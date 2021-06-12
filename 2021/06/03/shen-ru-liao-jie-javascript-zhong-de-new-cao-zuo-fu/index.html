@@ -661,8 +661,14 @@
         
       </div>
       <div class="post-content">
-        <h1 id="深入了解-javascript-中的-new-操作符"><a href="#深入了解-javascript-中的-new-操作符" class="headerlink" title="深入了解 javascript 中的 new 操作符"></a>深入了解 javascript 中的 new 操作符</h1><p>new 操作符在执行过程中会改变 this 的指向，所以我们在了解 new 操作符之前，我们先解释一下 this 的用法。</p>
-<h1 id="构造函数中-this-的用法"><a href="#构造函数中-this-的用法" class="headerlink" title="构造函数中 this 的用法"></a>构造函数中 this 的用法</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Person(<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>)); <span class="comment">// Person &#123;name: &#x27;xx&#x27;, age: 18&#125;</span></span><br></pre></td></tr></table></figure>
+        <h1 class="bamboo-h " id="深入了解 javascript 中的 new 操作符">深入了解 javascript 中的 new 操作符</h1><br/>
+
+
+<p>new 操作符在执行过程中会改变 this 的指向，所以我们在了解 new 操作符之前，我们先解释一下 this 的用法。</p>
+<h2 class="bamboo-h " id="构造函数中 this 的用法">构造函数中 this 的用法</h2><br/>
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Person(<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>)); <span class="comment">// Person &#123;name: &#x27;xx&#x27;, age: 18&#125;</span></span><br></pre></td></tr></table></figure>
 <p>输出结果中包含了 name 和 age 的信息。</p>
 <p>事实上，我们并没有通过 return 返回任何值，为什么输出信息中会包含 name 和 age 属性呢？ 其中起作用的就是 this 这个关键字。</p>
 <p>我们通过以下代码输出 this ，看看 this 具体的内容。</p>
@@ -675,7 +681,10 @@
 <p>换句话说，new Person 做的就是类似的事情。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// this = &#123;&#125;;（隐式创建）</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加属性到 this</span></span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// return this;（隐式返回）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过以上分析，我们了解了构造函数中 this 的用法。</p>
-<h1 id="this-与-new-操作符的关系"><a href="#this-与-new-操作符的关系" class="headerlink" title="this 与 new 操作符的关系"></a>this 与 new 操作符的关系</h1><p>通过 new 操作符生成一个Person 对象的实例。</p>
+<h2 class="bamboo-h " id="this 与 new 操作符的关系">this 与 new 操作符的关系</h2><br/>
+
+
+<p>通过 new 操作符生成一个Person 对象的实例。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Person = <span class="keyword">new</span> Person()</span><br></pre></td></tr></table></figure>
 <p>new 操作符做了 3 件事情。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span><span class="keyword">let</span> person = &#123;&#125;</span><br><span class="line"><span class="number">2.</span>person.__proto__ = Person.prototype</span><br><span class="line"><span class="number">3.</span>Person.call(person)</span><br></pre></td></tr></table></figure>
@@ -684,7 +693,9 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">  Person.apply(obj, <span class="built_in">arguments</span>)</span><br><span class="line">  <span class="keyword">return</span> obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(New(<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>)) <span class="comment">// &#123;name: &quot;xx&quot;, age: 18&#125;</span></span><br></pre></td></tr></table></figure>
 <p>返回的结果中也包含 name 和 age 属性，这就证明了 new 运算符对 this 指向的改变。Person.apply(obj, arguments) 调用后Person对象中的 this 就指向了 obj 对象，这样 obj 对象就具有了 name 和 age 属性。</p>
 <p><strong>但是，不仅关注 new 操作符的函数本身，也要关注它的原型属性。</strong></p>
-<h1 id="prototype-属性与-new-的关系"><a href="#prototype-属性与-new-的关系" class="headerlink" title="prototype 属性与 new 的关系"></a>prototype 属性与 new 的关系</h1><p>我们在 Person 的原型上添加一个 sayHi 函数，然后通过New()返回的对象去调用 sayHi 函数。</p>
+<h2 class="bamboo-h " id="prototype 属性与 new 的关系">prototype 属性与 new 的关系</h2><br/>
+
+<p>我们在 Person 的原型上添加一个 sayHi 函数，然后通过New()返回的对象去调用 sayHi 函数。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Hi!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(New(<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>).sayHi()) <span class="comment">// Uncaught TypeError: New(...).sayHi is not a function</span></span><br></pre></td></tr></table></figure>
 <p> 我们发现执行报错了，New 函数返回的对象并没有调用sayHi方法。</p>
 <p> 这是因为 sayHi 方法是属于 Person 原型的函数，只有 Person 原型链上的对象才能继承 sayHi 方法。那么我们该怎么做呢?</p>
@@ -766,11 +777,11 @@ arguments 对象是所有函数都具有的一个内置局部变量，表示的�
 			el: '#vcomment',
 			notify: false,
 			verify: false,
-			app_id: "",
-			app_key: "",
+			app_id: "eow4Nd7hsGx3yBuz6gtJaRFS-gzGzoHsz",
+			app_key: "EC6dXMMtoQCBqNRCOimmJP0T",
 			placeholder: "客官，说点什么吧",
-			avatar: "",
-			master: "",   //博主邮箱md5
+			avatar: "wavatar",
+			master: "326f29b2e0c5a3d9843a58206f58366f",   //博主邮箱md5
 			tagMeta: ["博主","小伙伴","访客"],     //标识字段名
 			friends: "",
 			metaPlaceholder: { "nick": "昵称/QQ号", "mail": "邮箱" },
