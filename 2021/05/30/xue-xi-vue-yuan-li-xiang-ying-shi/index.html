@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Vue 的生命周期 | personal blog</title>
+  <title>学习 Vue 原理：响应式 | personal blog</title>
 
   
     
@@ -612,14 +612,14 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/1.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/10.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      Vue 的生命周期
+      学习 Vue 原理：响应式
     </span>
   </div>
   
@@ -635,7 +635,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-06-07</span>
+        <span class="post-time">2021-05-30</span>
       </div>
       
       <div class="post-tags-categories">
@@ -661,31 +661,63 @@
         
       </div>
       <div class="post-content">
-        <h1 class="bamboo-h " id="beforeCreate(创建前)">beforeCreate(创建前)</h1><br/>
-<div class="note success"><p>在数据观测和初始化事件还未开始</p></div>
-
-<h1 class="bamboo-h " id="created(创建后)">created(创建后)</h1><br/>
-<div class="note success"><p>完成数据观测，属性和方法的运算，初始化事件，$el属性还没有显示出来。</p></div>
-
-<h1 class="bamboo-h " id="beforeMount(载入前)">beforeMount(载入前)</h1><br/>
-<div class="note success"><p>在挂载开始之前被调用，相关的render函数首次被调用。实例已完成以下的配置：编译模板，把data里面的数据和模板生成html。注意此时还没有挂载html到页面上。</p></div>
-
-<h1 class="bamboo-h " id="mounted（载入后）">mounted（载入后）</h1><br/>
-<div class="note success"><p>在el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用。实例已完成以下的配置：用上面编译好的html内容替换el属性指向的DOM对象。完成模板中的html渲染到html页面中。此过程中进行ajax交互。</p></div>
-
-<h1 class="bamboo-h " id="beforeUpdate（更新前）">beforeUpdate（更新前）</h1><br/>
-<div class="note success"><p>在数据更新之前调用，发生在虚拟DOM重新渲染和打补丁之前。可以在该钩子中进一步地更改状态，不会触发附加的重渲染过程。</p></div>
-
-<h1 class="bamboo-h " id="updated（更新后）">updated（更新后）</h1><br/>
-<div class="note success"><p>在由于数据更改导致的虚拟DOM重新渲染和打补丁之后调用。调用时，组件DOM已经更新，所以可以执行依赖于DOM的操作。然而在大多数情况下，应该避免在此期间更改状态，因为这可能会导致更新无限循环。该钩子在服务器端渲染期间不被调用。</p></div>
-
-<h1 class="bamboo-h " id="beforeDestroy（销毁前）">beforeDestroy（销毁前）</h1><br/>
-<div class="note success"><p>在实例销毁之前调用。实例仍然完全可用。</p></div>
-
-<h1 class="bamboo-h " id="destroyed（销毁后）">destroyed（销毁后）</h1><br/>
-<div class="note success"><p>在实例销毁之后调用。调用后，所有的事件监听器会被移除，所有的子实例也会被销毁。该钩子在服务器端渲染期间不被调用。</p></div>
+        <div class="note info"><p>近来在学习Vue，对于它的核心概念之一——响应式一直有所困惑，偶然间发现一门课程vue advanced workshop with Evan You。Vue的作者尤雨溪亲自讲解Vue。下面是对该课程学习的总结。欢迎大家参考和提出意见。</p></div>
 
 
+<h2 class="bamboo-h " id="什么是响应式？">什么是响应式？</h2><br/>
+<p>响应式是 Vue的一个核心特性，用于监听视图中绑定的数据，当数据发生改变时视图自动更新。</p>
+<p>只要状态发生改变，系统依赖部分发生自动更新就可以称为响应性。</p>
+<p>在web的场景下，就是不断变化的状态反应到DOM上的变化。</p>
+<p>响应式实现数据驱动视图的第一步。</p>
+<h2 class="bamboo-h " id="数据驱动视图">数据驱动视图</h2><br/>
+<p>现在有这样一个例子：</p>
+<blockquote>
+<p>变量 a 和变量 b ，变量 b 的值永远等于 a 的 10 倍。</p>
+</blockquote>
+<p>如果使用命令式编程，可以很简单实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">let</span> b = a * <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// 30</span></span><br></pre></td></tr></table></figure>
+<p>但是当我们设置 b 的值为 4 时， b 还是等于 30</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">let</span> b = a * <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// 30</span></span><br><span class="line">a = <span class="number">4</span>; <span class="comment">// 命令式，b不会保持关系同步</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// 30</span></span><br></pre></td></tr></table></figure>
+<p>那么该如何实现当a改变时，b同时也改变呢？</p>
+<blockquote>
+<p>这里有一个神奇的函数onChanged()，它接收一个函数并且当 a 的值改变时，可以自动执行里面的代码，我们将 b 的更新放在里面，问题就解决了。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onChanged (<span class="function">() =&gt;</span> b = a * <span class="number">10</span> ) <span class="comment">// 声明式, b 随着 a 改变而改变</span></span><br></pre></td></tr></table></figure>
+<p>我们扩展一下，下面代码同样有一个神奇函数onStateChange，它会在 state 改变的时候自动运行，那我们只要在函数中编写dom操作的代码，就可以实现 dom 的自动更新了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DOM元素</span></span><br><span class="line">&lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;cell b1&quot;</span>&gt;&lt;/span&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 神奇函数，当state值改变会自动重新运行</span></span><br><span class="line">onStateChange(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.cell.b1&#x27;</span>).textContent = state.a * <span class="number">10</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>我们再进一步抽象，把 dom 的操作使用渲染引擎替换，但是我们不去研究渲染引擎的实现，只是简单的认为它会自动解析模版代码与数据关联即可，那代码就会变成下面这样。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DOM元素</span></span><br><span class="line">&lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;cell b1&quot;</span>&gt;</span><br><span class="line">	&#123;&#123; state.a * <span class="number">10</span> &#125;&#125;</span><br><span class="line">&lt;/span&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 神奇函数，当state值改变会自动重新运行</span></span><br><span class="line">onStateChange(<span class="function">() =&gt;</span> &#123; view = render(state) &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 class="bamboo-h " id="如何实现响应式">如何实现响应式</h2><br/>
+
+<h3 class="bamboo-h warning" id="getter 和 setter">getter 和 setter</h3><br/>
+<p>Vue 中对象会被转换成响应式， 使用ES5的 defineProperty() 重写所有属性的 getter 和 setter 方法。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/web/javascript/reference/global_objects/object/defineproperty">MDN上关于Object.defineProperty的介绍</a></p>
+<p>下面将演示如何通过convert函数修改传入对象的getter和setter实现修改对象属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convert</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">Object</span>.keys(obj).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">let</span> internalValue = obj[key] <span class="comment">// 闭包，提供了存储机会 内部值</span></span><br><span class="line">		<span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">			get () &#123;</span><br><span class="line">				<span class="keyword">return</span> internalValue</span><br><span class="line">			&#125;,</span><br><span class="line">			set (newValue) &#123;</span><br><span class="line">				internalValue = newValue</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 class="bamboo-h warning" id="依赖跟踪（订阅发布模式）">依赖跟踪（订阅发布模式）</h3><br/>
+
+<h4 class="bamboo-h red" id="为什么要依赖收集？">为什么要依赖收集？</h4><br/>
+<p>先来看下面的代码</p>
+<figure class="highlight plaintext"><figcaption><span>Vue(&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    template: </span><br><span class="line">        `&lt;div&gt;</span><br><span class="line">            &lt;span&gt;text1:&lt;/span&gt; &#123;&#123;text1&#125;&#125;</span><br><span class="line">        &lt;div&gt;`,</span><br><span class="line">    data: &#123;</span><br><span class="line">        text1: &#x27;text1&#x27;,</span><br><span class="line">        text2: &#x27;text2&#x27;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>按照之前响应式中的方法进行绑定则会出现一个问题——text3在实际模板中并没有被用到，然而当text3的数据被修改（this.text3 = ‘test’）的时候，同样会触发text3的setter导致重新执行渲染，这显然不正确。</p>
+<p>所以我们要进行<strong>依赖收集</strong>。</p>
+<h4 class="bamboo-h red" id="如何实现？">如何实现？</h4><br/>
+<p><strong>创建一个依赖跟踪类Dep，里面有两个方法：’depend’ ‘notify’。</strong></p>
+<p>‘depend’: 收集这种依赖项。</p>
+<p>‘notify’: 表示依赖发生改变，任何之前被定义为依赖的表达式、函数、计算都会被通知重新执行。也就是说我们需要找到一种让他们建立关联的方法。我们把这种计算关系叫依赖。这种计算也被认为是订阅者模式。<br>下面是Dep类期望达到的效果，调用dep.depend方法收集收集依赖，当调用dep.notify方法，控制台会再次输出updated语句。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dep = <span class="keyword">new</span> Dep()</span><br><span class="line"></span><br><span class="line">autorun (<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	dep.depend() <span class="comment">// 实际上是把这个函数添加到订阅者列表中dep中,之后无论你在任何地方调用</span></span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&quot;updated&quot;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// should log: &quot;updated&quot;</span></span><br><span class="line"></span><br><span class="line">dep.notify()</span><br><span class="line"><span class="comment">// 函数再次被调用 should log: &quot;updated&quot; autorun</span></span><br></pre></td></tr></table></figure>
+<p>这个 autorun 函数接收一个更新函数或者表达式，当你进入这个更新函数时，一切都变得特别，当代码放在这个响应区内，就可以通过dep.depend 方法注册依赖项。</p>
+<p>代码实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.Dep = <span class="class"><span class="keyword">class</span> <span class="title">Dep</span> </span>&#123;</span><br><span class="line">	<span class="title">constructor</span> (<span class="params"></span>) &#123;</span><br><span class="line">		<span class="built_in">this</span>.subsctibers = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">	&#125;</span><br><span class="line">	depend () &#123;</span><br><span class="line">		<span class="keyword">if</span> (activeUpdate) &#123;</span><br><span class="line">			<span class="comment">// 注册这个activeUpdate作为订阅者</span></span><br><span class="line">			<span class="built_in">this</span>.subscribers.add(activeUpdate)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	notify () &#123;</span><br><span class="line">		<span class="comment">// 通知所有订阅者</span></span><br><span class="line">		<span class="built_in">this</span>.subscribers.forEach(<span class="function"><span class="params">sub</span> =&gt;</span> sub()) <span class="comment">// 获取订阅函数并执行</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> activeUpdate <span class="comment">// 发布者</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">autorun</span> (<span class="params">update</span>) </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">wrappedUpdate</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">		activeUpdate = wrappedUpdate <span class="comment">// 赋值给 wrappedUpdate 会使得当依赖关系发生改变update 函数会重新执行 动态更新依赖 保证依赖一直是最新的</span></span><br><span class="line">		update()</span><br><span class="line">		wrappedUpdate = <span class="literal">null</span></span><br><span class="line">	&#125;</span><br><span class="line">	updateWrapper();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">autorun(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	dep.depend()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 class="bamboo-h warning" id="实现迷你响应性系统">实现迷你响应性系统</h3><br/>
+<p>结合前面两个函数convert() autorun() 将covert改名成observe()。<br>observer需要一个监听对象，监听他们得getter和setter，在getters和setters里面，我们可以设置依赖。<br>都整合后我们相当于创建了一个对象，我们访问一个属性，它收集依赖，调用dep.depend 当我们通过赋值改变属性值，调用notify触发改变。</p>
+<p>期望实现的调用效果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = &#123;</span><br><span class="line">	<span class="attr">count</span>: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">observe(state)</span><br><span class="line"></span><br><span class="line">autorun(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(state.count))</span><br><span class="line"><span class="comment">// should immediately log &quot;count is: 0&quot;</span></span><br><span class="line"></span><br><span class="line">state.count ++</span><br><span class="line"><span class="comment">// should log &quot;count is: 1&quot;</span></span><br></pre></td></tr></table></figure>
+<p>最终整合代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dep</span> </span>&#123;</span><br><span class="line">  <span class="title">constructor</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>.subscribers = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  depend () &#123;</span><br><span class="line">    <span class="keyword">if</span> (activeUpdate) &#123;</span><br><span class="line">      <span class="built_in">this</span>.subscribers.add(activeUpdate)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  notify () &#123;</span><br><span class="line">    <span class="built_in">this</span>.subscribers.forEach(<span class="function"><span class="params">sub</span> =&gt;</span> sub())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">observe</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">Object</span>.keys(obj).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> internalValue = obj[key]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> dep = <span class="keyword">new</span> Dep()</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">      <span class="comment">// 在getter收集依赖项，当触发notify时重新运行</span></span><br><span class="line">      get () &#123;</span><br><span class="line">        dep.depend()</span><br><span class="line">        <span class="keyword">return</span> internalValue</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="comment">// setter用于调用notify</span></span><br><span class="line">      set (newVal) &#123;</span><br><span class="line">        <span class="keyword">if</span> (internalValue !== newVal) &#123;</span><br><span class="line">          internalValue = newVal</span><br><span class="line">          dep.notify()</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> activeUpdate = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">autorun</span> (<span class="params">update</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> wrappedUpdate = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    activeUpdate = wrappedUpdate</span><br><span class="line">    update()</span><br><span class="line">    activeUpdate = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">  wrappedUpdate()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上都是基于个人的理解，写的学习笔记，欢迎大家提出建议。</p>
 
       </div>
       
@@ -699,18 +731,19 @@
 
   
   <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/6.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="/medias/1.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/" class="post-nav-link">
+    <a href="/2021/06/01/v-model-shuang-xiang-shu-ju-bang-ding-shi-xian-yuan-li/" class="post-nav-link">
       <div class="title">
         <i class="fa fa-angle-left"></i> 上一篇:
-        <div>用js代码实现观察者模式</div>
+        <div>v-model 双向数据绑定实现原理</div>
       </div>
       
       <!-- <div class="content">
-        用js代码实现观察者模式
-观察者模式定义了对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都
+        准备工作
+我们来手动实现一个 v-model 的功能。
+首先定义了一个component组件，里面有一个template
       </div> -->
     </a>
   </div>
@@ -719,17 +752,19 @@
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/3.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="/medias/13.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/" class="post-nav-link">
+    <a href="/2021/05/29/san-chong-lei-xing-jian-cha-fang-fa-typeof-instanceof-he-object.prototype.tostring/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>arguments 对象的性质和应用</div>
+        <div>三种类型检查方法：typeof、instanceof 和 Object.prototype.toString</div>
       </div>
       <!-- <div class="content">
-        arguments 对象的性质
-arguments 对象是所有函数都具有的一个内置局部变量，表示的是函数实际接收的参数，
+        typeof 运算符,
+
+
+typeof 运算符返回参数的类型。当我们想要分别处理不同类型值的时候，或者想快速进行数据类
       </div> -->
     </a>
   </div>

@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Vue 的生命周期 | personal blog</title>
+  <title>javascript 求数组的最大值和最小值 (6种方法) | personal blog</title>
 
   
     
@@ -612,14 +612,14 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/1.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/11.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      Vue 的生命周期
+      javascript 求数组的最大值和最小值 (6种方法)
     </span>
   </div>
   
@@ -635,7 +635,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-06-07</span>
+        <span class="post-time">2021-05-29</span>
       </div>
       
       <div class="post-tags-categories">
@@ -643,8 +643,8 @@
         <div class="tags">
           <i class="iconfont icontag"></i>
           
-            <a href="/tags/vue/" class="">
-              vue
+            <a href="/tags/javascript/" class="">
+              javascript
             </a>
           
         </div>
@@ -661,32 +661,26 @@
         
       </div>
       <div class="post-content">
-        <h1 class="bamboo-h " id="beforeCreate(创建前)">beforeCreate(创建前)</h1><br/>
-<div class="note success"><p>在数据观测和初始化事件还未开始</p></div>
+        <h2 class="bamboo-h " id="通过prototype属性扩展min()函数和max()函数">通过prototype属性扩展min()函数和max()函数</h2><br/>
 
-<h1 class="bamboo-h " id="created(创建后)">created(创建后)</h1><br/>
-<div class="note success"><p>完成数据观测，属性和方法的运算，初始化事件，$el属性还没有显示出来。</p></div>
+<p>算法1的思路是在自定义min()和max()函数中，通过循环由第一个值依次与后面的值作比较，动态更新最大值和最小值，从而找到结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最小值</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.min = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> min = <span class="built_in">this</span>[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> len = <span class="built_in">this</span>.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>[i] &lt; min) min = <span class="built_in">this</span>[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> min</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 最大值</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.max = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> max = <span class="built_in">this</span>[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> len = <span class="built_in">this</span>.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>[i] &gt; max) max = <span class="built_in">this</span>[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.min()); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.max()); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
+<h2 class="bamboo-h " id="借助Math对象的min()函数和max()函数">借助Math对象的min()函数和max()函数</h2><br/>
+<p>算法2的主要思路是通过apply()函数改变函数的执行体，将数组作为参数传递给apply()函数。这样数组就可以直接调用Math对象的min()函数和max()函数来获取返回值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.min = <span class="function"><span class="keyword">function</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.min.apply(<span class="built_in">Math</span>, array)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 最大值</span></span><br><span class="line"><span class="built_in">Array</span>.max = <span class="function"><span class="keyword">function</span> (<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max.apply(<span class="built_in">Math</span>, array)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.min(arr)); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.max(arr)); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
+<h2 class="bamboo-h " id="算法2的优化">算法2的优化</h2><br/>
+<p>在算法2中将min()函数和max()函数作为Array类型的静态函数，但不支持链式调用，我们可以利用对象字面量进行简化。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最小值</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.min = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.min.apply(&#123;&#125;, <span class="built_in">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 最大值</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.max = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max.apply(&#123;&#125;, <span class="built_in">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.min()); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.max()); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
+<p>与算法2不同的是，在验证时，因为min()函数和max()函数属于实例方法，所以可以直接通过数组调用。<br>上面的算法代码中apply()函数传入的第一个值为{},实际表示当前执行环境的全局对象。第二个参数this指向需要处理的数组。<br>由于apply函数的特殊性第一个参数，指定为 null 或 undefined 时会自动替换为指向全局对象，原始值会被包装。所以我们也可以将第一个参数设置为null、undefind。</p>
+<h2 class="bamboo-h " id="借助Array类型的reduce()函数">借助Array类型的reduce()函数</h2><br/>
+<p>算法4的主要思想是reduce()函数不设置initialValue初始值，将数组的第一个元素直接作为回调函数的第一个参数，依次与后面的值进行比较。当需要找最大值时，每轮累加器返回当前比较中大的值；当需要找最小值时，每轮累加器返回当前比较中小的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最小值</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.min = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.reduce(<span class="function">(<span class="params">pre, cur</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> pre &lt; cur ? pre : cur</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 最大值</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.max = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.reduce(<span class="function">(<span class="params">pre, cur</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> pre &gt; cur ? pre : cur</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.min()); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.max()); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
+<h2 class="bamboo-h " id="借助Array类型的sort()函数">借助Array类型的sort()函数</h2><br/>
+<p>算法5的主要思想时借助数组的原生sort()函数对数组进行排序，排序完成后首尾元素即是数组的最小、最大元素。<br>默认的sort()函数在排序时时按照字母顺序排序的，数字会被按照字符串处理。例如数字 18 会被当做”18”处理，数字 6 被当”6”来处理，在排序时是按照字符串的每一位进行比较的，因为”1”比”6”要小，所以”11”排序时要比”6”小。对于数值类型的数组来说，这显然不合理。所以我们需要进行自定义排序。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sortArr = arr.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line"><span class="comment">// 最小值</span></span><br><span class="line">sortArr[<span class="number">0</span>]</span><br><span class="line"><span class="comment">// 最大值</span></span><br><span class="line">sortArr[sortArr.length - <span class="number">1</span>]</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="built_in">console</span>.log(sortArr[<span class="number">0</span>]); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(sortArr[sortArr.length - <span class="number">1</span>]); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
+<h2 class="bamboo-h " id="借助ES6的扩展运算符">借助ES6的扩展运算符</h2><br/>
 
-<h1 class="bamboo-h " id="beforeMount(载入前)">beforeMount(载入前)</h1><br/>
-<div class="note success"><p>在挂载开始之前被调用，相关的render函数首次被调用。实例已完成以下的配置：编译模板，把data里面的数据和模板生成html。注意此时还没有挂载html到页面上。</p></div>
-
-<h1 class="bamboo-h " id="mounted（载入后）">mounted（载入后）</h1><br/>
-<div class="note success"><p>在el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用。实例已完成以下的配置：用上面编译好的html内容替换el属性指向的DOM对象。完成模板中的html渲染到html页面中。此过程中进行ajax交互。</p></div>
-
-<h1 class="bamboo-h " id="beforeUpdate（更新前）">beforeUpdate（更新前）</h1><br/>
-<div class="note success"><p>在数据更新之前调用，发生在虚拟DOM重新渲染和打补丁之前。可以在该钩子中进一步地更改状态，不会触发附加的重渲染过程。</p></div>
-
-<h1 class="bamboo-h " id="updated（更新后）">updated（更新后）</h1><br/>
-<div class="note success"><p>在由于数据更改导致的虚拟DOM重新渲染和打补丁之后调用。调用时，组件DOM已经更新，所以可以执行依赖于DOM的操作。然而在大多数情况下，应该避免在此期间更改状态，因为这可能会导致更新无限循环。该钩子在服务器端渲染期间不被调用。</p></div>
-
-<h1 class="bamboo-h " id="beforeDestroy（销毁前）">beforeDestroy（销毁前）</h1><br/>
-<div class="note success"><p>在实例销毁之前调用。实例仍然完全可用。</p></div>
-
-<h1 class="bamboo-h " id="destroyed（销毁后）">destroyed（销毁后）</h1><br/>
-<div class="note success"><p>在实例销毁之后调用。调用后，所有的事件监听器会被移除，所有的子实例也会被销毁。该钩子在服务器端渲染期间不被调用。</p></div>
-
-
-
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最小值</span></span><br><span class="line"><span class="built_in">Math</span>.min(...arr)</span><br><span class="line"><span class="comment">// 最大值</span></span><br><span class="line"><span class="built_in">Math</span>.max(...arr)</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.min(...arr)); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max(...arr)); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
       </div>
       
     </article>
@@ -699,40 +693,25 @@
 
   
   <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/6.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="/medias/13.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/" class="post-nav-link">
+    <a href="/2021/05/29/san-chong-lei-xing-jian-cha-fang-fa-typeof-instanceof-he-object.prototype.tostring/" class="post-nav-link">
       <div class="title">
         <i class="fa fa-angle-left"></i> 上一篇:
-        <div>用js代码实现观察者模式</div>
+        <div>三种类型检查方法：typeof、instanceof 和 Object.prototype.toString</div>
       </div>
       
       <!-- <div class="content">
-        用js代码实现观察者模式
-观察者模式定义了对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都
+        typeof 运算符,
+
+
+typeof 运算符返回参数的类型。当我们想要分别处理不同类型值的时候，或者想快速进行数据类
       </div> -->
     </a>
   </div>
 
 
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/3.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fa fa-angle-right"></i>
-        <div>arguments 对象的性质和应用</div>
-      </div>
-      <!-- <div class="content">
-        arguments 对象的性质
-arguments 对象是所有函数都具有的一个内置局部变量，表示的是函数实际接收的参数，
-      </div> -->
-    </a>
-  </div>
 
 </div>
 

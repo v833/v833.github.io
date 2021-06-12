@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Vue 的生命周期 | personal blog</title>
+  <title>v-model 双向数据绑定实现原理 | personal blog</title>
 
   
     
@@ -619,7 +619,7 @@
   
   <div class="title-box">
     <span class="title">
-      Vue 的生命周期
+      v-model 双向数据绑定实现原理
     </span>
   </div>
   
@@ -635,7 +635,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-06-07</span>
+        <span class="post-time">2021-06-01</span>
       </div>
       
       <div class="post-tags-categories">
@@ -661,31 +661,44 @@
         
       </div>
       <div class="post-content">
-        <h1 class="bamboo-h " id="beforeCreate(创建前)">beforeCreate(创建前)</h1><br/>
-<div class="note success"><p>在数据观测和初始化事件还未开始</p></div>
-
-<h1 class="bamboo-h " id="created(创建后)">created(创建后)</h1><br/>
-<div class="note success"><p>完成数据观测，属性和方法的运算，初始化事件，$el属性还没有显示出来。</p></div>
-
-<h1 class="bamboo-h " id="beforeMount(载入前)">beforeMount(载入前)</h1><br/>
-<div class="note success"><p>在挂载开始之前被调用，相关的render函数首次被调用。实例已完成以下的配置：编译模板，把data里面的数据和模板生成html。注意此时还没有挂载html到页面上。</p></div>
-
-<h1 class="bamboo-h " id="mounted（载入后）">mounted（载入后）</h1><br/>
-<div class="note success"><p>在el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用。实例已完成以下的配置：用上面编译好的html内容替换el属性指向的DOM对象。完成模板中的html渲染到html页面中。此过程中进行ajax交互。</p></div>
-
-<h1 class="bamboo-h " id="beforeUpdate（更新前）">beforeUpdate（更新前）</h1><br/>
-<div class="note success"><p>在数据更新之前调用，发生在虚拟DOM重新渲染和打补丁之前。可以在该钩子中进一步地更改状态，不会触发附加的重渲染过程。</p></div>
-
-<h1 class="bamboo-h " id="updated（更新后）">updated（更新后）</h1><br/>
-<div class="note success"><p>在由于数据更改导致的虚拟DOM重新渲染和打补丁之后调用。调用时，组件DOM已经更新，所以可以执行依赖于DOM的操作。然而在大多数情况下，应该避免在此期间更改状态，因为这可能会导致更新无限循环。该钩子在服务器端渲染期间不被调用。</p></div>
-
-<h1 class="bamboo-h " id="beforeDestroy（销毁前）">beforeDestroy（销毁前）</h1><br/>
-<div class="note success"><p>在实例销毁之前调用。实例仍然完全可用。</p></div>
-
-<h1 class="bamboo-h " id="destroyed（销毁后）">destroyed（销毁后）</h1><br/>
-<div class="note success"><p>在实例销毁之后调用。调用后，所有的事件监听器会被移除，所有的子实例也会被销毁。该钩子在服务器端渲染期间不被调用。</p></div>
+        <h2 class="bamboo-h " id="准备工作">准备工作</h2><br/>
+<p>我们来手动实现一个 v-model 的功能。</p>
+<p>首先定义了一个component组件，里面有一个template。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> CompOne = &#123;</span><br><span class="line">  <span class="attr">props</span>: [<span class="string">&#x27;value&#x27;</span>],</span><br><span class="line">  <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;input type=&quot;text&quot;&gt;&lt;/input&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后再定义一个vue对象，里面引用了该组件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="attr">components</span>: &#123;</span><br><span class="line">    CompOne,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;comp-one&gt;&lt;/comp-one&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt; </span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">&#125;).$mount(root)</span><br></pre></td></tr></table></figure>
+<p>好了，准备工作完成。</p>
+<h2 class="bamboo-h " id="实现">实现</h2><br/>
 
 
+
+<p><img "" class="lazyload placeholder" data-original="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0cc2c223924940259fa124c63a96c3e4~tplv-k3u1fbpfcp-watermark.image" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="1.gif"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CompOne = &#123;</span><br><span class="line">  <span class="attr">props</span>: [<span class="string">&#x27;value&#x27;</span>], <span class="comment">// 接收父组件传递的数据</span></span><br><span class="line">  <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;input type=&quot;text&quot; @input=&quot;handleInput&quot; :value=&quot;value&quot;&gt;&lt;/input&gt; </span></span><br><span class="line"><span class="string">      // 添加一个input事件</span></span><br><span class="line"><span class="string">      // 接收父组件传递的value</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    handleInput (e) &#123;</span><br><span class="line">      <span class="built_in">this</span>.$emit(<span class="string">&#x27;input&#x27;</span>, e.target.value) <span class="comment">// 通过$emit，当 value 变化时通知父组件</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img "" class="lazyload placeholder" data-original="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/af3420cbfa4e4a818b203157ce8e3d7a~tplv-k3u1fbpfcp-watermark.image" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="2.gif"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="attr">components</span>: &#123;</span><br><span class="line">    CompOne,</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">value</span>: <span class="string">&#x27;vue&#x27;</span> </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">    // value 为传递给子组件的数据</span></span><br><span class="line"><span class="string">    // @input 接收子组件通过 $emit 传递的参数</span></span><br><span class="line"><span class="string">      &lt;comp-one :value=&quot;value&quot; @input=&quot;value = arguments[0]&quot;&gt;&lt;/comp-one&gt; </span></span><br><span class="line"><span class="string">    &lt;/div&gt; </span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">&#125;).$mount(root)</span><br></pre></td></tr></table></figure>
+
+<h2 class="bamboo-h " id="效果">效果</h2><br/>
+<p><img "" class="lazyload placeholder" data-original="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f1428aadc50644b9ad1629983bea1780~tplv-k3u1fbpfcp-watermark.image" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="3.gif"></p>
+<p>大功告成，我们实现了 v-model 的功能！</p>
+<h2 class="bamboo-h " id="拓展">拓展</h2><br/>
+
+
+<p> 默认情况下，一个组件上的 v-model 会把 value 用作 prop 且把 input 用作 event。</p>
+<p> 但是像单选框、复选框等类型的输入控件可能会将 value attribute 用于不同的目的。model 选项可以用<br> 来避免这样的冲突。<br> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="attr">components</span>: &#123;</span><br><span class="line">    CompOne,</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">value</span>: <span class="string">&#x27;vue&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;comp-one v-model=&quot;value&quot;&gt;&lt;/comp-one&gt; // 使用v-model 满足语法糖规则：属性必须为value，方法名必须为：input</span></span><br><span class="line"><span class="string">    &lt;/div&gt; </span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">&#125;).$mount(root)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改子组件 </span></span><br><span class="line"><span class="keyword">const</span> CompOne = &#123;</span><br><span class="line">  <span class="attr">props</span>: [<span class="string">&#x27;value1&#x27;</span>],</span><br><span class="line">  <span class="attr">model</span>: &#123;</span><br><span class="line">      <span class="attr">prop</span>: <span class="string">&quot;value1&quot;</span>, <span class="comment">// 接收的数据 value =&gt; value1</span></span><br><span class="line">      <span class="attr">event</span>: <span class="string">&quot;change&quot;</span> <span class="comment">// $emit 需要绑定的事件 input =&gt; change</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;input type=&quot;text&quot; @input=&quot;handleInput&quot; :value=&quot;value1&quot;&gt;&lt;/input&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    handleInput (e) &#123;</span><br><span class="line">      <span class="built_in">this</span>.$emit(<span class="string">&#x27;change&#x27;</span>, e.target.value)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这样就可以让 v-model 变得更灵活，属性和方法名可以自定义。</p>
+<h2 class="bamboo-h " id="总结">总结</h2><br/>
+
+<p>v-model 时一个语法糖，它做了：</p>
+<ol>
+<li><p>绑定数据value</p>
+</li>
+<li><p>触发输入事件input</p>
+</li>
+<li><p>data 更新触发重新渲染</p>
+</li>
+</ol>
 
       </div>
       
@@ -699,18 +712,17 @@
 
   
   <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/6.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="/medias/4.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/" class="post-nav-link">
+    <a href="/2021/06/03/shen-ru-liao-jie-javascript-zhong-de-new-cao-zuo-fu/" class="post-nav-link">
       <div class="title">
         <i class="fa fa-angle-left"></i> 上一篇:
-        <div>用js代码实现观察者模式</div>
+        <div>深入了解 javascript 中的 new 操作符</div>
       </div>
       
       <!-- <div class="content">
-        用js代码实现观察者模式
-观察者模式定义了对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都
+        new 操作符在执行过程中会改变 this 的指向，所以我们在了解 new 操作符之前，我们先解释一下 this 的用法
       </div> -->
     </a>
   </div>
@@ -719,17 +731,16 @@
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/3.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="/medias/10.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/" class="post-nav-link">
+    <a href="/2021/05/30/xue-xi-vue-yuan-li-xiang-ying-shi/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>arguments 对象的性质和应用</div>
+        <div>学习 Vue 原理：响应式</div>
       </div>
       <!-- <div class="content">
-        arguments 对象的性质
-arguments 对象是所有函数都具有的一个内置局部变量，表示的是函数实际接收的参数，
+        近来在学习Vue，对于它的核心概念之一——响应式一直有所困惑，偶然间发现一门课程vue advanced worksho
       </div> -->
     </a>
   </div>
