@@ -73,6 +73,29 @@
   <body>
     <!-- 页面预加载动画 -->
 
+<div id='loader'>
+  <link rel="stylesheet" href="/js/loaded/index.css" >
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1">
+      <div class="configure-core"></div>
+    </div>
+    <div class="configure-border-2">
+      <div class="configure-core"></div>
+    </div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<script>
+  var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('load',endLoading);
+</script>
+
     <!-- 判断是否为黑夜模式 -->
     <script>
       let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
@@ -97,7 +120,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo" src="/medias/logo.png" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/HomeLogo.jpg" alt="logo">
       <h3 class="drawer-box-head_title">perosonal blog</h3>
       <h5 class="drawer-box-head_desc">love the world and love you</h5>
     </div>
@@ -169,59 +192,6 @@
             
           </li>
         
-          <li class="drawer-box-content_item" style="position: relative;">
-            
-              <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(6)">
-                <span>
-                  
-                    <i class="fa fa-link"></i>
-                  
-                  <span class="name">更多</span>
-                </span>
-                <i class="fa fa-chevron-left arrow " :class="{'icon-rotate': isOpen(6)}" aria-hidden="true"></i>
-              </a>
-              <ul class="drawer-sub-menu" v-if="isOpen(6)">
-                
-                <li>
-                  <a href="/gallery">
-                    
-                    <i class="fa fa-music" style="margin-top: -20px;"></i>
-                    
-                    <span>图库</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a href="/huoban">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>友情连接</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a href="/me">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>关于我</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a target="_blank" rel="noopener" href="http://baidu.com">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>百度</span>
-                  </a>
-                </li>
-                
-              </ul>
-            
-          </li>
-        
         <li class="drawer-box-content_item">
           <a target="_blank" rel="noopener" href="https://github.com/v833">
             <i class="fa fa-github" aria-hidden="true"></i>
@@ -282,7 +252,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/logo.png" alt="logo">
+          <img src="/medias/HomeLogo.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">perosonal blog</a>
@@ -351,57 +321,6 @@
                 
                 <span class="name">友情链接</span>
               </a>
-            
-          </li>
-        
-          <li class="menu-item" style="position: relative;">
-            
-              <a href="javascript:;" class="menu-item-link">
-                
-                  <i class="fa fa-link"></i>
-                
-                <span class="name">更多</span>
-                <i class="fa fa-chevron-down arrow" aria-hidden="true"></i>
-              </a>
-              <ul class="sub-menu">
-                
-                <li>
-                  <a href="/gallery">
-                    
-                    <i class="fa fa-music" style="margin-top: -20px;"></i>
-                    
-                    <span>图库</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a href="/huoban">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>友情连接</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a href="/me">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>关于我</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a target="_blank" rel="noopener" href="http://baidu.com">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>百度</span>
-                  </a>
-                </li>
-                
-              </ul>
             
           </li>
         
@@ -579,47 +498,165 @@
 
 
 
-<div class="swiper-length" style="display: none;">0</div>
+<div class="swiper-length" style="display: none;">4</div>
 <div id="appSwiper"
-  class="swiper-no-swiping"
+  class=""
   @mouseenter="stopAutoPlay()" 
   @mouseleave="startAutoPlay()"
 >
   <swiper v-cloak ref="mySwiper" :options="swiperOptions" @slideChangeTransitionEnd="slideChangeTransitionEnd">
     
-      <swiper-slide>
-        <div class="item swiper-lazy" data-background="https://img11.360buyimg.com/ddimg/jfs/t1/160978/33/20686/2476596/6083e62dEa588862b/63f8f2163ab61b2f.png" style="background-size: 90000px; 
-          background-position: left center;" style="position: relative;">
-          <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-            <div class="flag">
-              
-              <div class="img-mask swiper-lazy swiper-default-bgImg" data-background="https://img11.360buyimg.com/ddimg/jfs/t1/160978/33/20686/2476596/6083e62dEa588862b/63f8f2163ab61b2f.png" style="height: 100%; background-size: cover; 
-                background-position: center center;">
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>   
-              </div>
-              <div class="flag-text">
-                <div class="flag-text-content">
-                  <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">青墨书晚风</div>
-                  
-                    <div class="ani animated default-excerpt" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
-                      <vue-typed-js :strings="defaultDesc" :loop="defaultDescTypedLoop" :typeSpeed="1000">
-                        <h1 class="typing"></h1>
-                      </vue-typed-js>
-                    </div>
-                    
+      
+        <swiper-slide>
+          <div class="item swiper-lazy" data-background="/medias/logo.jpg" style="background-size: 90000px; 
+            background-position: left center;" style="position: relative;">
+            <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
+              <div class="flag">
+                
+                <div class="img-mask swiper-lazy swiper-default-bgImg" data-background="/medias/logo.jpg" style="height: 100%; background-size: cover; 
+                  background-position: center center;">
+                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>   
                 </div>
-                <div style="display: flex;" class="flag-text-btns">
-                  
-                    <div class="ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a target="_blank" rel="noopener" href="https://yuang01.gitee.io/2021/02/08/hexo-theme-bamboo-new/" class="read-more border-color swiper-btn-color" style="display: inline-block; z-index:1;">阅读文档</a></div>
-                  
-                  
-                    <div class="ani animated" style="margin-left: 10px;" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a target="_blank" rel="noopener" href="https://gitee.com/yuang01/hexo-theme-bamboo/repository/archive/dev.zip" class="read-more border-color swiper-btn-color2" style="display: inline-block; z-index:1;border: 1px solid white;">下载主题</a></div>
-                  
+                <div class="flag-text">
+                  <div class="flag-text-content">
+                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s">知道你在改变</div>
+                    
+                      <div class="ani animated default-excerpt" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s">
+                        <vue-typed-js :strings="defaultDesc" :loop="defaultDescTypedLoop" typeSpeed="10000">
+                          <h1 class="typing"></h1>
+                        </vue-typed-js>
+                      </div>
+                      
+                  </div>
+                  <div style="display: flex;" class="flag-text-btns">
+                    
+                    
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-      </swiper-slide>
+        </swiper-slide>
+      
+      
+        
+        
+          
+          <swiper-slide>
+            <div class="item swiper-lazy" data-background="/medias/6.jpg" style=" background-size: 90000px; 
+            background-position: left center;" style="position: relative;">
+            <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
+              <div class="flag" style="z-index: 2;">
+                <div class="img-mask swiper-lazy" data-background="/medias/6.jpg" style="height: 100%; background-size: cover; 
+                  background-position: center center;">
+                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
+                </div>
+                <div class="flag-text">
+                  <div class="flag-text-content">
+                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s">
+                      <a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/">
+                        用js代码实现观察者模式
+                      </a>
+                    </div>
+                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s">用js代码实现观察者模式，总结来说观察者模式有两个特点：</br> 发布&订阅</br> 1对N</div>
+                  </div>
+                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s"><a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/" class="read-more border-color swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
+                </div>
+              </div>
+            </div>
+
+          </swiper-slide>
+        
+      
+        
+        
+          
+          <swiper-slide>
+            <div class="item swiper-lazy" data-background="/medias/1.jpg" style=" background-size: 90000px; 
+            background-position: left center;" style="position: relative;">
+            <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
+              <div class="flag" style="z-index: 2;">
+                <div class="img-mask swiper-lazy" data-background="/medias/1.jpg" style="height: 100%; background-size: cover; 
+                  background-position: center center;">
+                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
+                </div>
+                <div class="flag-text">
+                  <div class="flag-text-content">
+                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s">
+                      <a href="/2021/06/07/vue-de-sheng-ming-zhou-qi/">
+                        Vue 的生命周期
+                      </a>
+                    </div>
+                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s">vue 的8个声明周期的总结</div>
+                  </div>
+                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s"><a href="/2021/06/07/vue-de-sheng-ming-zhou-qi/" class="read-more border-color swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
+                </div>
+              </div>
+            </div>
+
+          </swiper-slide>
+        
+      
+        
+        
+          
+          <swiper-slide>
+            <div class="item swiper-lazy" data-background="/medias/3.jpg" style=" background-size: 90000px; 
+            background-position: left center;" style="position: relative;">
+            <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
+              <div class="flag" style="z-index: 2;">
+                <div class="img-mask swiper-lazy" data-background="/medias/3.jpg" style="height: 100%; background-size: cover; 
+                  background-position: center center;">
+                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
+                </div>
+                <div class="flag-text">
+                  <div class="flag-text-content">
+                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s">
+                      <a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/">
+                        arguments 对象的性质和应用
+                      </a>
+                    </div>
+                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s">arguments 对象的性质:</br>函数外部无法访问 可通过索引访问 由实参决定 </br>arguments 对象的应用 实参的个数判断 任意个数的参数处理 模拟函数重载 </div>
+                  </div>
+                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s"><a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/" class="read-more border-color swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
+                </div>
+              </div>
+            </div>
+
+          </swiper-slide>
+        
+      
+        
+        
+          
+          <swiper-slide>
+            <div class="item swiper-lazy" data-background="/medias/4.jpg" style=" background-size: 90000px; 
+            background-position: left center;" style="position: relative;">
+            <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
+              <div class="flag" style="z-index: 2;">
+                <div class="img-mask swiper-lazy" data-background="/medias/4.jpg" style="height: 100%; background-size: cover; 
+                  background-position: center center;">
+                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
+                </div>
+                <div class="flag-text">
+                  <div class="flag-text-content">
+                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s">
+                      <a href="/2021/06/03/shen-ru-liao-jie-javascript-zhong-de-new-cao-zuo-fu/">
+                        深入了解 javascript 中的 new 操作符
+                      </a>
+                    </div>
+                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s">构造函数中 this 的用法 </br>this 与 new 操作符的关系 </br>prototype 属性与 new 的关系 </div>
+                  </div>
+                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration=".2s" swiper-animate-delay=".2s"><a href="/2021/06/03/shen-ru-liao-jie-javascript-zhong-de-new-cao-zuo-fu/" class="read-more border-color swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
+                </div>
+              </div>
+            </div>
+
+          </swiper-slide>
+        
+      
+    <div class="swiper-pagination" slot="pagination" style=""></div>
+    <div class="swiper-button-prev swiper-button-white" slot="button-prev" style=""></div>
+    <div class="swiper-button-next swiper-button-white" slot="button-next" style=""></div>
     
   </swiper>
   
@@ -648,7 +685,7 @@
   let loop = JSON.parse('true') ? false : JSON.parse('true');
   let effect = 'slide';
   let swiperLength = parseInt(document.querySelector(".swiper-length").innerText);
-  let defaultDesc = '煮酒洗净尘嚣，论知交,万般付之一笑，共偕老';
+  let defaultDesc = '仰望星空，脚踏实地';
   defaultDesc = defaultDesc.split(',');
   let defaultDescTypedLoop = JSON.parse('true');
   var vm = new Vue({
@@ -1011,6 +1048,92 @@
 
 
 
+  .swiper-slide {
+    height: 450px; 
+  }
+  .flag {
+    width: 100%;
+  }
+  .flag-text {
+    left: 10%;
+  }
+  .swiper-button-prev {
+    margin-left: 10%;
+  }
+  .swiper-button-next {
+    margin-right: 10%;
+  }
+  .flag-text-btns {
+    justify-content: center;
+  }
+  .flag-text {
+    margin-left: 0;
+    transform: none;
+  }
+  .flag-text .title {
+    font-size: 2.2rem;
+    line-height: 1.5em;
+    max-height: none;
+  }
+  .bottom-one-btn {
+    margin-top: 15px;
+  }
+  .swiper-button-prev {
+    margin-left: 10px;
+    transform: translateX(0);
+    border-radius: 50%;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+  }
+  .swiper-button-next {
+    margin-right: 10px;
+    transform: translateX(0);
+    border-radius: 50%;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+  }
+  .swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 1.2rem;
+  }
+  @media (min-width: 992px) {
+    .flag-text .excerpt {
+      line-height: 30px;
+      height: 120px;
+      -webkit-line-clamp: 4;
+    }
+  }
+  @media (max-width: 992px) {
+    .flag-text .title {
+      font-size: 2.4rem;
+      margin-top: 20px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+    .flag-text .excerpt {
+      line-height: 30px;
+      height: 150px;
+    }
+  }
+  @media (max-width: 551px) {
+    .flag-text .excerpt {
+      line-height: 30px;
+      height: 120px;
+    }
+    .flag-text .title {
+      margin-top: 50px;
+    }
+    .swiper-button-prev {
+      margin-left: 0;
+    }
+    .swiper-button-next {
+      margin-right: 0;
+    }
+  }
+
 
 /* 全屏显示 */
 
@@ -1188,124 +1311,6 @@
   </div>
 
 
-<style>
-  .index-notice-content {
-    margin-top: 10px;
-  }
-  .warp {
-    width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  .index-notice-content__ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
-  }
-  .index-notice-content__ul li,
-  .index-notice-content__ul a {
-    display: block;
-    height: 30px;
-    line-height: 30px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 15px;
-  }
-  .index-notice-content__title {
-    flex: 1;
-    overflow: hidden;
-  }
-  .index-notice-content__title a,
-  .index-notice-content__title span {
-    overflow: hidden;
-    display: block;
-    text-overflow:ellipsis; 
-    white-space: nowrap;
-    height: 100%;
-    width: 100%;
-    color: #000;
-  }
-  .index-notice-content__title a:hover,
-  .index-notice-content__title span:hover {
-    text-decoration: underline;
-  }
-  .index-notice-content__date {
-    min-width: 80px;
-    margin-left: 5px;
-    color: #000;
-  }
-</style>
-<div class="index-notice" id="appIndexNotice">
-    <h3>
-      <i class="fa fa-bullhorn index-notice-icon"></i>公告
-    </h3>
-    <div class="index-notice-content">
-      
-      <vue-seamless-scroll
-        :data="listData"
-        :class-option="classOption"
-        class="warp"
-        style="height: 30px"
-      >
-        <ul class="index-notice-content__ul">
-          
-          
-            <li>
-              
-                <div class="index-notice-content__title">
-                  
-                    <a href="/archives" title="#博客更新到2.0了" style="color:red">
-                      #博客更新到2.0了
-                    </a>
-                  
-                </div>
-                
-                  <div class="index-notice-content__date" style="color:red">
-                    2021-04-28
-                  </div>
-                
-              
-            </li>
-           
-        </ul>
-      </vue-seamless-scroll>
-    </div>
-</div>
-<script src="/js/vue-seamless-scroll/index.js"></script>
-
-<!-- 滚动插件采用 vue-seamless-scroll
-  https://chenxuan0000.github.io/vue-seamless-scroll/zh/guide/06-singleStop.html 
--->
-
-<script>
-  let seamless = JSON.parse('false');
-  seamless = seamless ? 0 : 30;
-  let listData = '[object Object]';
-  listData = listData.split(',');
-  var vm = new Vue({
-    el: '#appIndexNotice',
-    data: {
-      listData: listData,
-      moveNum: 2,
-      classOption: {
-        singleHeight: seamless,
-        limitMoveNum: listData.length
-      },
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-    },
-    created() {
-      this.moveNum = parseInt(this.listData.length);
-    }
-  })
-</script>
-
-
-
 
 
 
@@ -1314,7 +1319,89 @@
 	<div class="articles">
 		
 			
+				<div class="article-link">
+					
+					<div class="article lazyload" data-original="/medias/6.jpg" style="background-size: cover; 
+						background-position: center center;">
+					</div>
+					<div class="text">
+						<div class="text-main">
+							<div class="title"><a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/">用js代码实现观察者模式</a></div>
+							<div class="content">
+								用js代码实现观察者模式
+观察者模式定义了对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都
+							</div>
+						</div>
+						<a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/" class="more">
+							<i class="fa fa-eye" aria-hidden="true"></i>阅读更多
+						</a>
+					</div>
+				</div>
+			
 		
+			
+				<div class="article-link">
+					
+					<div class="article lazyload" data-original="/medias/1.jpg" style="background-size: cover; 
+						background-position: center center;">
+					</div>
+					<div class="text">
+						<div class="text-main">
+							<div class="title"><a href="/2021/06/07/vue-de-sheng-ming-zhou-qi/">Vue 的生命周期</a></div>
+							<div class="content">
+								beforeCreate(创建前)
+在数据观测和初始化事件还未开始
+
+created(创建后)
+完成数据观测，属性和方法
+							</div>
+						</div>
+						<a href="/2021/06/07/vue-de-sheng-ming-zhou-qi/" class="more">
+							<i class="fa fa-eye" aria-hidden="true"></i>阅读更多
+						</a>
+					</div>
+				</div>
+			
+		
+			
+				<div class="article-link">
+					
+					<div class="article lazyload" data-original="/medias/3.jpg" style="background-size: cover; 
+						background-position: center center;">
+					</div>
+					<div class="text">
+						<div class="text-main">
+							<div class="title"><a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/">arguments 对象的性质和应用</a></div>
+							<div class="content">
+								arguments 对象的性质
+arguments 对象是所有函数都具有的一个内置局部变量，表示的是函数实际接收的参数，
+							</div>
+						</div>
+						<a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/" class="more">
+							<i class="fa fa-eye" aria-hidden="true"></i>阅读更多
+						</a>
+					</div>
+				</div>
+			
+		
+			
+				<div class="article-link">
+					
+					<div class="article lazyload" data-original="/medias/4.jpg" style="background-size: cover; 
+						background-position: center center;">
+					</div>
+					<div class="text">
+						<div class="text-main">
+							<div class="title"><a href="/2021/06/03/shen-ru-liao-jie-javascript-zhong-de-new-cao-zuo-fu/">深入了解 javascript 中的 new 操作符</a></div>
+							<div class="content">
+								深入了解 javascript 中的 new 操作符new 操作符在执行过程中会改变 this 的指向，所以我们在了解 
+							</div>
+						</div>
+						<a href="/2021/06/03/shen-ru-liao-jie-javascript-zhong-de-new-cao-zuo-fu/" class="more">
+							<i class="fa fa-eye" aria-hidden="true"></i>阅读更多
+						</a>
+					</div>
+				</div>
 			
 		
 	</div>
@@ -1330,40 +1417,49 @@
         <div class="post-info">
           <div class="post-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2021-05-25</span>
+            <span class="post-time">2021-06-11</span>
           </div>
           <div class="post-title">
-            <a class="post-title-link" href="/2021/05/25/questions/">question</a>
+            <a class="post-title-link" href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/">用js代码实现观察者模式</a>
           </div>
           <div class="post-meta">
             <div class="post-tags">
               
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
             </div>
             <div class="post-categories">
               
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+</div>
+
             </div>
           </div>
           <div class="post-img-mobile">
             
               
-              <a href="/2021/05/25/questions/" class="lazyload" data-original="/medias/12.jpg" style="background-size: cover; 
+              <a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/" class="lazyload" data-original="/medias/6.jpg" style="background-size: cover; 
                 background-position: center center;">
               </a>
             
           </div>
           <div class="post-content">
-            questions1.var 和 let const 的区别？使用var声明的变量，其作用域为该语句所在的函数内，且存在变量提升现象；        使用let const声明的变量，其作用域为该语句所在的代码块内，不存在变量提升；    
+            用js代码实现观察者模式
+观察者模式定义了对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知，并自动更新。观察者模式属于三种设计类型(创建型、组合型和行为型)中的行为型模式，行为型模式关注的是对象之间的
           </div>
         </div>
         <div class="post-more">
-          <a href="/2021/05/25/questions/">
+          <a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/">
             <i class="iconfont iconmore" style="float: right;  " title="阅读更多"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         
-          <a href="/2021/05/25/questions/" class="lazyload" data-original="/medias/12.jpg" style="background-size: cover; 
+          <a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/" class="lazyload" data-original="/medias/6.jpg" style="background-size: cover; 
             background-position: center center;">
           </a>
         
@@ -1375,40 +1471,164 @@
         <div class="post-info">
           <div class="post-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2021-05-25</span>
+            <span class="post-time">2021-06-07</span>
           </div>
           <div class="post-title">
-            <a class="post-title-link" href="/2021/05/25/hello-world/">Hello World</a>
+            <a class="post-title-link" href="/2021/06/07/vue-de-sheng-ming-zhou-qi/">Vue 的生命周期</a>
           </div>
           <div class="post-meta">
             <div class="post-tags">
               
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
             </div>
             <div class="post-categories">
               
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+</div>
+
             </div>
           </div>
           <div class="post-img-mobile">
             
               
-              <a href="/2021/05/25/hello-world/" class="lazyload" data-original="/medias/7.jpg" style="background-size: cover; 
+              <a href="/2021/06/07/vue-de-sheng-ming-zhou-qi/" class="lazyload" data-original="/medias/1.jpg" style="background-size: cover; 
                 background-position: center center;">
               </a>
             
           </div>
           <div class="post-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+            beforeCreate(创建前)
+在数据观测和初始化事件还未开始
+
+created(创建后)
+完成数据观测，属性和方法的运算，初始化事件，$el属性还没有显示出来。
+
+beforeMount(载入前)
+在挂载开始之前被调用，相关的rend
           </div>
         </div>
         <div class="post-more">
-          <a href="/2021/05/25/hello-world/">
+          <a href="/2021/06/07/vue-de-sheng-ming-zhou-qi/">
             <i class="iconfont iconmore" style="  " title="阅读更多"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         
-          <a href="/2021/05/25/hello-world/" class="lazyload" data-original="/medias/7.jpg" style="background-size: cover; 
+          <a href="/2021/06/07/vue-de-sheng-ming-zhou-qi/" class="lazyload" data-original="/medias/1.jpg" style="background-size: cover; 
+            background-position: center center;">
+          </a>
+        
+      </div>
+    </article>
+  
+    <article class="post" data-aos="fade-up" style="flex-direction: row-reverse;   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+            <span class="post-time">2021-06-04</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/">arguments 对象的性质和应用</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+            </div>
+            <div class="post-categories">
+              
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+</div>
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            
+              
+              <a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/" class="lazyload" data-original="/medias/3.jpg" style="background-size: cover; 
+                background-position: center center;">
+              </a>
+            
+          </div>
+          <div class="post-content">
+            arguments 对象的性质
+arguments 对象是所有函数都具有的一个内置局部变量，表示的是函数实际接收的参数，是一个类数组的结构。
+之所以说 arguments 是类数组是因为它除了具有 length 属性外，不具有数组的其他属性
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/">
+            <i class="iconfont iconmore" style="float: right;  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        
+          <a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/" class="lazyload" data-original="/medias/3.jpg" style="background-size: cover; 
+            background-position: center center;">
+          </a>
+        
+      </div>
+    </article>
+  
+    <article class="post" data-aos="fade-up" style="   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+            <span class="post-time">2021-06-03</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/2021/06/03/shen-ru-liao-jie-javascript-zhong-de-new-cao-zuo-fu/">深入了解 javascript 中的 new 操作符</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+            </div>
+            <div class="post-categories">
+              
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+</div>
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            
+              
+              <a href="/2021/06/03/shen-ru-liao-jie-javascript-zhong-de-new-cao-zuo-fu/" class="lazyload" data-original="/medias/4.jpg" style="background-size: cover; 
+                background-position: center center;">
+              </a>
+            
+          </div>
+          <div class="post-content">
+            深入了解 javascript 中的 new 操作符new 操作符在执行过程中会改变 this 的指向，所以我们在了解 new 操作符之前，我们先解释一下 this 的用法。
+构造函数中 this 的用法123456function Per
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/2021/06/03/shen-ru-liao-jie-javascript-zhong-de-new-cao-zuo-fu/">
+            <i class="iconfont iconmore" style="  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        
+          <a href="/2021/06/03/shen-ru-liao-jie-javascript-zhong-de-new-cao-zuo-fu/" class="lazyload" data-original="/medias/4.jpg" style="background-size: cover; 
             background-position: center center;">
           </a>
         
@@ -1420,6 +1640,10 @@
 
 <!-- 雪花和花瓣特效 -->
 
+  
+    <script src="/js/sakura.js"></script>
+  
+
 
 
 
@@ -1427,21 +1651,21 @@
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
+      <a target="_blank" rel="noopener" href="https://gitee.com/anmen-expo">
         <i class="fa fa-github" aria-hidden="true"></i>
       </a>
-      <a href="mailto:1730241541@qq.com">
+      <!-- <a href="mailto:1730241541@qq.com">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
-      </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541">
+      </a> -->
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2507301541">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
-      <a href="/atom.xml" target="_blank">
-        <i class="fa fa-rss" aria-hidden="true"></i>
+      <a href="https://twitter.com/v42225078" target="_blank">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> 
+      Copyright © 2021 <a target="_blank" rel="noopener" href="https://gitee.com/anmen-expo">WangQun</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> 
     </div>
     <!-- 不蒜子统计 -->
     
@@ -1461,8 +1685,6 @@
 <style>
 .aplayer .aplayer-lrc p {
   
-  display: none;
-  
   font-size: 12px;
   font-weight: 700;
   line-height: 16px !important;
@@ -1470,19 +1692,8 @@
 
 .aplayer .aplayer-lrc p.aplayer-lrc-current {
   
-  display: none;
-  
   font-size: 15px;
   color: #42b983;
-}
-
-
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-  left: -66px !important;
-}
-
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-  left: 0px !important;
 }
 
 
@@ -1491,9 +1702,9 @@
   class=""
   server="netease"
   type="playlist"
-  id="442274724"
+  id="6724598438"
   fixed='true'
-  autoplay='false'
+  autoplay='true'
   theme='#42b983'
   loop='all'
   order='random'

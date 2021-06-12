@@ -2519,6 +2519,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
   margin-right: 5%;
 }
 #about .basic-info .books .book-item .logo {
+  margin: auto;
   width: 100px;
   height: 110px;
   overflow: hidden;

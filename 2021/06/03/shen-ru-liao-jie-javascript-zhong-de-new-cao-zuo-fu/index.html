@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Hello World | perosonal blog</title>
+  <title>深入了解 javascript 中的 new 操作符 | perosonal blog</title>
 
   
     
@@ -73,6 +73,29 @@
   <body>
     <!-- 页面预加载动画 -->
 
+<div id='loader'>
+  <link rel="stylesheet" href="/js/loaded/index.css" >
+  <div class="loading-left-bg"></div>
+  <div class="loading-right-bg"></div>
+  <div class="spinner-box">
+    <div class="configure-border-1">
+      <div class="configure-core"></div>
+    </div>
+    <div class="configure-border-2">
+      <div class="configure-core"></div>
+    </div>
+    <div class="loading-word">加载中...</div>
+  </div>
+</div>
+
+<script>
+  var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('load',endLoading);
+</script>
+
     <!-- 判断是否为黑夜模式 -->
     <script>
       let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
@@ -97,7 +120,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo" src="/medias/logo.png" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/HomeLogo.jpg" alt="logo">
       <h3 class="drawer-box-head_title">perosonal blog</h3>
       <h5 class="drawer-box-head_desc">love the world and love you</h5>
     </div>
@@ -169,59 +192,6 @@
             
           </li>
         
-          <li class="drawer-box-content_item" style="position: relative;">
-            
-              <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(6)">
-                <span>
-                  
-                    <i class="fa fa-link"></i>
-                  
-                  <span class="name">更多</span>
-                </span>
-                <i class="fa fa-chevron-left arrow " :class="{'icon-rotate': isOpen(6)}" aria-hidden="true"></i>
-              </a>
-              <ul class="drawer-sub-menu" v-if="isOpen(6)">
-                
-                <li>
-                  <a href="/gallery">
-                    
-                    <i class="fa fa-music" style="margin-top: -20px;"></i>
-                    
-                    <span>图库</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a href="/huoban">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>友情连接</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a href="/me">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>关于我</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a target="_blank" rel="noopener" href="http://baidu.com">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>百度</span>
-                  </a>
-                </li>
-                
-              </ul>
-            
-          </li>
-        
         <li class="drawer-box-content_item">
           <a target="_blank" rel="noopener" href="https://github.com/v833">
             <i class="fa fa-github" aria-hidden="true"></i>
@@ -282,7 +252,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/logo.png" alt="logo">
+          <img src="/medias/HomeLogo.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">perosonal blog</a>
@@ -351,57 +321,6 @@
                 
                 <span class="name">友情链接</span>
               </a>
-            
-          </li>
-        
-          <li class="menu-item" style="position: relative;">
-            
-              <a href="javascript:;" class="menu-item-link">
-                
-                  <i class="fa fa-link"></i>
-                
-                <span class="name">更多</span>
-                <i class="fa fa-chevron-down arrow" aria-hidden="true"></i>
-              </a>
-              <ul class="sub-menu">
-                
-                <li>
-                  <a href="/gallery">
-                    
-                    <i class="fa fa-music" style="margin-top: -20px;"></i>
-                    
-                    <span>图库</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a href="/huoban">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>友情连接</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a href="/me">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>关于我</span>
-                  </a>
-                </li>
-                
-                <li>
-                  <a target="_blank" rel="noopener" href="http://baidu.com">
-                    
-                    <i class="fa fa-film" style="margin-top: -20px;"></i>
-                    
-                    <span>百度</span>
-                  </a>
-                </li>
-                
-              </ul>
             
           </li>
         
@@ -644,7 +563,7 @@
             clearInterval(this.time);
         },
         mounted() {
-            let prop = ''|| 'https://pic4.zhimg.com/80/v2-5030587bac1b856d09e0a119ff6d7c04_1440w.jpg,https://api.btstu.cn/sjbz/api.php';
+            let prop = ''|| '/medias/desktop.jpg,https://api.btstu.cn/sjbz/api.php';
             let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://') 
             if (isImg) {
                 let img = prop.split(',');
@@ -693,14 +612,14 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/7.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/4.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      Hello World
+      深入了解 javascript 中的 new 操作符
     </span>
   </div>
   
@@ -716,27 +635,62 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-05-25</span>
+        <span class="post-time">2021-06-03</span>
       </div>
       
       <div class="post-tags-categories">
         
+        <div class="tags">
+          <i class="iconfont icontag"></i>
+          
+            <a href="/tags/javascript/" class="">
+              javascript
+            </a>
+          
+        </div>
+        
+        
+        <div class="categories">
+          <i class="iconfont iconbookmark1"></i>
+          
+            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="">
+              前端
+            </a>
+          
+        </div>
         
       </div>
       <div class="post-content">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="深入了解-javascript-中的-new-操作符"><a href="#深入了解-javascript-中的-new-操作符" class="headerlink" title="深入了解 javascript 中的 new 操作符"></a>深入了解 javascript 中的 new 操作符</h1><p>new 操作符在执行过程中会改变 this 的指向，所以我们在了解 new 操作符之前，我们先解释一下 this 的用法。</p>
+<h1 id="构造函数中-this-的用法"><a href="#构造函数中-this-的用法" class="headerlink" title="构造函数中 this 的用法"></a>构造函数中 this 的用法</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Person(<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>)); <span class="comment">// Person &#123;name: &#x27;xx&#x27;, age: 18&#125;</span></span><br></pre></td></tr></table></figure>
+<p>输出结果中包含了 name 和 age 的信息。</p>
+<p>事实上，我们并没有通过 return 返回任何值，为什么输出信息中会包含 name 和 age 属性呢？ 其中起作用的就是 this 这个关键字。</p>
+<p>我们通过以下代码输出 this ，看看 this 具体的内容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>) <span class="comment">// Peoson &#123;&#125;</span></span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Person (<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+<p>我们发现 this 的实际值为 Person 空对象，后两句话就相当于给 Person 对象添加 name 和 age 属性，结果真的是这样吗？我们改写一下 Person 函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>)</span><br><span class="line">  Person.name = name</span><br><span class="line">  Person.age = age</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">new</span> Person (<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>) <span class="comment">// Person &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>输出结果中并未包含 name 和 age 属性。</p>
+<p>因为在Javascript中，如果构造函数没有 return 值，则默认 return this。而上面代码中，this 实际是一个 Person 空对象，name 和 age 属性只是被添加到了临时变量 Person 中，为了能让输出结果包含 name 和 age 属性，我们将临时变量 Person 进行 return 就可以了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> Person = &#123;&#125;</span><br><span class="line">  Person.name = name</span><br><span class="line">  Person.age = age</span><br><span class="line">  <span class="keyword">return</span> Person</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Person (<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>)) <span class="comment">// &#123;name: &quot;xx&quot;, age: 18&#125;</span></span><br></pre></td></tr></table></figure>
+<p>换句话说，new Person 做的就是类似的事情。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// this = &#123;&#125;;（隐式创建）</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加属性到 this</span></span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// return this;（隐式返回）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过以上分析，我们了解了构造函数中 this 的用法。</p>
+<h1 id="this-与-new-操作符的关系"><a href="#this-与-new-操作符的关系" class="headerlink" title="this 与 new 操作符的关系"></a>this 与 new 操作符的关系</h1><p>通过 new 操作符生成一个Person 对象的实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Person = <span class="keyword">new</span> Person()</span><br></pre></td></tr></table></figure>
+<p>new 操作符做了 3 件事情。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span><span class="keyword">let</span> person = &#123;&#125;</span><br><span class="line"><span class="number">2.</span>person.__proto__ = Person.prototype</span><br><span class="line"><span class="number">3.</span>Person.call(person)</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>我们自定义一个类似 new 功能的函数，来具体讲解上上面的 3 行代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">  Person.apply(obj, <span class="built_in">arguments</span>)</span><br><span class="line">  <span class="keyword">return</span> obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(New(<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>)) <span class="comment">// &#123;name: &quot;xx&quot;, age: 18&#125;</span></span><br></pre></td></tr></table></figure>
+<p>返回的结果中也包含 name 和 age 属性，这就证明了 new 运算符对 this 指向的改变。Person.apply(obj, arguments) 调用后Person对象中的 this 就指向了 obj 对象，这样 obj 对象就具有了 name 和 age 属性。</p>
+<p><strong>但是，不仅关注 new 操作符的函数本身，也要关注它的原型属性。</strong></p>
+<h1 id="prototype-属性与-new-的关系"><a href="#prototype-属性与-new-的关系" class="headerlink" title="prototype 属性与 new 的关系"></a>prototype 属性与 new 的关系</h1><p>我们在 Person 的原型上添加一个 sayHi 函数，然后通过New()返回的对象去调用 sayHi 函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Hi!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(New(<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>).sayHi()) <span class="comment">// Uncaught TypeError: New(...).sayHi is not a function</span></span><br></pre></td></tr></table></figure>
+<p> 我们发现执行报错了，New 函数返回的对象并没有调用sayHi方法。</p>
+<p> 这是因为 sayHi 方法是属于 Person 原型的函数，只有 Person 原型链上的对象才能继承 sayHi 方法。那么我们该怎么做呢?</p>
+<p> 这里用到的就是__proto__属性，实例的__proto__属性指向创建实例的函数的原型。设置 obj 对象的__proto__值为 Person 对象的 prototype 属性，那么 obj 对象就继承了 Person 原型上的 sayHi 方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Hi!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 另一种写法：let obj = Object.create(Person.prototype)</span></span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">  obj.__proto__ = Person.prototype</span><br><span class="line">  Person.apply(obj, <span class="built_in">arguments</span>)</span><br><span class="line">  <span class="keyword">return</span> obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(New(<span class="string">&#x27;xx&#x27;</span>, <span class="number">18</span>).sayHi()) <span class="comment">// Hi</span></span><br></pre></td></tr></table></figure>
+<p> 结果输出 ‘Hi’, 方法调用成功。</p>
 
       </div>
       
@@ -750,17 +704,18 @@
 
   
   <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/12.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="/medias/3.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/05/25/questions/" class="post-nav-link">
+    <a href="/2021/06/04/arguments-dui-xiang-de-xing-zhi-he-ying-yong/" class="post-nav-link">
       <div class="title">
         <i class="fa fa-angle-left"></i> 上一篇:
-        <div>question</div>
+        <div>arguments 对象的性质和应用</div>
       </div>
       
       <!-- <div class="content">
-        questions1.var 和 let const 的区别？使用var声明的变量，其作用域为该语句所在的函数内，且存在
+        arguments 对象的性质
+arguments 对象是所有函数都具有的一个内置局部变量，表示的是函数实际接收的参数，
       </div> -->
     </a>
   </div>
@@ -1695,7 +1650,7 @@
 
 <script>
   if ($('.toc').length > 0) {
-    var headerEl = 'h2, h3, h4',  //headers 
+    var headerEl = 'h1, h2, h3, h4',  //headers 
       content = '.post-detail',//文章容器
       idArr = {};  //标题数组以确定是否增加索引id
       //add #id
@@ -1795,21 +1750,21 @@
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
+      <a target="_blank" rel="noopener" href="https://gitee.com/anmen-expo">
         <i class="fa fa-github" aria-hidden="true"></i>
       </a>
-      <a href="mailto:1730241541@qq.com">
+      <!-- <a href="mailto:1730241541@qq.com">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
-      </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541">
+      </a> -->
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2507301541">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
-      <a href="/atom.xml" target="_blank">
-        <i class="fa fa-rss" aria-hidden="true"></i>
+      <a href="https://twitter.com/v42225078" target="_blank">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> 
+      Copyright © 2021 <a target="_blank" rel="noopener" href="https://gitee.com/anmen-expo">WangQun</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> 
     </div>
     <!-- 不蒜子统计 -->
     
@@ -1829,8 +1784,6 @@
 <style>
 .aplayer .aplayer-lrc p {
   
-  display: none;
-  
   font-size: 12px;
   font-weight: 700;
   line-height: 16px !important;
@@ -1838,19 +1791,8 @@
 
 .aplayer .aplayer-lrc p.aplayer-lrc-current {
   
-  display: none;
-  
   font-size: 15px;
   color: #42b983;
-}
-
-
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-  left: -66px !important;
-}
-
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-  left: 0px !important;
 }
 
 
@@ -1859,9 +1801,9 @@
   class=""
   server="netease"
   type="playlist"
-  id="442274724"
+  id="6724598438"
   fixed='true'
-  autoplay='false'
+  autoplay='true'
   theme='#42b983'
   loop='all'
   order='random'
