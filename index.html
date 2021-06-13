@@ -192,6 +192,37 @@
             
           </li>
         
+          <li class="drawer-box-content_item" style="position: relative;">
+            
+              <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(6)">
+                <span>
+                  
+                    <i class="fa fa-link"></i>
+                  
+                  <span class="name">常用网站</span>
+                </span>
+                <i class="fa fa-chevron-left arrow " :class="{'icon-rotate': isOpen(6)}" aria-hidden="true"></i>
+              </a>
+              <ul class="drawer-sub-menu" v-if="isOpen(6)">
+                
+                <li>
+                  <a target="_blank" rel="noopener" href="https://zh.javascript.info/">
+                    
+                    <span>现代js教程</span>
+                  </a>
+                </li>
+                
+                <li>
+                  <a target="_blank" rel="noopener" href="https://stackoverflow.com/">
+                    
+                    <span>stackoverflow</span>
+                  </a>
+                </li>
+                
+              </ul>
+            
+          </li>
+        
         <li class="drawer-box-content_item">
           <a target="_blank" rel="noopener" href="https://github.com/v833">
             <i class="fa fa-github" aria-hidden="true"></i>
@@ -321,6 +352,35 @@
                 
                 <span class="name">友情链接</span>
               </a>
+            
+          </li>
+        
+          <li class="menu-item" style="position: relative;">
+            
+              <a href="javascript:;" class="menu-item-link">
+                
+                  <i class="fa fa-link"></i>
+                
+                <span class="name">常用网站</span>
+                <i class="fa fa-chevron-down arrow" aria-hidden="true"></i>
+              </a>
+              <ul class="sub-menu">
+                
+                <li>
+                  <a target="_blank" rel="noopener" href="https://zh.javascript.info/">
+                    
+                    <span>现代js教程</span>
+                  </a>
+                </li>
+                
+                <li>
+                  <a target="_blank" rel="noopener" href="https://stackoverflow.com/">
+                    
+                    <span>stackoverflow</span>
+                  </a>
+                </li>
+                
+              </ul>
             
           </li>
         
@@ -2004,24 +2064,6 @@ typeof 运算符返回参数的类型。当我们想要分别处理不同类型�
       Copyright © 2021 <a target="_blank" rel="noopener" href="https://gitee.com/anmen-expo">WangQun</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> 
     </div>
     <!-- 不蒜子统计 -->
-    
-      
-  <!-- 不蒜子统计 -->
-  
-  <span id="busuanzi_container_site_pv">
-        <i class="fa fa-book" aria-hidden="true"></i>本站总阅读量：<span id="busuanzi_value_page_pv"></span> 次
-  </span>
-  <span id="busuanzi_container_site_pv">
-        <i class="fa fa-eye" aria-hidden="true"></i>本站总访问量：<span id="busuanzi_value_site_pv"></span> 次
-  </span>
-  <span class="post-meta-divider">|</span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-        <i class="fa fa-users" aria-hidden="true"></i>本站访客数：<span id="busuanzi_value_site_uv"></span> 人
-  </span>
-  <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-  </script>
-
     
   </div>
 </div>
