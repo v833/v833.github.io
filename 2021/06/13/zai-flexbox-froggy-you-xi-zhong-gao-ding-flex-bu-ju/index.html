@@ -724,39 +724,35 @@
         <div class="note info"><p>最近发现了一款学习flex布局的游戏,分享给大家 =&gt; <a target="_blank" rel="noopener" href="http://flexboxfroggy.com/">Flexbox Froggy</a></p></div>
 <p class='p primary'>一共 24 关</p>
 <h2 class="bamboo-h " id="附上参考答案">附上参考答案</h2><br/>
-<ol>
-<li><p>```<br>justify-content: flex-end</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ```</span><br><span class="line">   justify-content: center</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>justify-content: space-around</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. ```</span><br><span class="line">   justify-content: space-between</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>align-items: flex-end</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">6. ```</span><br><span class="line">   justify-content: center;</span><br><span class="line">   align-items: center</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>justify-content: space-around;<br>align-items: flex-end</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">8. ```</span><br><span class="line">   flex-direction: row-reverse</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>flex-direction: column</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">10. ```</span><br><span class="line">    flex-direction: row-reverse;</span><br><span class="line">    justify-content: flex-end</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>flex-direction: column;<br>justify-content: flex-end</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">12. ```</span><br><span class="line">    flex-direction: column-reverse;</span><br><span class="line">    justify-content: space-between</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>flex-direction: row-reverse;<br>justify-content: center;<br>align-items: flex-end</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">14. ```</span><br><span class="line">    order: 1</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>order: -1</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">16. ```</span><br><span class="line">    align-self: flex-end</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>order: 1;<br>align-self: flex-end</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">18. ```</span><br><span class="line">    flex-wrap: wrap;</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>flex-direction: column;<br>flex-wrap: wrap</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">20. ```</span><br><span class="line">    flex-flow: column wrap</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>align-content: flex-start</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">22. ```</span><br><span class="line">    align-content: flex-end</span><br></pre></td></tr></table></figure></li>
-<li><p>```<br>flex-direction: column-reverse;<br>align-content: center</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">24. ```</span><br><span class="line">    flex-flow: column-reverse wrap-reverse;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    align-content: space-between</span><br></pre></td></tr></table></figure>
+
+<div class="note success"><p>1、justify-content: flex-end</p></div>
+<div class="note success"><p>2、justify-content: center</p></div>
+<div class="note success"><p>3、justify-content: space-around</p></div>
+<div class="note success"><p>4、justify-content: space-between</p></div>
+<div class="note success"><p>5、align-items: flex-end</p></div>
+<div class="note success"><p>6、justify-content: center;</br> &nbsp; &nbsp;&nbsp; align-items: center</p></div>
+<div class="note success"><p>7、justify-content: space-around;</br>&nbsp; &nbsp;&nbsp;&nbsp;align-items: flex-end</p></div>
+<div class="note success"><p>8、flex-direction: row-reverse</p></div>
+<div class="note success"><p>9、flex-direction: column</p></div>
+<div class="note success"><p>10、flex-direction: row-reverse;</br>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; justify-content: flex-end</p></div>
+<div class="note success"><p>11、flex-direction: column;</br>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; justify-content: flex-end</p></div>
+<div class="note success"><p>12、flex-direction: column-reverse;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; justify-content: space-between</p></div>
+<div class="note success"><p>13、flex-direction: row-reverse;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; justify-content: center;</br>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; align-items: flex-end</p></div>
+<div class="note success"><p>14、order: 1</p></div>
+<div class="note success"><p>15、order: -1</p></div>
+<div class="note success"><p>16、align-self: flex-end</p></div>
+<div class="note success"><p>17、order: 1;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; align-self: flex-end</p></div>
+<div class="note success"><p>18、flex-wrap: wrap;</p></div>
+<div class="note success"><p>19、flex-direction: column;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; flex-wrap: wrap</p></div>
+<div class="note success"><p>20、flex-flow: column wrap</p></div>
+<div class="note success"><p>21、align-content: flex-start</p></div>
+<div class="note success"><p>22、align-content: flex-end</p></div>
+<div class="note success"><p>23、flex-direction: column-reverse;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; align-content: center</p></div>
+<div class="note success"><p>24、flex-flow: column-reverse wrap-reverse;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; justify-content: center;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; align-content: space-between</p></div>
+
 <h2 class="bamboo-h " id="总结">总结</h2><br/>
 <blockquote>
-<p>Flex 布局原理就是：给父盒子添加 flex 属性，来控制子盒子的位置排列方式从而实现 flex 布局。</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>当我们为父盒子设为 flex 布局以后，子元素的 float、clear 和 vertical-align 属性将失效。</p>
+<p>Flex 布局原理就是：给父盒子添加 flex 属性，来控制子盒子的位置排列方式从而实现 flex 布局。<br>当我们为父盒子设为 flex 布局以后，子元素的 float、clear 和 vertical-align 属性将失效。</p>
 </blockquote>
 <h3 class="bamboo-h warning" id="flex-direction">flex-direction</h3><br/>
 
@@ -794,6 +790,7 @@
 
 <p> flex-flow 就是 flex-direction 和 flex-wrap 的合写。</p>
 <h3 class="bamboo-h warning" id="order">order</h3><br/>
+
 <p>order是设置在items里面的属性,具体作用是可以决定本身的排列先后顺序。</p>
 <p>子元素可以通过设置 order 数值的大小来设定在页面中出现的顺序，数值小的在前，数值大的在后。</p>
 <h3 class="bamboo-h warning" id="align-self">align-self</h3><br/>
