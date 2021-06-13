@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>用js代码实现观察者模式 | WQ&#39;s personal blog</title>
+  <title>在Flexbox Froggy 游戏中搞定flex布局 | WQ&#39;s personal blog</title>
 
   
     
@@ -672,14 +672,14 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/6.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/15.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      用js代码实现观察者模式
+      在Flexbox Froggy 游戏中搞定flex布局
     </span>
   </div>
   
@@ -695,7 +695,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-06-11</span>
+        <span class="post-time">2021-06-13</span>
       </div>
       
       <div class="post-tags-categories">
@@ -703,8 +703,8 @@
         <div class="tags">
           <i class="iconfont icontag"></i>
           
-            <a href="/tags/javascript/" class="">
-              javascript
+            <a href="/tags/CSS/" class="">
+              CSS
             </a>
           
         </div>
@@ -721,22 +721,85 @@
         
       </div>
       <div class="post-content">
-        <h1 class="bamboo-h " id="用js代码实现观察者模式">用js代码实现观察者模式</h1><br/>
-<p>观察者模式定义了对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知，并自动更新。观察者模式属于三种设计类型(创建型、组合型和行为型)中的行为型模式，行为型模式关注的是对象之间的通讯，观察者模式就是观察者和被观察者之间的通讯。</p>
-<p>总结来说观察者模式有两个特点：</p>
-<p>1.发布&amp;订阅</p>
-<p>2.1对N</p>
-<h1 class="bamboo-h yellow" id="观察者模式的现实举例">观察者模式的现实举例</h1><br/>
-<p>想象一下，你是一位顶尖歌手，粉丝没日没夜地询问你下个单曲什么时候发。 为了从中解放，你承诺(<strong>发布</strong>)会在单曲发布的第一时间发给他们。你给了粉丝们一个列表。他们可以在上面填写他们的电子邮件地址，以便当歌曲发布后，让所有<strong>订阅</strong>了的人能够立即收到。即便遇到不测，例如录音室发生了火灾，以致你无法发布新歌，他们也能及时收到相关通知。</p>
-<h1 class="bamboo-h warning" id="用js代码实现观察者模式">用js代码实现观察者模式</h1><br/>
-<p>首先先画一个 UML 简图</p>
-<p><img "" class="lazyload placeholder" data-original="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c67be8ca93ce4e6589afbdf147b881a6~tplv-k3u1fbpfcp-watermark.image" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="image-20210611001736865.png"></p>
-<p>根据 UML 简图用js代码实现</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主题，保存状态，状态变化后触发所有观察者对象</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line">  <span class="title">constructor</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = <span class="number">0</span></span><br><span class="line">    <span class="built_in">this</span>.observers = []</span><br><span class="line">  &#125;</span><br><span class="line">  getState () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.state</span><br><span class="line">  &#125;</span><br><span class="line">  setState (state) &#123;</span><br><span class="line">    <span class="built_in">this</span>.state = state</span><br><span class="line">    <span class="built_in">this</span>.notifyAllObservers()</span><br><span class="line">  &#125;</span><br><span class="line">  notifyAllObservers () &#123;</span><br><span class="line">    <span class="built_in">this</span>.observers.forEach(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span><br><span class="line">      observer.update()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  attach (observer) &#123;</span><br><span class="line">    <span class="built_in">this</span>.observers.push(observer)</span><br><span class="line">  &#125;</span><br><span class="line">  remove (observer) &#123;</span><br><span class="line">    <span class="built_in">this</span>.observers = <span class="built_in">this</span>.observers.filter(<span class="function"><span class="params">sub</span> =&gt;</span> sub !== observer)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 观察者</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">  <span class="title">constructor</span> (<span class="params">name, subject</span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.subject = subject</span><br><span class="line">    <span class="built_in">this</span>.subject.attach(<span class="built_in">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  update () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span> update, state: <span class="subst">$&#123;<span class="built_in">this</span>.subject.getState()&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> Subject()</span><br><span class="line"><span class="keyword">let</span> o1 = <span class="keyword">new</span> Observer(<span class="string">&#x27;o1&#x27;</span>, s)</span><br><span class="line"><span class="keyword">let</span> o2 = <span class="keyword">new</span> Observer(<span class="string">&#x27;o2&#x27;</span>, s)</span><br><span class="line"><span class="keyword">let</span> o3 = <span class="keyword">new</span> Observer(<span class="string">&#x27;o3&#x27;</span>, s)</span><br><span class="line">s.setState(<span class="number">1</span>)</span><br><span class="line">s.setState(<span class="number">2</span>)</span><br><span class="line">s.setState(<span class="number">3</span>)</span><br><span class="line">s.remove(o1)</span><br><span class="line">s.setState(<span class="number">4</span>)</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-<h1 class="bamboo-h red" id="设计原则">设计原则</h1><br/>
+        <div class="note info"><p>最近发现了一款学习flex布局的游戏,分享给大家 =&gt; <a target="_blank" rel="noopener" href="http://flexboxfroggy.com/">Flexbox Froggy</a></p></div>
+<p class='p primary'>一共 24 关</p>
+<h2 class="bamboo-h " id="附上参考答案">附上参考答案</h2><br/>
+<ol>
+<li><p>```<br>justify-content: flex-end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ```</span><br><span class="line">   justify-content: center</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>justify-content: space-around</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. ```</span><br><span class="line">   justify-content: space-between</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>align-items: flex-end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">6. ```</span><br><span class="line">   justify-content: center;</span><br><span class="line">   align-items: center</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>justify-content: space-around;<br>align-items: flex-end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">8. ```</span><br><span class="line">   flex-direction: row-reverse</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>flex-direction: column</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">10. ```</span><br><span class="line">    flex-direction: row-reverse;</span><br><span class="line">    justify-content: flex-end</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>flex-direction: column;<br>justify-content: flex-end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">12. ```</span><br><span class="line">    flex-direction: column-reverse;</span><br><span class="line">    justify-content: space-between</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>flex-direction: row-reverse;<br>justify-content: center;<br>align-items: flex-end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">14. ```</span><br><span class="line">    order: 1</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>order: -1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">16. ```</span><br><span class="line">    align-self: flex-end</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>order: 1;<br>align-self: flex-end</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">18. ```</span><br><span class="line">    flex-wrap: wrap;</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>flex-direction: column;<br>flex-wrap: wrap</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">20. ```</span><br><span class="line">    flex-flow: column wrap</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>align-content: flex-start</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">22. ```</span><br><span class="line">    align-content: flex-end</span><br></pre></td></tr></table></figure></li>
+<li><p>```<br>flex-direction: column-reverse;<br>align-content: center</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">24. ```</span><br><span class="line">    flex-flow: column-reverse wrap-reverse;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    align-content: space-between</span><br></pre></td></tr></table></figure>
+<h2 class="bamboo-h " id="总结">总结</h2><br/>
+<blockquote>
+<p>Flex 布局原理就是：给父盒子添加 flex 属性，来控制子盒子的位置排列方式从而实现 flex 布局。</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>当我们为父盒子设为 flex 布局以后，子元素的 float、clear 和 vertical-align 属性将失效。</p>
+</blockquote>
+<h3 class="bamboo-h warning" id="flex-direction">flex-direction</h3><br/>
+
+<p>Flex 布局中默认的主轴是 row，x轴。</p>
+<p>如果想改变主轴方向可通过设置 flex-direction 来改变。</p>
+<p>flex-direction:column;将主轴改为y轴，纵轴。</p>
+<p>flex-direction:row; 将主轴改为x轴，横轴。</p>
+<p>flex-direction:row- reverse;主轴为x轴，<strong>并且翻转</strong>。</p>
+<p>flex-direction:column- reverse;主轴为y轴，<strong>并且翻转</strong>。</p>
+<h3 class="bamboo-h warning" id="justify-content">justify-content</h3><br/>
+<p>通过 justify-content 能够设置主轴子元素排列形式。</p>
+<p>值为 flex-start 所有子元素在主轴头部显示。</p>
+<p>值为 flex-end 所有子元素在主轴尾部显示。</p>
+<p>值为 flex-center 所有子元素在主轴居中对齐。</p>
+<p>值为 space-around 所有子元素平分剩余空间。</p>
+<p>值为 space-between 所有子元素先两边贴边在平分剩余空间。</p>
+<h3 class="bamboo-h warning" id="flex-wrap">flex-wrap</h3><br/>
+<p>flex-wrap<br>控制子元素是否换行。</p>
+<p>开启 flex 布局后默认为不换行。</p>
+<p>如果想要换行效果设置 flex-wrap：wrap。</p>
+<h3 class="bamboo-h warning" id="align-items">align-items</h3><br/>
 
 
-<p>主题和观察者分离，不是主动触发而是被动监听，两者解耦</p>
+<p>align-items 设置侧轴子元素排列。</p>
+<p>利用align-items 能够设置侧轴元素对齐的方式在子项为单项（单行）的时候使用。</p>
+<p>align-items 的值为flex-start 表示从头开始。</p>
+<p>align-items 的值为flex-end 表示从结尾开始。</p>
+<p>align-items 的值为center 表示居中显示。</p>
+<p>align-items 的值为stretch 会将子元素拉伸。</p>
+<h3 class="bamboo-h warning" id="align-content">align-content</h3><br/>
+<p>align-content 设置侧轴子元素排列。</p>
+<p> Align-content 适应于换行（多行）的情况下（单行情况下无效），可以设置上对齐、下对齐、居中、拉伸以及平均分配剩余空间等属性值。</p>
+<p> Align-item 和 align-content 的区别单行找 align-items 多行找 align-content。</p>
+<h3 class="bamboo-h warning" id="flex-flow">flex-flow</h3><br/>
+
+<p> flex-flow 就是 flex-direction 和 flex-wrap 的合写。</p>
+<h2 class="bamboo-h " id="warning">warning</h2><br/>
+<p>order是设置在items里面的属性,具体作用是可以决定本身的排列先后顺序。</p>
+<p>子元素可以通过设置 order 数值的大小来设定在页面中出现的顺序，数值小的在前，数值大的在后。</p>
+<h2 class="bamboo-h " id="warning">warning</h2><br/>
+
+<p>align-self 属性定义 flex 子项单独在侧轴（纵轴）方向上的对齐方式，并覆盖已有的 align-items 的值。</p>
+<p>此属性接受与align-items特定项目的值相同的值。</p>
 
       </div>
       
@@ -748,43 +811,21 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/15.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/06/13/zai-flexbox-froggy-you-xi-zhong-gao-ding-flex-bu-ju/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> 上一篇:
-        <div>在Flexbox Froggy 游戏中搞定flex布局</div>
-      </div>
-      
-      <!-- <div class="content">
-        最近发现了一款学习flex布局的游戏,分享给大家 =&gt; Flexbox Froggy
-一共 24 关
-附上参考答案
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/1.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="/medias/6.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/07/vue-de-sheng-ming-zhou-qi/" class="post-nav-link">
+    <a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>Vue 的生命周期</div>
+        <div>用js代码实现观察者模式</div>
       </div>
       <!-- <div class="content">
-        beforeCreate(创建前)
-在数据观测和初始化事件还未开始
-
-created(创建后)
-完成数据观测，属性和方法
+        用js代码实现观察者模式
+观察者模式定义了对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都
       </div> -->
     </a>
   </div>
