@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>arguments 对象的性质和应用 | WQ&#39;s personal blog</title>
+  <title>理解 ES6 的 Map 数据结构 | WQ&#39;s personal blog</title>
 
   
     
@@ -672,14 +672,14 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/6.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/19.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      arguments 对象的性质和应用
+      理解 ES6 的 Map 数据结构
     </span>
   </div>
   
@@ -695,7 +695,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-06-04</span>
+        <span class="post-time">2021-06-14</span>
       </div>
       
       <div class="post-tags-categories">
@@ -721,49 +721,83 @@
         
       </div>
       <div class="post-content">
-        <h1 class="bamboo-h red" id="arguments 对象的性质">arguments 对象的性质</h1><br/>
-<p>arguments 对象是所有函数都具有的一个内置局部变量，表示的是函数实际接收的参数，是一个<strong>类数组</strong>的结构。</p>
-<p>之所以说 arguments 是类数组是因为它除了具有 length 属性外，不具有数组的其他属性。</p>
-<h2 class="bamboo-h " id="函数外部无法访问">函数外部无法访问</h2><br/>
-<p>arguments对象只能在函数内部使用，无法在函数外部访问到 arguments 对象。同时 arguments 对象存在于函数作用域中，一个函数无法直接访问另一个函数的 arguments。</p>
-<blockquote>
-<p>箭头函数没有 “arguments”</p>
-<p>如果我们在箭头函数中访问 arguments，访问到的 arguments 并不属于箭头函数，而是属于箭头函数外部的“普通”函数。</p>
+        <h2 class="bamboo-h " id="Map">Map</h2><br/>
+<p>ES6 新增了一种数据结构 Map，与传统的对象字面量类似，它的本质是一种<strong>键值对的组合</strong>。但是与对象字面量不同的是，对象字面量的键只能是<strong>字符串</strong>，对于非字符串类型的值会采用强制类型转换成字符串，而 Map 的键却可以由各种类型的值组成。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统的对象类型</span></span><br><span class="line"><span class="keyword">let</span> xx = &#123;<span class="attr">name</span>: <span class="string">&#x27;xx&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">obj[xx] = <span class="string">&#x27;123&#x27;</span> <span class="comment">// &#123;[object Object]: &quot;123&quot;&#125;</span></span><br><span class="line">alert( obj[<span class="string">&quot;[object Object]&quot;</span>] ) <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
+<p>在上面案例中，采用的是传统的对象处理方式，我们将对一个对象作为对象的键，在输出时会将所有的键如 xx  转换为字符串。所以我们得到字符串键 “[object Object]”。这显然不是我们想要的结果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xx = &#123;<span class="attr">name</span>: <span class="string">&#x27;xx&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span></span><br><span class="line">map.set(xx, <span class="number">123</span>) <span class="comment">// Map(1) &#123;&#123;…&#125; =&gt; 123&#125;</span></span><br><span class="line">alert( map.get(xx) ) <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
+<p>使用 Map 处理方法，将一个对象作为键添加到 map 实例中，在输出时发现，键的值为对象的真实值，并没有转换成字符串。</p>
+<p>当创建一个 Map 后，我们可以传入一个带有键值对的数组（或其它可迭代对象）来进行初始化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([</span><br><span class="line">  [<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;xx&#x27;</span>],</span><br><span class="line">  [<span class="string">&#x27;age&#x27;</span>, <span class="number">23</span>]</span><br><span class="line">])</span><br><span class="line"><span class="built_in">console</span>.log(map) <span class="comment">// Map(2) &#123;&quot;name&quot; =&gt; &quot;xx&quot;, &quot;age&quot; =&gt; 23&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 class="bamboo-h " id="Map 的属性和方法">Map 的属性和方法</h2><br/>
+<ul>
+<li>new Map() —— 创建 map。</li>
+<li>map.set(key, value) —— 根据键存储值。</li>
+<li>map.get(key) —— 根据键来返回值，如果 map 中不存在对应的 key，则返回 undefined。</li>
+<li>map.has(key) —— 如果 key 存在则返回 true，否则返回 false。</li>
+<li>map.delete(key) —— 删除指定键的值。</li>
+<li>map.clear() —— 清空 map。</li>
+<li>map.size —— 返回当前元素个数。<blockquote>
+<p>map[key] 不是使用 Map 的正确方式</p>
+<p>虽然 map[key] 也有效，例如我们可以设置 map[key] = 23，这样会将 map 视为 JavaScript 的 plainobject，因此它暗含了所有相应的限制（没有对象键等）。<br>所以我们应该使用 map 方法：set 和 get 等。</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="built_in">arguments</span>); <span class="comment">// undefined</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>.length); <span class="comment">// 4</span></span><br><span class="line">&#125;</span><br><span class="line">fn (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
-<h2 class="bamboo-h " id="可通过索引访问">可通过索引访问</h2><br/>
-<p>arguments 对象是一个类数组结构，可以通过索引访问，每一项表示对应传递的实参值，如果该项索引值不存在，则会返回 undefined。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>]); <span class="comment">// 1</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">1</span>]); <span class="comment">// 2</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">2</span>]); <span class="comment">// undefined</span></span><br><span class="line">&#125;</span><br><span class="line">fn (<span class="number">1</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<h2 class="bamboo-h " id="由实参决定">由实参决定</h2><br/>
-<p>arguments 对象的值有实参决定，而不是由定义的形参决定，形参与 arguments 对象占用独立的内存空间。关于arguments 对象与形参之间的关系，可以总结为以下几点。</p>
+</li>
+</ul>
+<p>在 Map 数据结构中，所有的键都必须具有<strong>唯一性</strong>。如果对同一个键进行多次赋值，那么后面的值会覆盖前面的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="number">1</span>, <span class="string">&#x27;aa&#x27;</span>)</span><br><span class="line">map.set(<span class="number">1</span>, <span class="string">&#x27;bb&#x27;</span>)</span><br><span class="line">map.get(<span class="number">1</span>) <span class="comment">// &#x27;bb&#x27;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>1、arguments 对象的 length 属性在函数调用的时候就已经确定，不会随着韩式的处理而变化。</p>
-<p>2、指定的形参在传递实参的形况下，arguments 对象与形参值相同，并且可以互相改变。</p>
-<p>3、指定的形参在未传递实参的情况下，arguments 对象对应索引值返回 undefined。</p>
-<p>4、指定的形参在未传递实参的情况下，arguments 对象于形参值不能相互改变。</p>
+<p>Map 是怎么比较键的？</p>
+<p>Map 使用 SameValueZero 算法来比较键是否相等。它和严格等于 === 差不多，但区别是 NaN 被看成是等于 NaN。所以 NaN 也可以被用作键。</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>.length); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">arguments</span>[<span class="number">0</span>] = <span class="number">11</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(a); <span class="comment">// 11</span></span><br><span class="line"></span><br><span class="line">  b = <span class="number">12</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">1</span>]); <span class="comment">// 12</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">arguments</span>[<span class="number">2</span>] = <span class="number">3</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(c); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">  c = <span class="number">13</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">2</span>]); <span class="comment">// 3</span></span><br><span class="line">  </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>.length); <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line">fn (<span class="number">1</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p>通过上面的例子，很好的总结了 arguments 对象的性质。</p>
-<h2 id="arguments-引发的问题：形参失去意义"><a href="#arguments-引发的问题：形参失去意义" class="headerlink" title="arguments 引发的问题：形参失去意义"></a>arguments 引发的问题：形参失去意义</h2><p>我们看一个例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">arguments</span>[<span class="number">0</span>] = <span class="number">11</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(a); <span class="comment">// 11</span></span><br><span class="line">  <span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line">fn (<span class="number">1</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p><strong>注意：永远不要直接修改 arguments 对象</strong></p>
-<p>如同上面的例子，arguments 对象与函数的形参的关系及其脆弱。修改 arguments 对象需要承担函数的形参失去意义的风险。在严格模式下，函数参数不支持对arguments对象的修改。</p>
+<p>链式调用</p>
+<p>每一次 map.set 调用都会返回 map 本身，所以我们可以进行“链式”调用：</p>
+<p>map.set(‘name’, ‘xx1’).set(‘age’, 23)</p>
 </blockquote>
-<h1 class="bamboo-h red" id="arguments 对象的应用">arguments 对象的应用</h1><br/>
-<p>既然 arguments 有着致命的确定，那么我们该怎么应用它呢？我们来看下面几个应用。</p>
-<h2 class="bamboo-h " id="实参的个数判断">实参的个数判断</h2><br/>
-<p>定义一个函数，明确要求在调用时只能传递3个参数，如果传递的参数个数不等于3，则直接抛出异常。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">arguments</span>.length !== <span class="number">3</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;传递的参数个数不为3&quot;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 class="bamboo-h " id="任意个数的参数处理">任意个数的参数处理</h2><br/>
-<p>定义一个函数，该函数只会特定处理传递的前几个参数，对于后面的参数不论传递多少个都会统一处理。</p>
-<p>例如：定义一个函数，需求将多个字符串使用分隔符相连，并返回一个结果字符串。此时第一个参数表示分隔符，后面所有的参数表示待相连符。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">joinStr</span> (<span class="params">seperator</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// arguments 是一个类数组，并且不能直接操作 arguments</span></span><br><span class="line">  <span class="comment">// 可以通过call()函数间接调用 slice() 函数返回一个新的数组，操作这个数组</span></span><br><span class="line">  <span class="keyword">let</span> str = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> str.join(seperator)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">joinStr(<span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;z&#x27;</span>) <span class="comment">// x-y-z</span></span><br><span class="line">joinStr(<span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;p&#x27;</span>, <span class="string">&#x27;q&#x27;</span>) <span class="comment">// o,p,q</span></span><br></pre></td></tr></table></figure>
-<h2 class="bamboo-h " id="模拟函数重载">模拟函数重载</h2><br/>
-<p>函数重载就是在程序中有命名一样的函数，通过参数的判断实现相同函数的不同调用。</p>
-<p>javascript 不能实现函数重载，因为命名一样的函数，后面的会把前面的覆盖掉。我们可以使用 arguments 来模拟函数重载。</p>
-<p>定义一个函数，实现多值求和。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> arr = [...arguments]</span><br><span class="line">  <span class="keyword">return</span> arr.reduce(<span class="function">(<span class="params">pre, cur</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> pre + cur</span><br><span class="line">  &#125;, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)); <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+<h2 class="bamboo-h " id="Map 的遍历">Map 的遍历</h2><br/>
+<ul>
+<li>map.keys() —— 遍历并返回所有的键，</li>
+<li>map.values() —— 遍历并返回所有的值，</li>
+<li>map.entries() —— 遍历并返回所有的实体[key, value]，<strong>for..of 在默认情况下使用的就是这个</strong>，</li>
+<li>map.forEach(item, key) —— 第一个参数表示值，第二个参数表示键。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;xx&#x27;</span>)</span><br><span class="line">map.set(<span class="string">&#x27;age&#x27;</span>, <span class="number">23</span>)</span><br><span class="line"></span><br><span class="line">map.forEach(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value, key); </span><br><span class="line">  <span class="comment">// xx name </span></span><br><span class="line">  <span class="comment">// 23 age</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> map.keys()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key);</span><br><span class="line">  <span class="comment">// name</span></span><br><span class="line">  <span class="comment">// age</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> value <span class="keyword">of</span> map.values()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">  <span class="comment">// xx</span></span><br><span class="line">  <span class="comment">// 23</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [key, value] <span class="keyword">of</span> map.entries()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key, value);</span><br><span class="line">    <span class="comment">// name xx</span></span><br><span class="line">    <span class="comment">// age 23</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>map.entries === map[Symbol.iterator]</p>
+</blockquote>
+<blockquote>
+<p>使用插入顺序</p>
+<p>迭代的顺序与插入值的顺序相同。与普通的 Object 不同，Map 保留了此顺序。</p>
+</blockquote>
+<h2 class="bamboo-h " id="Map 与其他数据类型的转换">Map 与其他数据类型的转换</h2><br/>
+
+<h3 class="bamboo-h warning" id="数组转换成 Map">数组转换成 Map</h3><br/>
+<p>数组转换成 Map，可以通过 Map 构造函数实现，使用 new 操作符生成 Map 实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [[<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;xx&#x27;</span>], [<span class="string">&#x27;age&#x27;</span>, <span class="number">23</span>]]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(arr)</span><br><span class="line"><span class="built_in">console</span>.log(map) <span class="comment">// Map(2) &#123;&quot;name&quot; =&gt; &quot;xx&quot;, &quot;age&quot; =&gt; 23&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 class="bamboo-h warning" id="Map 转换成数组">Map 转换成数组</h3><br/>
+<p>Map 转换成数组，可以通过扩展运算符实现。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;xx&#x27;</span>)</span><br><span class="line">map.set(<span class="string">&#x27;age&#x27;</span>, <span class="number">23</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [...map]</span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// (2) [Array(2), Array(2)]</span></span><br></pre></td></tr></table></figure>
+
+<h3 class="bamboo-h warning" id="对象转换成 Map">对象转换成 Map</h3><br/>
+<p>如果我们想从一个已有的普通对象来创建一个 Map，那么我们可以使用内建方法 Object.entries(obj)，该方法返回对象的键/值对数组，该数组格式完全按照 Map 所需的格式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;xx&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(<span class="built_in">Object</span>.entries(obj))</span><br><span class="line"><span class="built_in">console</span>.log(map) <span class="comment">// Map(2) &#123;&quot;name&quot; =&gt; &quot;xx&quot;, &quot;age&quot; =&gt; 23&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 class="bamboo-h warning" id="Map 转换成对象">Map 转换成对象</h3><br/>
+<p>我们刚刚已经学习了如何使用 Object.entries(obj) 从普通对象创建 Map。</p>
+<p>Object.fromEntries 方法的作用是相反的：给定一个具有 [key, value] 键值对的数组，它会根据给定数组创建一个对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="string">&quot;name&quot;</span>, <span class="string">&#x27;xx&#x27;</span>)</span><br><span class="line">map.set(<span class="string">&quot;age&quot;</span>, <span class="number">23</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = <span class="built_in">Object</span>.fromEntries(map)</span><br><span class="line"><span class="built_in">console</span>.log(obj) <span class="comment">// &#123;name: &quot;xx&quot;, age: 23&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 class="bamboo-h warning" id="Map 转换成 Json">Map 转换成 Json</h3><br/>
+
+<h4 class="bamboo-h red" id="当 Map 的键名都是字符串">当 Map 的键名都是字符串</h4><br/>
+<p>当 Map 的键名都是字符串时，可以先将 Map 转换成对象，然后调用JSON.stringify()函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="string">&quot;name&quot;</span>, <span class="string">&#x27;xx&#x27;</span>).set(<span class="string">&quot;age&quot;</span>, <span class="number">23</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> json = <span class="built_in">JSON</span>.stringify(<span class="built_in">Object</span>.fromEntries(map))</span><br><span class="line"><span class="built_in">console</span>.log(json) <span class="comment">//&#123;&quot;name&quot;:&quot;xx&quot;,&quot;age&quot;:23&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 class="bamboo-h red" id="当 Map 的键名有非字符串">当 Map 的键名有非字符串</h4><br/>
+<p>当 Map 的键名有非字符串时，我们可以先将 Map 转换成数组，然后调用JSON.stringify()函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(&#123;<span class="attr">fn</span>: <span class="string">&#x27;foo&#x27;</span>&#125;, <span class="string">&#x27;xx&#x27;</span>).set(<span class="literal">true</span>, <span class="string">&#x27;abc&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> json = <span class="built_in">JSON</span>.stringify([...map])</span><br><span class="line"><span class="built_in">console</span>.log(json) <span class="comment">// [[&#123;&quot;fn&quot;:&quot;foo&quot;&#125;,&quot;xx&quot;],[true,&quot;abc&quot;]]</span></span><br></pre></td></tr></table></figure>
       </div>
       
     </article>
@@ -774,41 +808,22 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/16.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/06/07/vue-de-sheng-ming-zhou-qi/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> 上一篇:
-        <div>Vue 的生命周期</div>
-      </div>
-      
-      <!-- <div class="content">
-        beforeCreate(创建前)
-在数据观测和初始化事件还未开始
-
-created(创建后)
-完成数据观测，属性和方法
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/7.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="/medias/21.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/03/shen-ru-liao-jie-javascript-zhong-de-new-cao-zuo-fu/" class="post-nav-link">
+    <a href="/2021/06/13/zai-flexbox-froggy-you-xi-zhong-gao-ding-flex-bu-ju/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>深入了解 javascript 中的 new 操作符</div>
+        <div>在Flexbox Froggy 游戏中搞定flex布局</div>
       </div>
       <!-- <div class="content">
-        new 操作符在执行过程中会改变 this 的指向，所以我们在了解 new 操作符之前，我们先解释一下 this 的用法
+        最近发现了一款学习flex布局的游戏,分享给大家 =&gt; Flexbox Froggy
+一共 24 关
+附上参考答案
       </div> -->
     </a>
   </div>
