@@ -614,6 +614,15 @@ pre:hover::-webkit-scrollbar-thumb:hover,
   text-align: center;
   font-weight: normal;
 }
+.post-detail-header .post-meta-item-text {
+  font-family: '楷体';
+  font-size: 2rem;
+  line-height: 1.3;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  font-weight: normal;
+}
 .post-detail-header .typed-cursor {
   font-size: 2rem;
   color: #fff;
