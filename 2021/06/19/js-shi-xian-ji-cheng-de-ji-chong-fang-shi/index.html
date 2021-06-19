@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>理解 ES6 的 Map 数据结构 | WQ&#39;s personal blog</title>
+  <title>JS 实现继承的几种方式 | WQ&#39;s personal blog</title>
 
   
     
@@ -672,17 +672,17 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/7.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="/medias/11.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      理解 ES6 的 Map 数据结构
+      JS 实现继承的几种方式
     </span>
     <!-- id 将作为查询条件 -->
-    <span id="/2021/06/14/li-jie-es6-de-map-shu-ju-jie-gou/" class="leancloud-visitors view" data-flag-title="理解 ES6 的 Map 数据结构">
+    <span id="/2021/06/19/js-shi-xian-ji-cheng-de-ji-chong-fang-shi/" class="leancloud-visitors view" data-flag-title="JS 实现继承的几种方式">
       <i class="post-meta-item-text">阅读数: </i>
       <i class="leancloud-visitors-count">loading</i>
     </span>
@@ -700,7 +700,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-06-14</span>
+        <span class="post-time">2021-06-19</span>
       </div>
       
       <div class="post-tags-categories">
@@ -726,83 +726,98 @@
         
       </div>
       <div class="post-content">
-        <h2 class="bamboo-h " id="Map">Map</h2><br/>
-<p>ES6 新增了一种数据结构 Map，与传统的对象字面量类似，它的本质是一种<strong>键值对的组合</strong>。但是与对象字面量不同的是，对象字面量的键只能是<strong>字符串</strong>，对于非字符串类型的值会采用强制类型转换成字符串，而 Map 的键却可以由各种类型的值组成。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统的对象类型</span></span><br><span class="line"><span class="keyword">let</span> xx = &#123;<span class="attr">name</span>: <span class="string">&#x27;xx&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">obj[xx] = <span class="string">&#x27;123&#x27;</span> <span class="comment">// &#123;[object Object]: &quot;123&quot;&#125;</span></span><br><span class="line">alert( obj[<span class="string">&quot;[object Object]&quot;</span>] ) <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
-<p>在上面案例中，采用的是传统的对象处理方式，我们将对一个对象作为对象的键，在输出时会将所有的键如 xx  转换为字符串。所以我们得到字符串键 “[object Object]”。这显然不是我们想要的结果。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xx = &#123;<span class="attr">name</span>: <span class="string">&#x27;xx&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span></span><br><span class="line">map.set(xx, <span class="number">123</span>) <span class="comment">// Map(1) &#123;&#123;…&#125; =&gt; 123&#125;</span></span><br><span class="line">alert( map.get(xx) ) <span class="comment">// 123</span></span><br></pre></td></tr></table></figure>
-<p>使用 Map 处理方法，将一个对象作为键添加到 map 实例中，在输出时发现，键的值为对象的真实值，并没有转换成字符串。</p>
-<p>当创建一个 Map 后，我们可以传入一个带有键值对的数组（或其它可迭代对象）来进行初始化。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([</span><br><span class="line">  [<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;xx&#x27;</span>],</span><br><span class="line">  [<span class="string">&#x27;age&#x27;</span>, <span class="number">23</span>]</span><br><span class="line">])</span><br><span class="line"><span class="built_in">console</span>.log(map) <span class="comment">// Map(2) &#123;&quot;name&quot; =&gt; &quot;xx&quot;, &quot;age&quot; =&gt; 23&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 class="bamboo-h " id="Map 的属性和方法">Map 的属性和方法</h2><br/>
-<ul>
-<li>new Map() —— 创建 map。</li>
-<li>map.set(key, value) —— 根据键存储值。</li>
-<li>map.get(key) —— 根据键来返回值，如果 map 中不存在对应的 key，则返回 undefined。</li>
-<li>map.has(key) —— 如果 key 存在则返回 true，否则返回 false。</li>
-<li>map.delete(key) —— 删除指定键的值。</li>
-<li>map.clear() —— 清空 map。</li>
-<li>map.size —— 返回当前元素个数。<blockquote>
-<p>map[key] 不是使用 Map 的正确方式</p>
-<p>虽然 map[key] 也有效，例如我们可以设置 map[key] = 23，这样会将 map 视为 JavaScript 的 plainobject，因此它暗含了所有相应的限制（没有对象键等）。<br>所以我们应该使用 map 方法：set 和 get 等。</p>
+        <blockquote>
+<p><strong>继承</strong>作为面向对象语言的三大特性之一，可以在不影响父类对象实现的情况下，使得子类对象具有父类对象的特性；同时还能再不影响父类对象行为的情况下扩展子类对象独有的特性，为编码带来了极大的便利。<br>下面我们就来看看 <code>JavaScript</code> 中都有哪些实现继承的方法。</p>
 </blockquote>
-</li>
-</ul>
-<p>在 Map 数据结构中，所有的键都必须具有<strong>唯一性</strong>。如果对同一个键进行多次赋值，那么后面的值会覆盖前面的值。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="number">1</span>, <span class="string">&#x27;aa&#x27;</span>)</span><br><span class="line">map.set(<span class="number">1</span>, <span class="string">&#x27;bb&#x27;</span>)</span><br><span class="line">map.get(<span class="number">1</span>) <span class="comment">// &#x27;bb&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 class="bamboo-h " id="原型链继承">原型链继承</h2><br/>
+<p>原型链继承是比较常见的继承方式之一，其中涉及的构造函数、原型和实例，三者之间存在着一定的关系，即<strong>每一个构造函数都有一个原型对象，原型对象又包含一个指向构造函数的指针，而实例则包含一个原型对象的指针。</strong></p>
 <blockquote>
-<p>Map 是怎么比较键的？</p>
-<p>Map 使用 SameValueZero 算法来比较键是否相等。它和严格等于 === 差不多，但区别是 NaN 被看成是等于 NaN。所以 NaN 也可以被用作键。</p>
+<p>原型链继承的主要思想是：<strong>重写子类的prototype属性，将其指向父类的实例</strong>。<br>下面我们结合代码来了解一下。</p>
 </blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 属性</span></span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.type = <span class="string">&#x27;Animal&#x27;</span></span><br><span class="line">  <span class="comment">// 实例函数</span></span><br><span class="line">  <span class="built_in">this</span>.sleep = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name + <span class="string">&#x27;正在睡觉&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 原型函数</span></span><br><span class="line">Animal.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params">food</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>正在吃<span class="subst">$&#123;food&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 原型继承</span></span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal()</span><br><span class="line"><span class="comment">// 将Cat的构造函数指向自身</span></span><br><span class="line">Cat.prototype.constructor = Cat</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> cat = <span class="keyword">new</span> Cat(<span class="string">&#x27;Tom&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(cat.name) <span class="comment">// Tom</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.type) <span class="comment">// Animal</span></span><br><span class="line">cat.sleep() <span class="comment">// Tom正在睡觉</span></span><br><span class="line">cat.eat(<span class="string">&#x27;猫罐头&#x27;</span>) <span class="comment">// Tom正在吃猫罐头</span></span><br></pre></td></tr></table></figure>
+<p>在子类<code>Cat</code>中，我们没有增加<code>type</code>属性，因此会直接继承父类<code>Animal</code>的<code>type</code>属性。</p>
+<p>在子类<code>Cat</code>中，我们增加了<code>name</code>属性，在生成子类实例时，<code>name</code>属性会覆盖父类<code>Animal</code>属性值。</p>
+<p>同样因为<code>Cat</code>的<code>prototype</code>属性指向了<code>Animal</code>类型的实例，因此在生成实例<code>Cat</code>时，会继承实例函数和原型函数。</p>
 <blockquote>
-<p>链式调用</p>
-<p>每一次 map.set 调用都会返回 map 本身，所以我们可以进行“链式”调用：</p>
-<p>map.set(‘name’, ‘xx1’).set(‘age’, 23)</p>
+<p>需要注意：</p>
+<p>Cat.prototype.constructor = Cat</p>
+<p>如果不将Cat原型对象的constructor属性指向自身的构造函数，那将指向父类Animal的构造函数。</p>
 </blockquote>
-<h2 class="bamboo-h " id="Map 的遍历">Map 的遍历</h2><br/>
-<ul>
-<li>map.keys() —— 遍历并返回所有的键，</li>
-<li>map.values() —— 遍历并返回所有的值，</li>
-<li>map.entries() —— 遍历并返回所有的实体[key, value]，<strong>for..of 在默认情况下使用的就是这个</strong>，</li>
-<li>map.forEach(item, key) —— 第一个参数表示值，第二个参数表示键。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;xx&#x27;</span>)</span><br><span class="line">map.set(<span class="string">&#x27;age&#x27;</span>, <span class="number">23</span>)</span><br><span class="line"></span><br><span class="line">map.forEach(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value, key); </span><br><span class="line">  <span class="comment">// xx name </span></span><br><span class="line">  <span class="comment">// 23 age</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> map.keys()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key);</span><br><span class="line">  <span class="comment">// name</span></span><br><span class="line">  <span class="comment">// age</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> value <span class="keyword">of</span> map.values()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">  <span class="comment">// xx</span></span><br><span class="line">  <span class="comment">// 23</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [key, value] <span class="keyword">of</span> map.entries()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key, value);</span><br><span class="line">    <span class="comment">// name xx</span></span><br><span class="line">    <span class="comment">// age 23</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 class="bamboo-h warning" id="原型链继承的优点">原型链继承的优点</h3><br/>
+
+<h4 class="bamboo-h red" id="简单，易于实现">简单，易于实现</h4><br/>
+<p>只需要设置子类的<code>prototype</code>属性指向父类的实例即可。</p>
+<h4 class="bamboo-h red" id="可通过子类直接访问父类原型链属性和函数">可通过子类直接访问父类原型链属性和函数</h4><br/>
+
+<h3 class="bamboo-h warning" id="原型链继承的缺点">原型链继承的缺点</h3><br/>
+
+<h4 class="bamboo-h red" id="子类的所有实例将共享父类的属性">子类的所有实例将共享父类的属性</h4><br/>
+<p>子类的所有实例将共享父类的属性会带来一个很严重的问题，父类包含<strong>引用值</strong>时，子类的实例改变该引用值会在所有实例中共享。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.skill = [<span class="string">&#x27;eat&#x27;</span>, <span class="string">&#x27;jump&#x27;</span>, <span class="string">&#x27;sleep&#x27;</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal()</span><br><span class="line">Cat.prototype.constructor = Cat</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> cat1 = <span class="keyword">new</span> Cat()</span><br><span class="line"><span class="keyword">let</span> cat2 = <span class="keyword">new</span> Cat()</span><br><span class="line">cat1.skill.push(<span class="string">&#x27;walk&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(cat1.skill) <span class="comment">// [&quot;eat&quot;, &quot;jump&quot;, &quot;sleep&quot;, &quot;walk&quot;]</span></span><br><span class="line"><span class="built_in">console</span>.log(cat2.skill) <span class="comment">// [&quot;eat&quot;, &quot;jump&quot;, &quot;sleep&quot;, &quot;walk&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<h4 class="bamboo-h red" id="在子类实例化时，无法向父类的构造函数传参">在子类实例化时，无法向父类的构造函数传参</h4><br/>
+<p>在通过<code>new</code>操作符创建子类的实例时，会调用子类的构造函数，而在子类的构造函数中并没有设置与父类关联，从而导致无法向父类的构造函数传递参数。</p>
+<h4 class="bamboo-h red" id="无法实现多继承">无法实现多继承</h4><br/>
+<p>子类的<code>prototype</code>只能设置一个值，设置多个值时，后面的值会覆盖前面的值。</p>
+<h2 class="bamboo-h " id="构造函数继承（借助 call）">构造函数继承（借助 call）</h2><br/>
 <blockquote>
-<p>map.entries === map[Symbol.iterator]</p>
+<p>构造函数继承的主要思想：<strong>在子类的构造函数中通过call()函数改变thi的指向，调用父类的构造函数，从而将父类的实例的属性和函数绑定到子类的this上。</strong></p>
 </blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 父类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span> (<span class="params">age</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 属性</span></span><br><span class="line">  <span class="built_in">this</span>.name = <span class="string">&#x27;Animal&#x27;</span></span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">  <span class="comment">// 实例函数</span></span><br><span class="line">  <span class="built_in">this</span>.sleep = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name + <span class="string">&#x27;正在睡觉&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 原型函数</span></span><br><span class="line">Animal.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params">food</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>正在吃<span class="subst">$&#123;food&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 核心，通过call()函数实现Animal的实例的属性和函数的继承</span></span><br><span class="line">  Animal.call(<span class="built_in">this</span>)</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> cat = <span class="keyword">new</span> Cat(<span class="string">&#x27;Tom&#x27;</span>)</span><br><span class="line">cat.sleep() <span class="comment">// Tom正在睡觉</span></span><br><span class="line">cat.eat() <span class="comment">// Uncaught TypeError: cat.eat is not a function</span></span><br></pre></td></tr></table></figure>
+<p>通过代码可以发现，子类可以正常调用父类的实例函数，而无法调用父类原型上的函数，<strong>这是因为子类并没有通过某种方式来调用父类原型对象上的函数</strong>。</p>
+<h3 class="bamboo-h warning" id="构造继承的优点">构造继承的优点</h3><br/>
+
+<h4 class="bamboo-h red" id="解决了子类实例共享父类属性的问题">解决了子类实例共享父类属性的问题</h4><br/>
+<p><code>call()</code>函数实际时改变父类<code>Animal</code>构造函数中<code>this</code>的指向，然后调用<code>this</code>指向了子类<code>Cat</code>，相当于将父类的属性和函数直接绑定到了子类的<code>this</code>中，成了子类实例的熟属性和函数，因此生成的子类实例中是各自拥有自己的属性和函数，不会相互影响。</p>
+<h4 class="bamboo-h red" id="创建子类的实例时，可以向父类传参">创建子类的实例时，可以向父类传参</h4><br/>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// 父类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span> (<span class="params">age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = <span class="string">&#x27;Animal&#x27;</span></span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span> (<span class="params">name, parentAge</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 在子类生成实例时，传递参数给call()函数，间接地传递给父类，然后被子类继承</span></span><br><span class="line">  Animal.call(<span class="built_in">this</span>, parentAge)</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> cat = <span class="keyword">new</span> Cat(<span class="string">&#x27;Tom&#x27;</span>, <span class="number">10</span>)</span><br><span class="line"><span class="built_in">console</span>.log(cat.age)</span><br></pre></td></tr></table></figure>
+<h4 class="bamboo-h red" id="可以实现多继承">可以实现多继承</h4><br/>
+
+<p>在子类的构造函数中，可以多次调用<code>call()</code>函数来继承多个父对象。</p>
+<h3 class="bamboo-h warning" id="构造函数的缺点">构造函数的缺点</h3><br/>
+
+<h4 class="bamboo-h red" id="实例只是子类的实例，并不是父类的实例">实例只是子类的实例，并不是父类的实例</h4><br/>
+<p>因为我们并未通过原型对象将子类与父类进行串联，所以生成的实例与父类并没有关系。</p>
+<h4 class="bamboo-h red" id="只能继承父类实例的属性和函数，并不能继承原型对象上的属性和函数">只能继承父类实例的属性和函数，并不能继承原型对象上的属性和函数</h4><br/>
+<p>与上面原因相同。</p>
+<h4 class="bamboo-h red" id="无法复用父类的构造函数">无法复用父类的构造函数</h4><br/>
+<p>因为父类的实例函数将通过<code>call()</code>函数绑定到子类的<code>this</code>中，因此子类生成的每个实例都会拥有父类实例的引用，这会造成不必要的内存消耗，影响性能。</p>
+<h2 class="bamboo-h " id="组合继承">组合继承</h2><br/>
 <blockquote>
-<p>使用插入顺序</p>
-<p>迭代的顺序与插入值的顺序相同。与普通的 Object 不同，Map 保留了此顺序。</p>
+<p>组合继承的主要思想：<strong>结合构造继承和原型继承的两种方式，一方面在子类的构造函数中通过call()函数调用父类的构造函数，将父类的实例的属性和函数绑定到子类的this中；另一方面，通过改变子类的prototype属性，继承父类的原型对象上的属性和函数。</strong></p>
 </blockquote>
-<h2 class="bamboo-h " id="Map 与其他数据类型的转换">Map 与其他数据类型的转换</h2><br/>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span> (<span class="params">age</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 实例属性</span></span><br><span class="line">  <span class="built_in">this</span>.name = <span class="string">&#x27;Animal&#x27;</span></span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">  <span class="built_in">this</span>.skill = [<span class="string">&#x27;eat&#x27;</span>, <span class="string">&#x27;jump&#x27;</span>, <span class="string">&#x27;sleep&#x27;</span>]</span><br><span class="line">  <span class="comment">// 实例函数</span></span><br><span class="line">  <span class="built_in">this</span>.sleep = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name + <span class="string">&#x27;正在睡觉&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 原型函数</span></span><br><span class="line">Animal.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params">food</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>正在吃<span class="subst">$&#123;food&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 通过构造函数继承实例的属性和函数</span></span><br><span class="line">  Animal.call(<span class="built_in">this</span>)</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 通过原型继承原型对象上的属性和函数</span></span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal()</span><br><span class="line">Cat.prototype.constructor = Cat</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> cat = <span class="keyword">new</span> Cat(<span class="string">&#x27;Tom&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(cat.name) <span class="comment">// Tom</span></span><br><span class="line">cat.sleep() <span class="comment">// Tom正在睡觉</span></span><br><span class="line">cat.eat(<span class="string">&#x27;猫罐头&#x27;</span>) <span class="comment">// Tom正在吃猫罐头</span></span><br></pre></td></tr></table></figure>
 
-<h3 class="bamboo-h warning" id="数组转换成 Map">数组转换成 Map</h3><br/>
-<p>数组转换成 Map，可以通过 Map 构造函数实现，使用 new 操作符生成 Map 实例。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [[<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;xx&#x27;</span>], [<span class="string">&#x27;age&#x27;</span>, <span class="number">23</span>]]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(arr)</span><br><span class="line"><span class="built_in">console</span>.log(map) <span class="comment">// Map(2) &#123;&quot;name&quot; =&gt; &quot;xx&quot;, &quot;age&quot; =&gt; 23&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 class="bamboo-h warning" id="组合继承的优点">组合继承的优点</h3><br/>
 
-<h3 class="bamboo-h warning" id="Map 转换成数组">Map 转换成数组</h3><br/>
-<p>Map 转换成数组，可以通过扩展运算符实现。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;xx&#x27;</span>)</span><br><span class="line">map.set(<span class="string">&#x27;age&#x27;</span>, <span class="number">23</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [...map]</span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// (2) [Array(2), Array(2)]</span></span><br></pre></td></tr></table></figure>
+<h4 class="bamboo-h red" id="既能继承父类实例的属性和函数，又能继承原型对象上的属性和函数">既能继承父类实例的属性和函数，又能继承原型对象上的属性和函数</h4><br/>
 
-<h3 class="bamboo-h warning" id="对象转换成 Map">对象转换成 Map</h3><br/>
-<p>如果我们想从一个已有的普通对象来创建一个 Map，那么我们可以使用内建方法 Object.entries(obj)，该方法返回对象的键/值对数组，该数组格式完全按照 Map 所需的格式。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;xx&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(<span class="built_in">Object</span>.entries(obj))</span><br><span class="line"><span class="built_in">console</span>.log(map) <span class="comment">// Map(2) &#123;&quot;name&quot; =&gt; &quot;xx&quot;, &quot;age&quot; =&gt; 23&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 class="bamboo-h red" id="既是子类的实例，又是父类的实例">既是子类的实例，又是父类的实例</h4><br/>
 
-<h3 class="bamboo-h warning" id="Map 转换成对象">Map 转换成对象</h3><br/>
-<p>我们刚刚已经学习了如何使用 Object.entries(obj) 从普通对象创建 Map。</p>
-<p>Object.fromEntries 方法的作用是相反的：给定一个具有 [key, value] 键值对的数组，它会根据给定数组创建一个对象。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="string">&quot;name&quot;</span>, <span class="string">&#x27;xx&#x27;</span>)</span><br><span class="line">map.set(<span class="string">&quot;age&quot;</span>, <span class="number">23</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = <span class="built_in">Object</span>.fromEntries(map)</span><br><span class="line"><span class="built_in">console</span>.log(obj) <span class="comment">// &#123;name: &quot;xx&quot;, age: 23&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 class="bamboo-h red" id="不存在引用属性共享的问题">不存在引用属性共享的问题</h4><br/>
+<p>构造函数作用域优先级比原型链优先级高，所以不会出现引用属性共享的问题。</p>
+<h4 class="bamboo-h red" id="可以向父类的构造函数中传参">可以向父类的构造函数中传参</h4><br/>
 
-<h3 class="bamboo-h warning" id="Map 转换成 Json">Map 转换成 Json</h3><br/>
+<h3 class="bamboo-h warning" id="组合继承的缺点">组合继承的缺点</h3><br/>
 
-<h4 class="bamboo-h red" id="当 Map 的键名都是字符串">当 Map 的键名都是字符串</h4><br/>
-<p>当 Map 的键名都是字符串时，可以先将 Map 转换成对象，然后调用JSON.stringify()函数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(<span class="string">&quot;name&quot;</span>, <span class="string">&#x27;xx&#x27;</span>).set(<span class="string">&quot;age&quot;</span>, <span class="number">23</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> json = <span class="built_in">JSON</span>.stringify(<span class="built_in">Object</span>.fromEntries(map))</span><br><span class="line"><span class="built_in">console</span>.log(json) <span class="comment">//&#123;&quot;name&quot;:&quot;xx&quot;,&quot;age&quot;:23&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 class="bamboo-h red" id="父类的实例属性会被绑定两次">父类的实例属性会被绑定两次</h4><br/>
+<p>在子类的构造函数中，通过<code>call()</code>函数调用了一次父类的构造函数；在改写子类的<code>prototype</code>属性，生成的实例时又调用了一次父类的构造函数。</p>
+<h2 class="bamboo-h " id="寄生组合继承">寄生组合继承</h2><br/>
+<p>组合继承方案已经足够好，但是针对其存在的缺点，我们仍然可以进行优化。</p>
+<p><strong>在进行子类的<code>prototype</code>属性的设置时，可以去掉父类实例的属性的函数</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//父类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span> (<span class="params">age</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 实例属性</span></span><br><span class="line">  <span class="built_in">this</span>.name = <span class="string">&#x27;Animal&#x27;</span></span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">  <span class="built_in">this</span>.skill = [<span class="string">&#x27;eat&#x27;</span>, <span class="string">&#x27;jump&#x27;</span>, <span class="string">&#x27;sleep&#x27;</span>]</span><br><span class="line">  <span class="comment">// 实例函数</span></span><br><span class="line">  <span class="built_in">this</span>.sleep = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name + <span class="string">&#x27;正在睡觉&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 原型函数</span></span><br><span class="line">Animal.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params">food</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>正在吃<span class="subst">$&#123;food&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 子类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 继承父类的实例和属性</span></span><br><span class="line">  Animal.call(<span class="built_in">this</span>)</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 继承父类原型上的实例和属性</span></span><br><span class="line">Cat.prototype = <span class="built_in">Object</span>.create(Animal.prototype)</span><br><span class="line">Cat.prototype.constructor = Cat</span><br><span class="line"><span class="keyword">let</span> cat = <span class="keyword">new</span> Cat(<span class="string">&#x27;Tom&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(cat.name) <span class="comment">// Tom</span></span><br><span class="line">cat.sleep() <span class="comment">// Tom正在睡觉</span></span><br><span class="line">cat.eat(<span class="string">&#x27;猫罐头&#x27;</span>) <span class="comment">// Tom正在吃猫罐头</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中最关键的语句：</p>
+<p>Cat.prototype = Object.create(Animal.prototype)</p>
+<p>只取父类Animal的prototype属性，过滤掉Animal的实例属性，从而避免了父类的实例属性绑定两次。</p>
+</blockquote>
+<p>这种寄生组合式继承方式，基本可以解决前几种继承方式的缺点，较好地实现了继承想要的结果，同时也减少了构造次数，减少了性能的开销。</p>
+<p><strong>整体看下来，这六种继承方式中，寄生组合式继承是这里面最优的继承方式。</strong></p>
+<h2 class="bamboo-h " id="总结">总结</h2><br/>
 
-<h4 class="bamboo-h red" id="当 Map 的键名有非字符串">当 Map 的键名有非字符串</h4><br/>
-<p>当 Map 的键名有非字符串时，我们可以先将 Map 转换成数组，然后调用JSON.stringify()函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line">map.set(&#123;<span class="attr">fn</span>: <span class="string">&#x27;foo&#x27;</span>&#125;, <span class="string">&#x27;xx&#x27;</span>).set(<span class="literal">true</span>, <span class="string">&#x27;abc&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> json = <span class="built_in">JSON</span>.stringify([...map])</span><br><span class="line"><span class="built_in">console</span>.log(json) <span class="comment">// [[&#123;&quot;fn&quot;:&quot;foo&quot;&#125;,&quot;xx&quot;],[true,&quot;abc&quot;]]</span></span><br></pre></td></tr></table></figure>
+<p><img "" class="lazyload placeholder" data-original="/medias/extends.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="继承"></p>
+
       </div>
       
     </article>
@@ -813,40 +828,21 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/11.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/06/19/js-shi-xian-ji-cheng-de-ji-chong-fang-shi/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> 上一篇:
-        <div>JS 实现继承的几种方式</div>
-      </div>
-      
-      <!-- <div class="content">
-        
-继承作为面向对象语言的三大特性之一，可以在不影响父类对象实现的情况下，使得子类对象具有父类对象的特性；同时还能再不影响
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="/medias/15.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="/medias/7.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/13/zai-flexbox-froggy-you-xi-zhong-gao-ding-flex-bu-ju/" class="post-nav-link">
+    <a href="/2021/06/14/li-jie-es6-de-map-shu-ju-jie-gou/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>在Flexbox Froggy 游戏中搞定flex布局</div>
+        <div>理解 ES6 的 Map 数据结构</div>
       </div>
       <!-- <div class="content">
-        最近发现了一款学习flex布局的游戏,分享给大家 =&gt; Flexbox Froggy
-一共 24 关
-附上参考答案
+        Map
+ES6 新增了一种数据结构 Map，与传统的对象字面量类似，它的本质是一种键值对的组合。但是与对象字面量不同的是
       </div> -->
     </a>
   </div>
