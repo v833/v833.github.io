@@ -733,7 +733,7 @@
 </blockquote>
 <p>举个例子，我们有一个函数 <code>f</code>，并将其替换为 <code>f = debounce(f, 1000)</code>。</p>
 <p>然后，如果包装函数分别在 <code>0ms、200ms 和 500ms</code> 时被调用了，之后没有其他调用，那么实际的 <code>f</code> 只会在 <code>1500ms</code> 时被调用一次。也就是说：从最后一次调用开始经过 <code>1000ms</code> 的冷却期之后。</p>
-<p><img "" class="lazyload placeholder" data-original="/medias/throttle.gif" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="throttle"></p>
+<p><img "" class="lazyload placeholder" data-original="/medias/debounce.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="throttle"></p>
 <p>……并且，它将获得最后一个调用的所有参数，其他调用的参数将被忽略。</p>
 <h3 class="bamboo-h warning" id="防抖举例">防抖举例</h3><br/>
 <p>现在我们举一个实际中的例子。假设用户输入了一些内容，我们想要在用户输入完成时向服务器发送一个请求。</p>
