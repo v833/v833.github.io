@@ -18,9 +18,25 @@
   <meta name="author" content="Wang Qun">
   <meta name="keywords" content="">
   
-  <title>标签 - WQ&#39;s personal blog</title>
+  <title>WQ&#39;s personal blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -147,17 +163,50 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="标签">
+            <span class="h2" id="subtitle" title="">
               
             </span>
 
             
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-22 16:55" pubdate>
+        2021年6月22日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      983 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -166,24 +215,144 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  
-</div>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <p>Vue 渐进式Javascript框架</p>
+<p>特点：1.轻量：200kb min+gzip 2.渐进式框架（不需要学习所有知识）3.响应式的更新原理 4.学习成本低（基于html）</p>
+<p>父子通讯： 子组件创建props属性 传入一个数组放入属性，标签上绑定该属性并指向父组件中的属性</p>
+<ul>
+<li>父组件发送的形式是以属性的形式绑定值到子组件身上。</li>
+<li>然后子组件用属性props接收</li>
+<li>在props中使用驼峰形式，模板中需要使用短横线的形式字符串形式的模板中没有这个限制</li>
+</ul>
+<ul>
+<li><p>子组件用<code>$emit()</code>触发事件</p>
+</li>
+<li><p><code>$emit()</code>  第一个参数为 自定义的事件名称     第二个参数为需要传递的数据</p>
+</li>
+<li><p>父组件用v-on 监听子组件的事件</p>
+</li>
+<li><p>Vue.component缺点：</p>
+<p>1.<strong>全局定义</strong>：强制要求每个component中的命名不得重复</p>
+</li>
+</ul>
+<p>2.<strong>字符串模板</strong>：缺乏语法高亮，在HTML中多行的时候，需要用到丑陋的\</p>
+<p>3.<strong>不支持CSS</strong>：（可以使用内联样式）意味者当HTML和Javascript组件化时，CSS明显被遗漏</p>
+<p>4.<strong>没有构建步骤</strong>：限制只能使用HTML和ES5Javascript，而不能使用预处理器（Babel）=&gt;<strong>单文件组件</strong></p>
+<p>slot <h1 slot="a"></h1>  </p>
+<p>template: <code>&lt;slot name=&quot;a&quot;&gt;&lt;/slot&gt;</code></p>
+<p><img src="C:\Users\25073\AppData\Roaming\Typora\typora-user-images\image-20210327162138195.png" srcset="/img/loading.gif" lazyload alt="image-20210327162138195"></p>
+<p>vue 2.6 如图</p>
+<p>作用域插槽：既可以复用子组件的slot，又可以使slot内容不一致</p>
+<p><strong>属性、事件、插槽</strong></p>
+<p>属性：</p>
+<p>1.自定义属性props：组件props中声明的属性</p>
+<p>2.原生属性attrs：没有声明的属性，默认自动挂载到组件根元素上，设置inheritAttrs为false可以关闭自动挂载</p>
+<p>3.特殊属性：class、style 挂载到组件根元素上，支持字符串、对象、数组等多种语法</p>
+<p><strong>子组件不可以修改父组件传递的prop （单向流动）</strong></p>
+<p>事件：</p>
+<p>1.普通事件： @click @input @change @xxx等事件 通过this.$emit(‘xxx’, …)触发</p>
+<p>2.修饰符事件：@input.trim @click.stop @submit.prevent 等 一般用于原生HTML元素，自定义组件需要自行开发支持</p>
+<p><strong>this.$emit的返回值是什么？</strong> this</p>
+<p>插槽：(下面vue 2.6)</p>
+<p>1.普通插槽：</p>
+<p><template slot="xxx"></template></p>
+<p><template v-slot="xxx"></template></p>
+<p>2.作用域插槽：</p>
+<p><template slot="xxx" slot-scope="props"></template></p>
+<p><template v-slot:xxx="props"></template>   v-bind=”{传递属性}”</p>
+<p><strong>相同名称的插槽是合并还是替换？</strong></p>
+<p>在2.5版本中，普通插槽是合并，作用域插槽是替换。</p>
+<p>在2.6版本中，都是替换。这是因为使用了v-slot新语法，由于v-slot后面跟着插槽的名字，普通插槽默认名字为default，和作用域插槽没有本质的区别。</p>
+<p>双向绑定：vm</p>
+<p>Vue是单向数据流，不是双向绑定</p>
+<p>Vue的双向绑定时语法糖</p>
+<p>Object.defineProperty时用来做响应式更新的，<strong>和双向绑定没有关系</strong></p>
+<p>diff算法：同层比较</p>
+<p><strong>为什么不能用index作为key？</strong></p>
+<p>key的作用就是更新组件时<strong>判断两个节点是否相同</strong>。相同就复用，不相同就删除旧的创建新的。</p>
+<p>数据来源（单向）：<br>        1.来自父元素的属性</p>
+<p>2.来自组件自身的状态 data</p>
+<p>3.来自状态管理器，如vuex, Vue.observable（2.6）</p>
+<p>状态  data &amp; 属性 props ：</p>
+<p>1.状态是组件自身的数据</p>
+<p>2.属性是来自父组件的数据</p>
+<p>3.状态的改变未必会触发更新</p>
+<p>4.属性的改变未必会触发更新</p>
+<p>计算属性：<br>        1.减少模板中计算逻辑</p>
+<p>2.数据缓存</p>
+<p>3.依赖固定的数据类型（响应式数据）</p>
+<p>watch:</p>
+<p>1.更加灵活，通用 2.watch可以执行任何逻辑，如函数节流，Ajax异步获取数据，甚至操作dom</p>
+<p>computed能做的watch都能做 反过来不行 能用computed尽量用</p>
+<p>1.watch擅长处理的场景：一个数据影响多个数据</p>
+<p>2.computed擅长处理的场景：一个数据受多个数据影响</p>
 
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/22/shang-cheng/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -263,9 +432,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
