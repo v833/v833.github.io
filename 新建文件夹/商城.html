@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="love the world and love you">
+  <meta name="author" content="Wang Qun">
+  <meta name="keywords" content="">
+  
+  <title>page.title - WQ&#39;s personal blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"wangqundd.top","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="page.title">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <h1 id="商城"><a href="#商城" class="headerlink" title="商城"></a>商城</h1><h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><p>vscode 安装 git history diff</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs stata">git clone &lt;url&gt;<br>git init <br>git status 查看状态<br>git diff 查看变更内容<br>git pull <br>git push 3 <span class="hljs-comment">// master 分支</span><br>git push origin &lt;branch&gt; <span class="hljs-comment">// 其他分支</span><br>git add . 1<br>git add &lt;<span class="hljs-keyword">file</span>&gt;<br>git commit -<span class="hljs-keyword">m</span> &#x27;xxx&#x27; 2<br>git -commit -<span class="hljs-keyword">m</span> &#x27;xxx -a <span class="hljs-comment">// 新增所有</span><br>git branch &lt;new branch&gt;<br>git branch &lt;branch&gt; -<span class="hljs-keyword">d</span> <span class="hljs-comment">// 删除分支</span><br>git checkout 切换分支<br>git <span class="hljs-keyword">merge</span> &lt;branch&gt;<br>git mv &lt;<span class="hljs-keyword">file</span>&gt; &lt;newfilename&gt; 修改文件名字<br>git <span class="hljs-keyword">rm</span> &lt;<span class="hljs-keyword">file</span>&gt; <span class="hljs-comment">// 删除文件</span><br>git <span class="hljs-keyword">log</span> <span class="hljs-comment">// 查看历史</span><br>git tag &lt;tagname&gt;<br>git checkout a.js <span class="hljs-comment">// 撤销</span><br>git revert &lt;commit&gt; <span class="hljs-comment">// 回滚 撤销指定的提交 有历史记录</span><br>git reset --hard &lt;commit&gt; <span class="hljs-comment">// 撤销指定的提交 无历史记录</span><br>=&gt; git push &#x27;xx&#x27; --force<br></code></pre></td></tr></table></figure>
+
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">vue <span class="hljs-built_in">create</span> <span class="hljs-string">&#x27;xxx&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="前端跨域解决方案"><a href="#前端跨域解决方案" class="headerlink" title="前端跨域解决方案"></a>前端跨域解决方案</h3><p>跨域是浏览器为了安全做出的限制策略。</p>
+<p>浏览器必须请求同源策略：同域名、同协议、同端口</p>
+<h4 id="CORS跨域"><a href="#CORS跨域" class="headerlink" title="CORS跨域"></a>CORS跨域</h4><p>服务端设置，前端直接调用</p>
+<p>说明：后台允许前端某个站点进行访问</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml">App.vue<br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span><br><span class="javascript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;axios&#x27;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>Access-Control-Allow-Credentials: true // 前端跨域发送cookie</p>
+<h4 id="JSONP跨域"><a href="#JSONP跨域" class="headerlink" title="JSONP跨域"></a>JSONP跨域</h4><p>jsonp跨域，前端适配，后台配合 // 前端发callback</p>
+<p>说明：前后台同时改造</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript">jsonp (url, <span class="hljs-function">() =&gt;</span> &#123;&#125;) <span class="hljs-comment">// js 文件</span><br>    <span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span> &#123;<br>      <span class="hljs-keyword">let</span> url = <span class="hljs-string">&#x27;https://www.imooc.com/search/hotwords&#x27;</span>;<br>      jsonp(url, <span class="hljs-function">(<span class="hljs-params">err,res</span>) =&gt;</span> &#123;<br>        <span class="hljs-built_in">this</span>.data = res<br>    	&#125;)<br>    &#125;,<br></code></pre></td></tr></table></figure>
+
+<h4 id="代理跨域"><a href="#代理跨域" class="headerlink" title="代理跨域"></a>代理跨域</h4><p>接口代理-通过修改nginx服务器配置来实现</p>
+<p>说明：前端修改，后台不动</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs awk">devServer: &#123;<br>  host:<span class="hljs-string">&#x27;localhost&#x27;</span>,<br>  port: <span class="hljs-number">8082</span>,<br>  proxy: &#123;<br>    <span class="hljs-regexp">//</span> <span class="hljs-regexp">/search/</span>hotwords<br>    <span class="hljs-string">&#x27;/api&#x27;</span>: &#123;<br>      target: <span class="hljs-string">&#x27;https://www.imooc.com/&#x27;</span>,<br>      changeOrigin: true,<br>      pathRewrite: &#123;<br>        <span class="hljs-string">&#x27;/api&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-regexp">//</span> 将接口设置为空<br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="需求梳理"><a href="#需求梳理" class="headerlink" title="需求梳理"></a>需求梳理</h3><p>熟悉文档，查看原型、读懂需求</p>
+<p>了解前端设计稿-设计前端业务架构</p>
+<p>了解后台接口文档-指定相关对接规范</p>
+<p>协调资源</p>
+<p>搭建前端框架</p>
+<h3 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h3><p>建议大图片放在public， 小图片放在assets (base64)</p>
+<h3 id="路由封装"><a href="#路由封装" class="headerlink" title="路由封装"></a>路由封装</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">const routes = [<br>  &#123;<br>    <span class="hljs-type">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>    <span class="hljs-type">name</span>: <span class="hljs-string">&#x27;home&#x27;</span>,<br>    component: Home,<br>    redirect: <span class="hljs-string">&#x27;/index&#x27;</span>,<br>    children: [<br>      &#123;<br>        <span class="hljs-type">path</span>: <span class="hljs-string">&#x27;index&#x27;</span>,<br>        <span class="hljs-type">name</span>: <span class="hljs-string">&#x27;index&#x27;</span>,<br>        component: <span class="hljs-keyword">Index</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-type">path</span>: <span class="hljs-string">&#x27;product/:id&#x27;</span>,<br>        <span class="hljs-type">name</span>: <span class="hljs-string">&#x27;product&#x27;</span>,<br>        component: Product<br>      &#125;,<br>      &#123;<br>        <span class="hljs-type">path</span>: <span class="hljs-string">&#x27;detail/:id&#x27;</span>,<br>        <span class="hljs-type">name</span>: <span class="hljs-string">&#x27;detail&#x27;</span>,<br>        component: Detail<br>      &#125;<br>    ]<br>  &#125;,<br></code></pre></td></tr></table></figure>
+
+<h3 id="Storage-封装"><a href="#Storage-封装" class="headerlink" title="Storage 封装"></a>Storage 封装</h3><h5 id="Cookie、localStorage、sessionStorage-三者区别？"><a href="#Cookie、localStorage、sessionStorage-三者区别？" class="headerlink" title="Cookie、localStorage、sessionStorage 三者区别？"></a>Cookie、localStorage、sessionStorage 三者区别？</h5><p>都是缓存技术</p>
+<p>存储大小：Cookie 4K、Storage 5M</p>
+<p>有效期：Cookie 拥有有效期、Storage 永久存储 (localStorage)</p>
+<p>Cookie 会发送到服务端，存储在内存中，Storage 只存储在浏览器端</p>
+<p>路径：Cookie 有路径限制，Storage 只存储在域名下</p>
+<p>API：Cookie 没有特定的API，Storage 有特定的API</p>
+<p>document.cookie setItem() localStorag.getItem</p>
+<h5 id="为什么要封装Storage，本身已经是API？"><a href="#为什么要封装Storage，本身已经是API？" class="headerlink" title="为什么要封装Storage，本身已经是API？"></a>为什么要封装Storage，本身已经是API？</h5><p>Storage 本身有API，但是只是简单的key/value 形式</p>
+<p>Storage 只存储字符串，需要人工传换成json对象</p>
+<p>Storage 只能一次性清空，不能单个清空</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// storage 封装</span><br><br><span class="hljs-keyword">const</span> STORAGE_KEY = <span class="hljs-string">&#x27;mall&#x27;</span><br>export default &#123;<br>  <span class="hljs-comment">// 存储值</span><br>  setItem (key, value, module_name) &#123;<br>    <span class="hljs-keyword">if</span> (module_name) &#123;<br>      let <span class="hljs-keyword">val</span> = <span class="hljs-keyword">this</span>.getItem(module_name)<br>      <span class="hljs-keyword">val</span>[key] = value<br>      <span class="hljs-keyword">this</span>.setItem(module_name, <span class="hljs-keyword">val</span>)<br>    &#125;<br>    let <span class="hljs-keyword">val</span> = <span class="hljs-keyword">this</span>.getStorage();<br>    <span class="hljs-keyword">val</span>[key] = value<br>    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(<span class="hljs-keyword">val</span>))<br>  &#125;,<br>  <span class="hljs-comment">// 获取某一个模块下面的属性</span><br>  getItem (key, module_name) &#123;<br>    <span class="hljs-keyword">if</span> (module_name) &#123;<br>      let <span class="hljs-keyword">val</span> = <span class="hljs-keyword">this</span>.getItem(module_name)<br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">val</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">val</span>[key]<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.getStorage()[key]<br>  &#125;,<br>  <span class="hljs-comment">// 获取整个数据</span><br>  getStorage () &#123;<br>    <span class="hljs-keyword">return</span> JSON.parse(window.sessionStorage.getItem(STORAGE_KEY) || <span class="hljs-string">&#x27;&#123;&#125;&#x27;</span>)<br>  &#125;,<br><br>  <span class="hljs-comment">// 清空</span><br>  clear (key, module_name) &#123;<br>    let <span class="hljs-keyword">val</span> = <span class="hljs-keyword">this</span>.getStorage()<br>    <span class="hljs-keyword">if</span> (module_name) &#123;<br>      delete <span class="hljs-keyword">val</span>[module_name][key]<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      delete <span class="hljs-keyword">val</span>[key]<br>    &#125;<br>    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(<span class="hljs-keyword">val</span>))<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="接口错误拦截"><a href="#接口错误拦截" class="headerlink" title="接口错误拦截"></a>接口错误拦截</h3><p>统一报错</p>
+<p>未登录统一拦截</p>
+<p>请求值、返回值统一处理</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">axios 传参 <span class="hljs-built_in">get</span> 加<span class="hljs-built_in">params</span> <span class="hljs-built_in">post</span> 不加<br><br>同时发多个请求？ axios.all([]).<span class="hljs-keyword">then</span>()<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs javascript">main.js<br><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span><br><span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./router&#x27;</span><br><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./store&#x27;</span><br><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;axios&#x27;</span> <span class="hljs-comment">// 每个页面都要去写，导入</span><br><span class="hljs-keyword">import</span> VueAxios <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-axios&#x27;</span> <span class="hljs-comment">// 作用域对象挂载在vue实例上</span><br><br><span class="hljs-comment">// 根据前端的跨域方式做调整 (接口代理除外)</span><br>axios.defaults.baseURL = <span class="hljs-string">&#x27;/api&#x27;</span><br><br>axios.defaults.timeout = <span class="hljs-number">8000</span>; <span class="hljs-comment">// 超时时间</span><br><br><span class="hljs-comment">// 接口错误拦截</span><br>axios.interceptors.response.use(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">response</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> res = response.data;<br>  <span class="hljs-keyword">if</span> (res.status == <span class="hljs-number">0</span>) &#123; <span class="hljs-comment">// 成功</span><br>    <span class="hljs-keyword">return</span> res.data<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (res.status == <span class="hljs-number">10</span>) &#123; <span class="hljs-comment">// 未登录 自定义状态码</span><br>    <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">&#x27;/#/login&#x27;</span><br>    <span class="hljs-comment">// 路由是挂载在vue实例中 这里是js文件 不能用路由跳转</span><br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    alert (res.msg)<br>  &#125;<br>&#125;)<br><br>Vue.use(VueAxios, axios)<br>Vue.config.productionTip = <span class="hljs-literal">false</span><br><br><span class="hljs-keyword">new</span> Vue(&#123;<br>  router,<br>  store,<br>  <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> h(App)<br>&#125;).$mount(<span class="hljs-string">&#x27;#app&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="接口环境配置"><a href="#接口环境配置" class="headerlink" title="接口环境配置"></a>接口环境配置</h3><p>开发上线的不同阶段，需要不同的配置</p>
+<p>不同的跨域方式，配置不同</p>
+<p>打包的时候统一注入环境参数，统一管理环境，输出不同的版本包</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-string">&quot;serve&quot;</span>: <span class="hljs-string">&quot;vue-cli-service serve --mode=development&quot;</span>, <span class="hljs-regexp">//</span> 注入参数，把环境变量传给mode<br><span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;vue-cli-service build --mode=production&quot;</span>,<br><span class="hljs-string">&quot;test&quot;</span>: <span class="hljs-string">&quot;vue-cli-service test --mode=test&quot;</span>,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs scala">env.js<br>let baseURL; <span class="hljs-comment">// 用cors 和 jsons 使用</span><br>switch (process.env.<span class="hljs-type">NODE_ENV</span>) &#123; <span class="hljs-comment">// nodejs 的环境变量</span><br>  <span class="hljs-keyword">case</span> <span class="hljs-symbol">&#x27;developmen</span>t&#x27;:<br>    baseURL = <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//dev-mall-pre.springboot.cn/api&#x27;</span><br>    <span class="hljs-keyword">break</span>;<br>  <span class="hljs-keyword">case</span> <span class="hljs-symbol">&#x27;tes</span>t&#x27;: <span class="hljs-comment">// 不能随便书写 需要写一个.env.(name) 文件 配置NODE_ENV = &#x27;name&#x27;</span><br>    baseURL = <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//test-mall-pre.springboot.cn/api&#x27;</span><br>    <span class="hljs-keyword">break</span>;<br>  <span class="hljs-keyword">case</span> <span class="hljs-symbol">&#x27;productio</span>n&#x27;:<br>    baseURL = <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//mall-pre.springboot.cn/api&#x27;</span><br>    <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">default</span>:<br>    baseURL = <span class="hljs-symbol">&#x27;http</span>:<span class="hljs-comment">//mall-pre.springboot.cn/api&#x27;</span><br>    <span class="hljs-keyword">break</span><br><br>&#125;<br><br>export <span class="hljs-keyword">default</span> &#123;<br>  baseURL<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Mock-设置"><a href="#Mock-设置" class="headerlink" title="Mock 设置"></a>Mock 设置</h3><p>开发阶段，为了高效率，需要提前Mock</p>
+<p>减少代码冗余，灵活拔插</p>
+<p>减少沟通，减少接口联调时间</p>
+<h5 id="三种方案"><a href="#三种方案" class="headerlink" title="三种方案:"></a>三种方案:</h5><p>1、本地创建json</p>
+<p>2、easy-mock 平台</p>
+<p>3、集成Mock API</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stylus">json<br><span class="hljs-function"><span class="hljs-title">mounted</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 本地加载请求静态json</span><br>   this<span class="hljs-selector-class">.axios</span><span class="hljs-selector-class">.get</span>(<span class="hljs-string">&#x27;/mock/user/login.json&#x27;</span>)<span class="hljs-selector-class">.then</span>(res =&gt; &#123;<br>     this<span class="hljs-selector-class">.res</span> = res <span class="hljs-comment">// localhost:8080 =&gt; 默认在 public 下导入 根目录</span><br>   &#125;)<br> &#125;,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript">集成Mock API<br>main.js<br>const mock = <span class="hljs-literal">true</span>;<span class="hljs-regexp">//</span> 希望mock开关打开时被拦截，用<span class="hljs-built_in">require</span>而不是<span class="hljs-keyword">import</span><br><span class="hljs-regexp">//</span> <span class="hljs-keyword">import</span> 预编译加载 <span class="hljs-built_in">require</span> 执行加载，如果未需要，不加载<br><span class="hljs-keyword">if</span> (mock) &#123;<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./mock/api&#x27;</span>)&#125;<br><br>api.js<br><span class="hljs-keyword">import</span> Mock <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mockjs&#x27;</span><br>Mock.mock(<span class="hljs-string">&#x27;/api/user/login&#x27;</span>, data)<br><span class="hljs-regexp">//</span> 本地集成mockjs实现数据mock 没有发送真正的请求，代码阶段拦截 <br></code></pre></td></tr></table></figure>
+
+<h3 id="nav-header"><a href="#nav-header" class="headerlink" title="nav-header"></a>nav-header</h3><p>给网站设置最小宽度 min-weight</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">安装sass<br>npm<span class="hljs-built_in"> config </span><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">registry</span>=<span class="hljs-string">&quot;https://registry.npmjs.org/&quot;</span><br>registry = <span class="hljs-string">&quot;https://registry.npm.taobao.org/&quot;</span><br>$ <span class="hljs-builtin-name">set</span> <span class="hljs-attribute">SASS_BINARY_SITE</span>=http://npm.taobao.org/mirrors/node-sass&amp;&amp;npm i node-sass<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scss">导入sass<br><span class="hljs-keyword">@import</span> <span class="hljs-string">&#x27;./assets/sass/reset.scss&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs css">          <span class="hljs-selector-tag">a</span> &#123;<br>            <span class="hljs-attribute">display</span>: inline-block;<br>            <span class="hljs-attribute">width</span>: <span class="hljs-number">110px</span>;<br>            <span class="hljs-attribute">height</span>: <span class="hljs-number">55px</span>;<br>            <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid red;<br>            &amp;:before &#123; // sass 给a加伪类<br>              <br>            &#125;<br>            <span class="hljs-attribute">cursor</span>: pointer<br>            设置背景图片<br>            background: <span class="hljs-built_in">url</span>() no-repeat center;<br>            <span class="hljs-attribute">background-size</span>: contain<br>            <br>&lt;input  autocomplete=<span class="hljs-string">&quot;off&quot;</span>/&gt; // 历史搜索<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">// flex 布局复用</span><br><span class="hljs-keyword">@mixin</span> flex (<span class="hljs-variable">$hov</span>:space-between, <span class="hljs-variable">$col</span>: center) &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">justify-content</span>: <span class="hljs-variable">$hov</span>;<br>  <span class="hljs-attribute">align-items</span>: <span class="hljs-variable">$col</span>;<br>&#125;<br>使用<br><span class="hljs-keyword">@include</span> flex();<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-keyword">@mixin</span> bgImg (<span class="hljs-variable">$w</span>: <span class="hljs-number">0</span>, <span class="hljs-variable">$h</span>: <span class="hljs-number">0</span>, <span class="hljs-variable">$img</span>: <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-variable">$size</span>: contain) &#123;<br>  <span class="hljs-attribute">display</span>: inline-block;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-variable">$w</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-variable">$h</span>;<br>  <span class="hljs-attribute">background</span>: url(<span class="hljs-variable">$img</span>) no-repeat center;<br>  <span class="hljs-attribute">background-size</span>: <span class="hljs-variable">$size</span>;<br>  <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">4px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">&lt;<span class="hljs-keyword">a</span> target=<span class="hljs-string">&quot;_blank&quot;</span>&gt;&lt;/<span class="hljs-keyword">a</span>&gt;<span class="hljs-comment"> // 新页面打开</span><br>图片一般自适应展开，要么定义高度，要么定义宽度<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">过滤器<br>  filters: &#123;<br>    currency (<span class="hljs-keyword">val</span>) &#123;<br>      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">val</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;0.00&#x27;</span>;<br>      <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;￥&#x27;</span> + <span class="hljs-keyword">val</span>.toFixed(<span class="hljs-number">2</span>) + <span class="hljs-string">&#x27;元&#x27;</span><br>    &#125;<br>  &#125;,<br>  <br>  &#123;&#123;item.price | currency&#125;&#125; <span class="hljs-comment">// 使用</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">路由跳转 <span class="hljs-variable">$router</span><span class="hljs-selector-class">.push</span>()<br>路由取参：<span class="hljs-variable">$router</span><span class="hljs-selector-class">.params</span> 或者 <span class="hljs-variable">$router</span>.query<br></code></pre></td></tr></table></figure>
+
+<h3 id="首页轮播"><a href="#首页轮播" class="headerlink" title="首页轮播"></a>首页轮播</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> install --save vue-awesome-swiper@<span class="hljs-number">3.1</span><span class="hljs-number">.3</span> <br>对应swiper <span class="hljs-number">4</span><br><br><span class="hljs-keyword">import</span> &#123; swiper, swiperSlide&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-awesome-swiper&#x27;</span> <span class="hljs-regexp">//</span> swiper组件很大，按需加载<br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;swiper/dist/css/swiper.css&#x27;</span><br><br><span class="hljs-number">2</span> 报错  <span class="hljs-built_in">Error</span> <span class="hljs-keyword">in</span> render: <span class="hljs-string">&quot;TypeError: Cannot set property &#x27;params&#x27; of undefined&quot;</span>  ---跟版本号有关系，<span class="hljs-number">4.0</span> 版本首字母大写，<span class="hljs-number">3.0</span>版本，首字母小写。<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">swiper</span> <span class="hljs-attr">:options</span>=<span class="hljs-string">&quot;swiperOption&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">swiper-slide</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;(item, index) in slideList&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;index&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;&#x27;/#/product/&#x27; + item.id&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">:src</span>=<span class="hljs-string">&quot;item.img&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">swiper-slide</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">swiper</span>&gt;</span><br>分页器<br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;swiper-pagination&quot;</span>  <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;pagination&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;swiper-button-prev&quot;</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;button-prev&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;swiper-button-next&quot;</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;button-next&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;swiper-scrollbar&quot;</span>   <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;scrollbar&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs awk">swiperOption: &#123;<br>  autoplay: true,<br>  <span class="hljs-regexp">//</span> 循环播放<br>  loop: true,<br>  <span class="hljs-regexp">//</span> 切换效果<br>  effect: <span class="hljs-string">&#x27;cube&#x27;</span>,<br>  slidesPerView: <span class="hljs-number">3</span>,  <span class="hljs-regexp">//</span> 显示的数目<br>spaceBetween: <span class="hljs-number">30</span>,  <span class="hljs-regexp">//</span> 元素之间的距离<br>  pagination: &#123;<br>    el: <span class="hljs-string">&#x27;.swiper-pagination&#x27;</span>,<br>    <span class="hljs-regexp">//</span> 点击分页器切换<br>    clickable :true,<br>  &#125;,<br>  navigation: &#123;<br>    nextEl: <span class="hljs-string">&#x27;.swiper-button-next&#x27;</span>,<br>    prevEl: <span class="hljs-string">&#x27;.swiper-button-prev&#x27;</span>,<br>  &#125;,<br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">opacity</span> 会把内容全部加透明度<br>rgba 内容不会有透明度<br></code></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\25073\AppData\Roaming\Typora\typora-user-images\image-20210605212151537.png" srcset="/img/loading.gif" lazyload alt="image-20210605212151537"></p>
+<p>可以用二维数组实现</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;children&quot;</span>&gt;</span></span><br><span class="xml">            <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;(item, index1) in menuList&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;index1&quot;</span>&gt;</span></span><br><span class="xml">              <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;(sub, index) in item&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;index&quot;</span>&gt;</span></span><br><span class="xml">                <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">:href</span>=<span class="hljs-string">&quot;sub ? &#x27;/#/product/&#x27; + sub.id : &#x27;&#x27; &quot;</span>&gt;</span></span><br><span class="xml">                  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">:src</span>=<span class="hljs-string">&quot;sub ? sub.img : &#x27;/imgs/item-box-1.png&#x27;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span></span><br><span class="xml">                  </span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">sub</span> ? sub.name : <span class="hljs-string">&#x27;小米9&#x27;</span>&#125;&#125;</span><span class="xml"></span><br><span class="xml">                <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span><br><span class="xml">              <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="xml">            <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><br><span class="xml">          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">this</span>.phoneList = [res.list.slice(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>), res.list.slice(<span class="hljs-number">4</span>, <span class="hljs-number">8</span>)] <span class="hljs-comment">// 赋值</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="modal组件-transition"><a href="#modal组件-transition" class="headerlink" title="modal组件(transition)"></a>modal组件(transition)</h3><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs lasso">props: &#123;<br>  <span class="hljs-comment">// 弹框类型: 小框，中框，大框，表单</span><br>  modalType: &#123;<br>    <span class="hljs-keyword">type</span>: <span class="hljs-built_in">String</span>,<br>    default: <span class="hljs-string">&#x27;form&#x27;</span><br>  &#125;,<br>  title: <span class="hljs-built_in">String</span>,<br>  btnType: <span class="hljs-built_in">String</span>, <span class="hljs-comment">// 按钮类型： 1.确定按钮 2.取消按钮 3.确定取消按钮</span><br>  sureText: &#123;<br>    <span class="hljs-keyword">type</span>: <span class="hljs-built_in">String</span>,<br>    default: <span class="hljs-string">&#x27;确定&#x27;</span><br>  &#125;,<br>  cancelText: &#123;<br>    <span class="hljs-keyword">type</span>: <span class="hljs-built_in">String</span>,<br>    default: <span class="hljs-string">&#x27;取消&#x27;</span><br>  &#125;,<br>  showModal: <span class="hljs-built_in">Boolean</span><br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-keyword">@mixin</span> position(<span class="hljs-variable">$pos</span>, <span class="hljs-variable">$top</span>, <span class="hljs-variable">$left</span>, <span class="hljs-variable">$w</span>, <span class="hljs-variable">$h</span>) &#123;<br>  <span class="hljs-attribute">position</span>: <span class="hljs-variable">$pos</span>;<br>  <span class="hljs-attribute">top</span>: <span class="hljs-variable">$top</span>;<br>  <span class="hljs-attribute">left</span>: <span class="hljs-variable">$left</span>;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-variable">$w</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-variable">$h</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">transition</span> <br>样式先定义 -active 因为样式会覆盖<br></code></pre></td></tr></table></figure>
+
+<h3 id="图片懒加载"><a href="#图片懒加载" class="headerlink" title="图片懒加载"></a>图片懒加载</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs stylus">npm <span class="hljs-selector-tag">i</span> vue-lazyload -S<br><br>import VueLazyLoad from <span class="hljs-string">&#x27;vue-lazyload&#x27;</span><br>Vue<span class="hljs-selector-class">.use</span>(VueLazyLoad, &#123;<br>  loading: <span class="hljs-string">&#x27;/imgs/loading-svg/loading-bars.svg&#x27;</span><br>&#125;)<br><br>&lt;<span class="hljs-selector-tag">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-string">&quot;item.img&quot;</span> alt=<span class="hljs-string">&quot;&quot;</span>&gt; =&gt; &lt;img v-lazy=<span class="hljs-string">&quot;item.img&quot;</span> alt=<span class="hljs-string">&quot;&quot;</span>&gt;<br><br><span class="hljs-comment">// 注意，指令里面的是变量</span><br>&lt;<span class="hljs-selector-tag">img</span> v-lazy=<span class="hljs-string">&quot;&#x27;/imgs/banner-1.png&#x27;&quot;</span> alt=<span class="hljs-string">&quot;&quot;</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="登录交互"><a href="#登录交互" class="headerlink" title="登录交互"></a>登录交互</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">  methods: &#123;<br>    login () &#123;<br>      let &#123;username, password&#125; = <span class="hljs-keyword">this</span> <span class="hljs-comment">// 数据绑定在this上</span><br>      <span class="hljs-keyword">this</span>.axios.post(<span class="hljs-string">&#x27;/user/login&#x27;</span> &#123;username, password&#125;).then(res =&gt; ...)<br>      <span class="hljs-keyword">this</span>.$cookie.<span class="hljs-keyword">set</span>(<span class="hljs-string">&#x27;userId&#x27;</span>, res.id, &#123; expires:<span class="hljs-string">&#x27;1M&#x27;</span> &#125;)<br>    &#125;<br>  &#125;<br><br>main.js<br>Vue.use(VueCookie) <span class="hljs-comment">// 保存token</span><br><br>单页面应用，刷新会丢失数据，需要在App.vue中重新拉取<br>Cookie: JSESSIONID=25E86D07E1B121DB1C6B38ECCF6CCADA; userId=<span class="hljs-number">2840</span><br><span class="hljs-comment">// java写的</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h3><p>vue 中数据是单项流通的，如果 A 与 B 之间没有任何关系，而A想用B的变量。兄弟组件传递数据。</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pf">vuex <span class="hljs-keyword">state</span> 中的数据不具有响应式， <span class="hljs-keyword">state</span>中的数据发生变化，不会主动通知调用该数据的对象，我们可以用computed监听数据<br></code></pre></td></tr></table></figure>
+
+<h3 id="产品站参数"><a href="#产品站参数" class="headerlink" title="产品站参数"></a>产品站参数</h3><h4 id="吸顶功能"><a href="#吸顶功能" class="headerlink" title="吸顶功能"></a>吸顶功能</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span> &#123;<br>  <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-built_in">this</span>.initHeight) <span class="hljs-comment">// 方法抽离出来，为了移除事件使用，使用function() 事件在组件销毁时不会移除</span><br>&#125;,<br><br>data () &#123;<br>	<span class="hljs-keyword">return</span> &#123;<br>  	<span class="hljs-attr">isFixed</span>: <span class="hljs-literal">false</span><br>  &#125;<br>&#125;,<br><span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span> &#123;<br>  <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-built_in">this</span>.initHeight)<br>&#125;,<br><span class="hljs-attr">methods</span>: &#123;<br>  initHeight () &#123;<br>    <span class="hljs-keyword">let</span> scrollTop = <span class="hljs-built_in">window</span>.scrollY || <span class="hljs-built_in">document</span>.documentElement.scrollTop || <span class="hljs-built_in">document</span>.scrollTop; <span class="hljs-comment">// 兼容浏览器</span><br>    <span class="hljs-built_in">console</span>.log(scrollTop);<br>    <span class="hljs-built_in">this</span>.isFixed = scrollTop &gt; <span class="hljs-number">152</span><br>  &#125;<br>&#125;<br> <span class="hljs-function"><span class="hljs-title">destroyed</span>(<span class="hljs-params"></span>)</span> &#123;<br>  <span class="hljs-built_in">window</span>.removeEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-built_in">this</span>.initHeight, <span class="hljs-literal">false</span>)<br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight tp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tp">box-shadow:<span class="hljs-keyword">X</span>轴偏移量、<span class="hljs-keyword">Y</span>轴偏移量、模糊半径、扩散半径和颜色。<br></code></pre></td></tr></table></figure>
+
+<h3 id="video"><a href="#video" class="headerlink" title="video"></a>video</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;overlay&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span> // 遮罩<br><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/imgs/product/video.mp4&quot;</span> <span class="hljs-attr">muted</span> <span class="hljs-attr">autoplay</span> <span class="hljs-attr">controls</span>=<span class="hljs-string">&quot;controls&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">video</span>&gt;</span><br>设置自动播放 需要先数值muted    loop<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arduino">object-fit:cover <span class="hljs-comment">// 类似backgroundimg 这个CSS属性可以达到最佳最完美的居中自动剪裁图片的功能。</span><br>background-size只能作用于有背景图的，<br>object-fit可以作用于类似 img, video等的标签。<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript">closeVideo () &#123;<br>  <span class="hljs-built_in">this</span>.showSlide = <span class="hljs-string">&#x27;slideUp&#x27;</span>;<br>  <span class="hljs-built_in">setTimeout</span> (<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">this</span>.showSlide = <span class="hljs-literal">false</span><br>  &#125;, <span class="hljs-number">600</span>)<br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs erlang"><span class="hljs-number">1</span>.router是VueRouter的一个对象,通过Vue.use(VueRouter)和VueRouter构造函数得到一个router的实例对象,这个对象中是一个全局的对象,他包含了所有的路由包含了许多关键的...<br><span class="hljs-number">2</span>.route是一个跳转的路由对象,每一个路由都会有一个route对象,是一个局部的对象,可以获取对应的name,path,params,<span class="hljs-keyword">query</span>等 我们可以从vue devtools中看到每个路由对象的不同.当前的路由信息，包含了当前 URL 解析得到的信息。包含当前的路径，参数，<span class="hljs-keyword">query</span>对象等。<br></code></pre></td></tr></table></figure>
+
+<h3 id="商品详情页面"><a href="#商品详情页面" class="headerlink" title="商品详情页面"></a>商品详情页面</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs stylus">浮动及清除浮动<br>.fl&#123;<br>  <span class="hljs-attribute">float</span>: left;<br>&#125;<br>.fr&#123;<br>  <span class="hljs-attribute">float</span>: right;<br>&#125;<br><span class="hljs-selector-class">.clearfix</span>:before,<span class="hljs-selector-class">.clearfix</span>:after&#123;<br>  <span class="hljs-attribute">content</span>:<span class="hljs-string">&#x27; &#x27;</span>;<br>  <span class="hljs-attribute">display</span>:table;<br>&#125;<br><span class="hljs-selector-class">.clearfix</span>:after&#123;<br>  <span class="hljs-attribute">clear</span>: both;<br>&#125;<br><br>&lt;<span class="hljs-selector-tag">div</span> class=<span class="hljs-string">&quot;container clearfix&quot;</span>&gt; 父元素添加清除浮动<br></code></pre></td></tr></table></figure>
+
+<h3 id="购物车页面"><a href="#购物车页面" class="headerlink" title="购物车页面"></a>购物车页面</h3><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-meta">@import</span> <span class="hljs-string">&#x27;./&#x27;</span>  <span class="hljs-comment">// 不带./默认是插件 去node_modules中查找</span><br></code></pre></td></tr></table></figure>
+
+<p>数据一般放在后台，防止前端篡改数据</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 公共赋值</span><br>renderData(res)&#123;<br>  <span class="hljs-keyword">this</span>.list = res.cartProductVoList || [];<br>  <span class="hljs-keyword">this</span>.allChecked = res.selectedAll;<br>  <span class="hljs-keyword">this</span>.cartTotalPrice = res.cartTotalPrice;<br>  <span class="hljs-keyword">this</span>.checkedNum = <span class="hljs-keyword">this</span>.list.filter(item=&gt;item.productSelected).length;<br>&#125;, <span class="hljs-comment">// 某项数据改变后，与其相关联的数据不变化，需要重新赋值</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Element-UI"><a href="#Element-UI" class="headerlink" title="Element UI"></a>Element UI</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">&lt;a&gt; 优先级高于<span class="hljs-keyword">class</span><br>&lt;<span class="hljs-symbol">h2</span>&gt; 优先级高于<span class="hljs-symbol">class</span><br></code></pre></td></tr></table></figure>
+
+<p>主要用于B端</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">import</span> &#123; Message &#125; from &#x27;element-ui&#x27;<br><span class="hljs-keyword">import</span> &#x27;element-ui/lib/theme-chalk/index.css&#x27;<br><span class="hljs-type">Vue</span>.proto<span class="hljs-keyword">type</span>.$message = <span class="hljs-type">Message</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="babel"><a href="#babel" class="headerlink" title="babel"></a>babel</h3><p><code>babel.config.js</code>和 <code>.babelrc </code>不会被合并</p>
+<p>js.map 源码存放 上线后删除</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-string">&quot;plugins&quot;</span>: [<br>  [<br>    <span class="hljs-string">&quot;component&quot;</span>,<br>    &#123;<br>      <span class="hljs-string">&quot;libraryName&quot;</span>: <span class="hljs-string">&quot;element-ui&quot;</span>,<br>      <span class="hljs-string">&quot;styleLibraryName&quot;</span>: <span class="hljs-string">&quot;theme-chalk&quot;</span><br>    &#125;<br>  ]<br>] <span class="hljs-regexp">//</span> 按需加载<br></code></pre></td></tr></table></figure>
+
+<h3 id="退出登录"><a href="#退出登录" class="headerlink" title="退出登录"></a>退出登录</h3><p>因为是单页面，所以把数据存储在Vuex中，Vuex中的数据存储在内存，页面刷新后，内存中的数据自动消失。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs csharp">      <span class="hljs-keyword">this</span>.$router.push(&#123;<br>        path: <span class="hljs-string">&#x27;/index&#x27;</span>,<br>        query: &#123;<br>          <span class="hljs-keyword">from</span>: <span class="hljs-string">&#x27;login&#x27;</span><br>        &#125;<br>      &#125;) <span class="hljs-comment">// query传参</span><br>      <br>       <span class="hljs-keyword">this</span>.$router.push(&#123;<br>        name: <span class="hljs-string">&#x27;index&#x27;</span>,<br>        <span class="hljs-keyword">params</span>: &#123;<br>          <span class="hljs-keyword">from</span>: <span class="hljs-string">&#x27;login&#x27;</span><br>        &#125;<br>      &#125;) <span class="hljs-comment">// params 传参，用 name</span><br>      <br> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.$route.<span class="hljs-keyword">params</span> &amp;&amp; <span class="hljs-keyword">this</span>.$route.<span class="hljs-keyword">params</span>.<span class="hljs-keyword">from</span> == <span class="hljs-string">&#x27;login&#x27;</span>)<br>  <span class="hljs-keyword">this</span>.getCartCount()<br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.$cookie.<span class="hljs-keyword">get</span>(<span class="hljs-string">&#x27;userId&#x27;</span>)) &#123;<br>  <span class="hljs-keyword">this</span>.getUser();<br>  <span class="hljs-keyword">this</span>.getCartCount()<br>&#125; <span class="hljs-comment">// 如果未登录 不需要调取登录信息 判断 cookie </span><br>清除cookie <span class="hljs-keyword">this</span>.$cookie.<span class="hljs-keyword">set</span>(<span class="hljs-string">&#x27;xx&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, &#123;expires: -<span class="hljs-number">1</span>&#125;)<br>expires 和后端保持一致 登录有效期<br>会话级别：Session 把整个浏览器关闭coookie消失<br></code></pre></td></tr></table></figure>
+
+<h3 id="订单确认"><a href="#订单确认" class="headerlink" title="订单确认"></a>订单确认</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">mounted() &#123;<br>  let path = <span class="hljs-keyword">this</span>.$route.path;<br>  <span class="hljs-keyword">if</span> (path == <span class="hljs-string">&#x27;/order/confirm&#x27;</span>) &#123;<br>    <span class="hljs-keyword">this</span>.title = <span class="hljs-string">&quot;确认订单&quot;</span><br>    <span class="hljs-keyword">this</span>.tip = <span class="hljs-string">&quot;请认真填写收获地址&quot;</span><br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (path == <span class="hljs-string">&#x27;order/list&#x27;</span>) &#123;<br>    <span class="hljs-keyword">this</span>.title = <span class="hljs-string">&#x27;订单列表&#x27;</span><br>    <span class="hljs-keyword">this</span>.tip = <span class="hljs-string">&quot;请谨防钓鱼链接或诈骗电话&quot;</span><br><br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (path == <span class="hljs-string">&#x27;/order/pay&#x27;</span>) &#123;<br>    <span class="hljs-keyword">this</span>.title = <span class="hljs-string">&#x27;订单支付&#x27;</span><br>    <span class="hljs-keyword">this</span>.tip = <span class="hljs-string">&quot;请谨防钓鱼链接或诈骗电话&quot;</span><br>  &#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<h3 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// axios的封装</span><br>  <span class="hljs-function"><span class="hljs-title">submitAddress</span>(<span class="hljs-params"></span>)</span> &#123;<br>     <span class="hljs-keyword">let</span> &#123; checkedItem, userAction &#125; = <span class="hljs-built_in">this</span>;<br>     <span class="hljs-keyword">let</span> method,<br>         url,<br>         params = &#123;&#125;;<br>     <span class="hljs-keyword">if</span> (userAction == <span class="hljs-number">0</span>) &#123;<br>       (method = <span class="hljs-string">&quot;post&quot;</span>), (url = <span class="hljs-string">&quot;/shippings&quot;</span>);<br>     &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (userAction == <span class="hljs-number">1</span>) &#123;<br>       (method = <span class="hljs-string">&quot;put&quot;</span>), (url = <span class="hljs-string">`/shippings/<span class="hljs-subst">$&#123;checkedItem.id&#125;</span>`</span>);<br>     &#125; <span class="hljs-keyword">else</span> &#123;<br>       (method = <span class="hljs-string">&quot;delete&quot;</span>), (url = <span class="hljs-string">`/shippings/<span class="hljs-subst">$&#123;checkedItem.id&#125;</span>`</span>);<br>     &#125;<br>     <span class="hljs-keyword">if</span> (userAction == <span class="hljs-number">0</span> || userAction == <span class="hljs-number">1</span>) &#123;<br>       <span class="hljs-keyword">let</span> &#123;<br>           receiverName,<br>           receiverMobile,<br>           receiverProvince,<br>           receiverCity,<br>           receiverDistrict,<br>           receiverAddress,<br>           receiverZip<br>           &#125; = checkedItem;<br>       <span class="hljs-keyword">let</span> errMsg = <span class="hljs-string">&quot;&quot;</span>;<br>       <span class="hljs-keyword">if</span> (!receiverName) &#123;<br>         errMsg = <span class="hljs-string">&quot;请输入收货人名称&quot;</span>;<br>       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!receiverMobile || !<span class="hljs-regexp">/\d&#123;11&#125;/</span>.test(receiverMobile)) &#123;<br>         errMsg = <span class="hljs-string">&quot;请输入正确格式的手机号&quot;</span>;<br>       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!receiverProvince) &#123;<br>         errMsg = <span class="hljs-string">&quot;请选择省份&quot;</span>;<br>       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!receiverCity) &#123;<br>         errMsg = <span class="hljs-string">&quot;请选择对应的城市&quot;</span>;<br>       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!receiverAddress || !receiverDistrict) &#123;<br>         errMsg = <span class="hljs-string">&quot;请输入收货地址&quot;</span>;<br>       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!<span class="hljs-regexp">/\d&#123;6&#125;/</span>.test(receiverZip)) &#123;<br>         errMsg = <span class="hljs-string">&quot;请输入六位邮编&quot;</span>;<br>       &#125;<br>       <span class="hljs-keyword">if</span> (errMsg) &#123;<br>         <span class="hljs-built_in">this</span>.$message.error(errMsg);<br>         <span class="hljs-keyword">return</span>;<br>       &#125;<br>       params = &#123;<br>         receiverName,<br>         receiverMobile,<br>         receiverProvince,<br>         receiverCity,<br>         receiverDistrict,<br>         receiverAddress,<br>         receiverZip<br>       &#125;;<br>     &#125;<br>     <span class="hljs-built_in">this</span>.axios[method](url, params).then(<span class="hljs-function">() =&gt;</span> &#123;<br>       <span class="hljs-built_in">this</span>.closeModal();<br>       <span class="hljs-built_in">this</span>.getAddressList();<br>       <span class="hljs-built_in">this</span>.$message.success(<span class="hljs-string">&quot;操作成功&quot;</span>);<br>     &#125;);<br>   &#125;,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/\d&#123;11&#125;/</span>.text(arg) <br></code></pre></td></tr></table></figure>
+
+<h3 id="订单支付"><a href="#订单支付" class="headerlink" title="订单支付"></a>订单支付</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">paySubmit(payType)&#123;<br>  <span class="hljs-keyword">if</span>(payType == <span class="hljs-number">1</span>)&#123;<br>    window.<span class="hljs-keyword">open</span>(<span class="hljs-string">&#x27;/#/order/alipay?orderId=&#x27;</span>+<span class="hljs-keyword">this</span>.orderId,<span class="hljs-string">&#x27;_blank&#x27;</span>);<br>    <span class="hljs-comment">// 可以打开新窗口 window.open(URL,name,specs,replace) specs: &#x27;_blank&amp;_self&#x27;</span><br>  &#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">this</span>.axios.post(<span class="hljs-string">&#x27;/pay&#x27;</span>,&#123;<br>      orderId:<span class="hljs-keyword">this</span>.orderId,<br>      orderName:<span class="hljs-string">&#x27;Vue高仿小米商城&#x27;</span>,<br>      amount:<span class="hljs-number">0.01</span>,<span class="hljs-comment">//单位元</span><br>      payType:<span class="hljs-number">2</span> <span class="hljs-comment">//1支付宝，2微信</span><br>    &#125;).then((res)=&gt;&#123;<br>      QRCode.toDataURL(res.content)<br>      .then(url =&gt; &#123;<br>        <span class="hljs-keyword">this</span>.showPay = <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">this</span>.payImg = url;<br>        <span class="hljs-keyword">this</span>.loopOrderState();<br>      &#125;)<br>      .<span class="hljs-keyword">catch</span>(() =&gt; &#123;<br>        <span class="hljs-keyword">this</span>.$message.error(<span class="hljs-string">&#x27;微信二维码生成失败，请稍后重试&#x27;</span>);<br>      &#125;)<br>    &#125;)<br>  &#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript">paySubmit () &#123;<br>  <span class="hljs-built_in">this</span>.axios.post(<span class="hljs-string">&#x27;/pay&#x27;</span>, &#123;<br>    orderId: <span class="hljs-built_in">this</span>.orderId,<br>    orderName: <span class="hljs-string">&#x27;Vue高仿小米&#x27;</span>,<br>    amount: <span class="hljs-number">0.01</span>,<br>    payType: <span class="hljs-number">1</span><br>  &#125;).<span class="hljs-keyword">then</span>(<span class="hljs-function"><span class="hljs-params">(res)</span> =&gt;</span> &#123;<br>    <span class="hljs-built_in">this</span>.content = res.content<br>    <span class="hljs-built_in">setTimeout</span> (<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123; <span class="hljs-built_in">document</span>.forms[<span class="hljs-number">0</span>].submit() &#125;, <span class="hljs-number">100</span>) <span class="hljs-regexp">//</span> 提交表单<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="支付对接"><a href="#支付对接" class="headerlink" title="支付对接"></a>支付对接</h3><p>调用后端接口，</p>
+<p>传入订单id，商品名称，金额，支付类型，</p>
+<p>得到表单 通过v-html赋值 通过document.forms[0].submit() 提交 (做一个中间页面)</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">QRCode.toDataURL(res.content)<br>.then(url =&gt; &#123; <span class="hljs-comment">// 转换成base64</span><br>  <span class="hljs-keyword">this</span>.showPay = <span class="hljs-literal">true</span>;<br>  <span class="hljs-keyword">this</span>.payImg = url;<br>  <span class="hljs-keyword">this</span>.loopOrderState();<br>&#125;)<br>.<span class="hljs-keyword">catch</span>(() =&gt; &#123;<br>  <span class="hljs-keyword">this</span>.$message.error(<span class="hljs-string">&#x27;微信二维码生成失败，请稍后重试&#x27;</span>);<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 轮询当前订单支付状态</span><br><span class="hljs-function"><span class="hljs-title">loopOrderState</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-built_in">this</span>.T = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">()=&gt;</span>&#123;<br>    <span class="hljs-built_in">this</span>.axios.get(<span class="hljs-string">`/orders/<span class="hljs-subst">$&#123;<span class="hljs-built_in">this</span>.orderId&#125;</span>`</span>).then(<span class="hljs-function">(<span class="hljs-params">res</span>)=&gt;</span>&#123;<br>      <span class="hljs-keyword">if</span>(res.status == <span class="hljs-number">20</span>)&#123;<br>        <span class="hljs-built_in">clearInterval</span>(<span class="hljs-built_in">this</span>.T);<br>        <span class="hljs-built_in">this</span>.goOrderList();<br>      &#125;<br>    &#125;)<br>  &#125;,<span class="hljs-number">1000</span>);<br>&#125;, <span class="hljs-comment">// 如果用户已经支付，自动跳转</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript">axios.interceptors.response.use(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">response</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> res = response.data;<br>  <span class="hljs-keyword">let</span> path = location.hash;<br>  <span class="hljs-keyword">if</span> (res.status == <span class="hljs-number">0</span>) &#123; <span class="hljs-comment">// 成功</span><br>    <span class="hljs-keyword">return</span> res.data<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (res.status == <span class="hljs-number">10</span>) &#123; <span class="hljs-comment">// 未登录 自定义状态码</span><br>    <span class="hljs-keyword">if</span> (path !== <span class="hljs-string">&#x27;#/index&#x27;</span>) &#123; <span class="hljs-comment">// 处于首页不需要跳转login</span><br>      <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">&#x27;/#/login&#x27;</span><br>      <span class="hljs-comment">// 路由是挂载在vue实例中 这里是js文件 不能用路由跳转</span><br>    &#125;<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    Message.warning(res.msg)<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(res) <span class="hljs-comment">// 不抛出认为是成功状态</span><br>  &#125;<br>&#125;, <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> &#123; <span class="hljs-comment">// 状态码拦截 请求发送失败</span><br>  <span class="hljs-keyword">let</span> res = error.response;<br>  Message.error(res.data.message)<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(res)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<h3 id="订单列表"><a href="#订单列表" class="headerlink" title="订单列表"></a>订单列表</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> &#123; Pagination,Button &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;element-ui&#x27;</span><br><span class="hljs-keyword">import</span> infiniteScroll <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-infinite-scroll&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs awk">&lt;el-pagination<br>        v-<span class="hljs-keyword">if</span>=<span class="hljs-string">&quot;false&quot;</span><br>        class=<span class="hljs-string">&quot;pagination&quot;</span><br>        background<br>        layout=<span class="hljs-string">&quot;prev, pager, next&quot;</span><br>        :pageSize=<span class="hljs-string">&quot;pageSize&quot;</span>    <span class="hljs-regexp">//</span> :pageSize=<span class="hljs-string">&quot;pageSize&quot;</span><br>        :total=<span class="hljs-string">&quot;total&quot;</span><br>        @current-change=<span class="hljs-string">&quot;handleChange&quot;</span><br>        &gt;<br>      &lt;/el-pagination&gt;<br>components:&#123;<br>  OrderHeader,<br>  Loading,<br>  NoData,<br>  [Pagination.name]:Pagination, <span class="hljs-regexp">//</span> 使用方法<br>  [Button.name]:Button<br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 第一种方法：分页器</span><br><span class="hljs-function"><span class="hljs-title">handleChange</span>(<span class="hljs-params">pageNum</span>)</span>&#123;<br>  <span class="hljs-built_in">this</span>.pageNum = pageNum;<br>  <span class="hljs-built_in">this</span>.getOrderList();<br>&#125;,    <span class="hljs-comment">// 向右：添加text-align: right</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"> <span class="hljs-comment">// 第二种方法：加载更多按钮</span><br><span class="hljs-function"><span class="hljs-title">loadMore</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">this</span>.pageNum++;<br>    <span class="hljs-built_in">this</span>.getOrderList();<br>  &#125;,<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 第三种方法：滚动加载，通过npm插件实现</span><br>npm i infinite-scroll 是一个指令<br> directives: &#123;<br> 	infiniteScroll<br> &#125;<br> <br>    &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span>=&quot;<span class="hljs-title">scroll</span>-<span class="hljs-title">more</span>&quot;</span><br>      v-infinite-scroll=<span class="hljs-string">&quot;scrollMore&quot;</span><br>      infinite-scroll-disabled=<span class="hljs-string">&quot;true&quot;</span><br>      infinite-scroll-distance=<span class="hljs-string">&quot;410&quot;</span><br>      v-<span class="hljs-keyword">if</span>=<span class="hljs-string">&quot;true&quot;</span><br>    &gt;<br>      &lt;img src=<span class="hljs-string">&quot;/imgs/loading-svg/loading-spinning-bubbles.svg&quot;</span> alt=<span class="hljs-string">&quot;&quot;</span> v-show=<span class="hljs-string">&quot;loading&quot;</span>&gt;<br>    &lt;/div&gt;<br><br>scrollMore()&#123;<br>  <span class="hljs-keyword">this</span>.busy = <span class="hljs-literal">true</span>;<br>  setTimeout(()=&gt;&#123;<br>    <span class="hljs-keyword">this</span>.pageNum++;<br>    <span class="hljs-keyword">this</span>.getList();<br>  &#125;,<span class="hljs-number">500</span>);<br>&#125;,<br><span class="hljs-comment">// 专门给scrollMore使用</span><br>getList()&#123;<br>  <span class="hljs-keyword">this</span>.loading = <span class="hljs-literal">true</span>;<br>  <span class="hljs-keyword">this</span>.axios.<span class="hljs-keyword">get</span>(<span class="hljs-string">&#x27;/orders&#x27;</span>,&#123;<br>    params:&#123;<br>      pageSize:<span class="hljs-number">10</span>,<br>      pageNum:<span class="hljs-keyword">this</span>.pageNum<br>    &#125;<br>  &#125;).then((res)=&gt;&#123;<br>    <span class="hljs-keyword">this</span>.list = <span class="hljs-keyword">this</span>.list.concat(res.list);<br>    <span class="hljs-keyword">this</span>.loading = <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">if</span>(res.hasNextPage)&#123;<br>      <span class="hljs-keyword">this</span>.busy=<span class="hljs-literal">false</span>;<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>      <span class="hljs-keyword">this</span>.busy=<span class="hljs-literal">true</span>;<br>    &#125;<br>  &#125;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript">component: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;../pages/product.vue&#x27;</span>) <span class="hljs-regexp">//</span> 预加载，文件加载进html，等待空闲时生成js文件。<br>实现真正按需加载：<br>    chainWebpack: <span class="hljs-function"><span class="hljs-params">(config)</span> =&gt;</span> &#123;<br>      config.plugins.<span class="hljs-keyword">delete</span>(<span class="hljs-string">&#x27;prefetch&#x27;</span>)<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+  
+</article>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
