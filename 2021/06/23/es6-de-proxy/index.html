@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>性能优化：防抖和节流 | WQ&#39;s personal blog</title>
+  <title>ES6 的 Proxy | WQ&#39;s personal blog</title>
 
   
     
@@ -672,17 +672,17 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/176433/38/16331/317801/60d1ac0eEca01bc76/25118f184af79e31.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/177772/34/10719/148461/60d1acd3E8642092d/319597142cee7cef.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      性能优化：防抖和节流
+      ES6 的 Proxy
     </span>
     <!-- id 将作为查询条件 -->
-    <span id="/2021/06/20/xing-neng-you-hua-fang-dou-he-jie-liu/" class="leancloud-visitors view" data-flag-title="性能优化：防抖和节流">
+    <span id="/2021/06/23/es6-de-proxy/" class="leancloud-visitors view" data-flag-title="ES6 的 Proxy">
       <i class="post-meta-item-text">阅读数: </i>
       <i class="leancloud-visitors-count">loading</i>
     </span>
@@ -700,7 +700,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-06-20</span>
+        <span class="post-time">2021-06-23</span>
       </div>
       
       <div class="post-tags-categories">
@@ -708,8 +708,8 @@
         <div class="tags">
           <i class="iconfont icontag"></i>
           
-            <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="">
-              性能优化
+            <a href="/tags/javascript/" class="">
+              javascript
             </a>
           
         </div>
@@ -726,44 +726,100 @@
         
       </div>
       <div class="post-content">
-        <h2 class="bamboo-h " id="debounce防抖">debounce防抖</h2><br/>
-<p><code>debounce(f, ms)</code>装饰器的结果是一个包装器，该包装器将暂停对 <code>f</code> 的调用，直到经过 <code>ms</code> 毫秒的非活动状态（没有函数调用，“冷却期”），然后使用最新的参数调用 <code>f</code> 一次。</p>
-<blockquote>
-<p>换句话说，<code>debounce</code> 就像一个“接听电话”的秘书，并一直等到 <code>ms</code> 毫秒的安静时间之后，才将最新的呼叫信息传达给“老板”（调用实际的 <code>f</code>）。</p>
+        <blockquote>
+<p>ES6中新增了Proxy对象，从字面量上看可以理解为代理器，主要用于<strong>改变对象的默认访问行为</strong>，实际表现是在访问对象之间增加了一层<strong>拦截</strong>，任何对对象的访问行为都会通过这层拦截。在拦截中，我们可以<strong>增加自定义的行为</strong>。</p>
 </blockquote>
-<p>举个例子，我们有一个函数 <code>f</code>，并将其替换为 <code>f = debounce(f, 1000)</code>。</p>
-<p>然后，如果包装函数分别在 <code>0ms、200ms 和 500ms</code> 时被调用了，之后没有其他调用，那么实际的 <code>f</code> 只会在 <code>1500ms</code> 时被调用一次。也就是说：从最后一次调用开始经过 <code>1000ms</code> 的冷却期之后。</p>
-<p><img "" class="lazyload placeholder" data-original="/medias/debounce.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="throttle"></p>
-<p>……并且，它将获得最后一个调用的所有参数，其他调用的参数将被忽略。</p>
-<h3 class="bamboo-h warning" id="防抖举例">防抖举例</h3><br/>
-<p>现在我们举一个实际中的例子。假设用户输入了一些内容，我们想要在用户输入完成时向服务器发送一个请求。</p>
-<p>我们没有必要为每一个字符的输入都发送请求。相反，我们想要等一段时间，然后处理整个结果。</p>
-<p>在 <code>Web</code> 浏览器中，我们可以设置一个事件处理程序 —— 一个在每次输入内容发生改动时都会调用的函数。通常，监听所有按键输入的事件的处理程序会被调用的非常频繁。但如果我们为这个处理程序做一个 <code>1000ms</code> 的 <code>debounce</code> 处理，它仅会在最后一次输入后的 <code>1000ms</code> 后被调用一次。</p>
-<p><img "" class="lazyload placeholder" data-original="/medias/debounce.gif" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="debounce"></p>
-<p>看到了吗？第二个输入框调用了防抖函数，所以它的内容是在最后一次输入的 <code>1000ms</code> 后被处理的。</p>
-<p>因此，<code>debounce</code> 是一个处理一系列事件的好方法：无论是系列键盘输入，鼠标移动还是其他类似的事件。</p>
-<p>它在最后一次调用之后等待给定的时间，然后运行其可以处理结果的函数。</p>
-<h3 class="bamboo-h warning" id="实现一个防抖函数">实现一个防抖函数</h3><br/>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">f, ms</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timeout;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">    timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> f.apply(<span class="built_in">this</span>, <span class="built_in">arguments</span>), ms);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>调用 debounce 会返回一个包装器。当它被调用时，它会安排一个在给定的 ms 之后对原始函数的调用，并取消之前的此类超时。</p>
-</blockquote>
-<h2 class="bamboo-h " id="throttle节流">throttle节流</h2><br/>
-<p>当被多次调用时，它会在每 <code>ms</code> 毫秒最多将调用传递给 <code>f</code> 一次。</p>
-<p>与防抖抖的不同是，它是个完全不同的装饰器：</p>
-<p><code>debounce</code> 会在“冷却”期后运行函数一次。适用于处理最终结果。<br><code>throttle</code> 运行函数的频率不会大于所给定的时间 <code>ms</code> 毫秒。适用于不应该经常进行的定期更新。</p>
-<blockquote>
-<p>换句话说，throttle 就像接电话的秘书，但是打扰老板（实际调用 <code>f</code>）的频率不能超过每 <code>ms</code> 毫秒一次。</p>
-</blockquote>
-<h3 class="bamboo-h warning" id="节流举例">节流举例</h3><br/>
-<p><img "" class="lazyload placeholder" data-original="/medias/throttle.gif" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="throttle"></p>
-<h3 class="bamboo-h warning" id="实现一个节流函数">实现一个节流函数</h3><br/>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">f, ms = <span class="number">100</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (timer) <span class="keyword">return</span></span><br><span class="line">   timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      f，apply(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">      timer = <span class="literal">null</span></span><br><span class="line">    &#125;, ms)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 class="bamboo-h warning" id="Proxy的基本语法：">Proxy的基本语法：</h3><br/>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler)</span><br></pre></td></tr></table></figure>
+<p>target —— 是要包装的对象，可以是任何东西，包括函数。</p>
+<p>handler —— 代理配置：带有“捕捉器”（“traps”，即拦截操作的方法）的对象。比如 get 捕捉器用于读取 target 的属性，set 捕捉器用于写入 target 的属性，等等。</p>
+<p><strong>对 proxy 进行操作，如果在 handler 中存在相应的捕捉器，则它将运行</strong>，并且 Proxy 有机会对其进行处理，否则将直接对 target 进行处理。</p>
+<h3 class="bamboo-h warning" id="Proxy实例">Proxy实例</h3><br/>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们用 get 来实现一个对象的默认值。</span></span><br><span class="line"><span class="comment">//我们将创建一个对不存在的数组项返回 0 的数组。</span></span><br><span class="line"><span class="comment">//通常，当人们尝试获取不存在的数组项时，他们会得到 undefined，</span></span><br><span class="line"><span class="comment">//但是我们在这将常规数组包装到代理（proxy）中，以捕获读取操作，并在没有要读取的属性的时返回 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义目标数组</span></span><br><span class="line"><span class="keyword">let</span> numbers = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义配置对象</span></span><br><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">target, prop</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> prop <span class="keyword">in</span> target ? target[prop] : <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 生成Proxy实例</span></span><br><span class="line"><span class="keyword">let</span> numbersProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(numbers, handler)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行结果</span></span><br><span class="line"><span class="built_in">console</span>.log(numbersProxy[<span class="number">1</span>]); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(numbersProxy[<span class="number">123</span>]); <span class="comment">// 0（没有这个数组项）</span></span><br></pre></td></tr></table></figure>
 
-<h2 class="bamboo-h " id="总结">总结</h2><br/>
-<p><strong>防抖：用户输入结束或暂停时，才会触发change事件</strong></p>
-<p><strong>节流：无论输入速度多快，每隔一定时间只会触发一次</strong></p>
+<p>上面实例中，我们定义了一个包含get()函数的配置对象，表示的是对代理对象的属性进行读取操作，就会触发get()函数。因此在执行numbersProxy[1]，即访问Proxy实例数组项为1的值，会触发get()函数，在控制台输出自定义的结果。</p>
+<h3 class="bamboo-h warning" id="使用Proxy时的注意事项">使用Proxy时的注意事项</h3><br/>
 
+<blockquote>
+<p><strong>必须通过代理实例访问</strong></p>
+<p>如果需要配置对象的拦截行为生效，那么必须是对代理实例的属性进行访问，而不是直接对目标对象进行访问。</p>
+</blockquote>
+<h3 class="bamboo-h warning" id="Proxy实例函数及其基本使用">Proxy实例函数及其基本使用</h3><br/>
+<p>在上面例子中，我们通过访问代理对象的属性来触发自定义配置对象的get()函数。而get()函数只是Proxy实例支持的总共13中函数中的一种，这13中函数汇总如下。</p>
+<h4 class="bamboo-h property" id="get(target">get(target</h4><br/>
+<p>用于拦截对象的读取属性操作。例如调用proxy.name或者proxy[name]，其中target表示的是目标对象，property表示的是读取的属性值，receiver表示的是配置对象(最初被调用的对象。通常是 proxy 本身)。</p>
+<h4 class="bamboo-h property" id="set(target">set(target</h4><br/>
+<p>拦截对象属性的写入操作，即设置属性值，例如proxy.name = ‘xx’或者proxy[name] = ‘xx’，其中target表示目标对象，property表示的是将要设置的属性，value表示将要设置的属性值，receiver表示的是配置对象。</p>
+<h4 class="bamboo-h prop)" id="has(target">has(target</h4><br/>
+<p>拦截hasProperty的操作，返回一个布尔值，最典型的表现形式是执行prop in target，其中target表示目标对象，prop表示判断的属性值。</p>
+<h4 class="bamboo-h property)" id="deleteProperty(target">deleteProperty(target</h4><br/>
+<p>拦截delete proxy[property]的操作，返回一个布尔值，表示是否执行成功，其中target表示目标对象，property表示将要删除的属性。</p>
+<h4 class="bamboo-h red" id="ownkeys(target)">ownkeys(target)</h4><br/>
+<p>拦截Object.getOwnPropertyNames(target)、Object.getOwnPropertySymbols(target)、Object.keys(target)、for…in循环等操作，其中target表示的是获取对象自身所有的属性名。</p>
+<h5 class="bamboo-h " id="拓展 ,">拓展 ,</h5><br/>
+<p>Object.getOwnPropertyNames(obj) 返回非 Symbol 键。</p>
+<p>Object.getOwnPropertySymbols(obj) 返回 Symbol 键。</p>
+<p>Object.keys/values() 返回带有 enumerable 标志的非 Symbol 键/值。</p>
+<p>for..in 循环遍历所有带有 enumerable 标志的非 Symbol 键，以及原型对象的键。</p>
+<h4 class="bamboo-h prop)" id="getOwnPropertyDecriptor(target">getOwnPropertyDecriptor(target</h4><br/>
+<p>拦截Object.getOwnPropertyDecriptor(proxy, prop)操作，返回属性的属性描述符构成的对象，其中target表示目标对象，prop表示需要获取属性描述符集合的属性。</p>
+<h4 class="bamboo-h property" id="defineProperty(target">defineProperty(target</h4><br/>
+<p>拦截Object.defineProperty(proxy, property, decriptor)、Object.defineProperties(proxy, decriptors)操作，返回一个布尔值，其中target表示目标对象，property表示新增的属性，descriptor表示的是属性描述符对象。</p>
+<h4 class="bamboo-h red" id="preventExtensions(target)">preventExtensions(target)</h4><br/>
+<p>拦截Object.preventExtensions(proxy)操作，返回一个布尔值，表示的是让一个对象变得不可扩展，不能再增加新属性，其中target表示目标对象。</p>
+<h4 class="bamboo-h red" id="isExtensible(target)">isExtensible(target)</h4><br/>
+<p>拦截Object.isExtensible(proxy)，返回一个布尔值，表示对象是否可拓展。其中target表示目标对象。</p>
+<h4 class="bamboo-h red" id="getPrototypeOf(target)">getPrototypeOf(target)</h4><br/>
+<p>拦截Object.getPrototypeOf(proxy)操作，返回一个对象，表示的是拦截获取对象原型属性，其中target表示目标对象。</p>
+<h4 class="bamboo-h prototype)" id="setPropertyOf(target">setPropertyOf(target</h4><br/>
+<p>拦截Object.setPrototype(proxy, prototype)操作，返回一个布尔值，表示的是拦截设置对象的原型属性的行为，其中target表示目标对象，prototype表示新的原型对象。</p>
+<h4 class="bamboo-h object" id="apply(target">apply(target</h4><br/>
+<p>拦截Proxy实例作为函数调用的操作，例如proxy(…args)、proxy.call(object, …args)、proxy.apply(…)，其中target表示目标对象，object表示函数的调用方，args表示函数调用传递的参数。</p>
+<h4 class="bamboo-h args)" id="constructor(target">constructor(target</h4><br/>
+<p>拦截Proxy实例作为构造函数调用的操作，例如new Proxy(…args)，其中target表示目标对象，args表示函数调用传递的参数。</p>
+<blockquote>
+<p>这些函数都有一个通用的特性，即如果再target中使用了this关键字，再通过Proxy处理后，<strong>this关键之指向的是Proxy实例，而不是目标对象target</strong>。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  <span class="function"><span class="title">getName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span> === proxy)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(person, &#123;&#125;)</span><br><span class="line">person.getName() <span class="comment">// fasle</span></span><br><span class="line">proxy.getName() <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h3 class="bamboo-h warning" id="Proxy应用场景">Proxy应用场景</h3><br/>
+
+<h4 class="bamboo-h red" id="读取不存在属性">读取不存在属性</h4><br/>
+<p>通常，尝试读取不存在的属性会返回 undefined。</p>
+<p>创建一个代理，在尝试读取不存在的属性时，该代理抛出一个错误。</p>
+<p>这可以帮助及早发现编程错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;xx&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wrap</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, &#123;</span><br><span class="line">    <span class="function"><span class="title">get</span>(<span class="params">target, prop</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (prop <span class="keyword">in</span> target) &#123;</span><br><span class="line">        <span class="keyword">return</span> target[prop]</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">ReferenceError</span>(<span class="string">`Property doesn&#x27;t exist: &quot;<span class="subst">$&#123;prop&#125;</span>&quot;`</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">user = wrap(user);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(user.name); <span class="comment">// xx</span></span><br><span class="line"><span class="built_in">console</span>.log(user.age); <span class="comment">// ReferenceError: Property doesn&#x27;t exist: &quot;age&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 class="bamboo-h red" id="读取负索引的值">读取负索引的值</h4><br/>
+<p>数组的索引值时从0开始依次递增的，正常情况下我们无法读取负索引的值，但是通过<strong>Proxy的get()函数</strong>可以做到这一点。</p>
+<blockquote>
+<p>负索引实际就是从数组的尾部元素开始，从后往前，寻找元素的位置。</p>
+<p><strong>换句话说，array[-N] 与 array[array.length - N] 相同。</strong></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">arr = <span class="keyword">new</span> <span class="built_in">Proxy</span>(arr, &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">target, index</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (index &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> target[index]</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> target[+index + target.length]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(arr[<span class="number">1</span>]) <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(arr[<span class="number">2</span>]) <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">console</span>.log(arr[-<span class="number">1</span>]) <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">console</span>.log(arr[-<span class="number">2</span>]) <span class="comment">// 4   </span></span><br></pre></td></tr></table></figure>
+
+<h4 class="bamboo-h red" id="禁止访问私有属性">禁止访问私有属性</h4><br/>
+<p>在一些约定熟成的写法中，私有属性都会以下划线(_)开头，事实上，我们并不希望用户能访问到私有属性。</p>
+<p><strong><em>我们将需要以下捕捉器</em>：</strong></p>
+<p><code>get 读取此类属性时抛出错误</code></p>
+<p><code>set 写入属性时抛出错误</code></p>
+<p><code>deleteProperty 删除属性时抛出错误</code></p>
+<p><code>has 在使用 in 方法时排除以 _ 开头的属性</code></p>
+<p><code>ownKeys 在使用 for..in 和像 Object.keys 这样的的方法时排除以 _ 开头的属性</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;xx&quot;</span>,</span><br><span class="line">  <span class="attr">_age</span>: <span class="string">&quot;18&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">user = <span class="keyword">new</span> <span class="built_in">Proxy</span>(user, &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">target, prop</span>)</span> &#123; <span class="comment">// 拦截属性读取</span></span><br><span class="line">    <span class="keyword">if</span> (prop.startsWith(<span class="string">&#x27;_&#x27;</span>)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Access denied&quot;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> target[prop]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">target, prop, val</span>)</span> &#123; <span class="comment">// 拦截属性写入</span></span><br><span class="line">    <span class="keyword">if</span> (prop.startsWith(<span class="string">&#x27;_&#x27;</span>)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Access denied&quot;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      target[prop] = val</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">deleteProperty</span>(<span class="params">target, prop</span>)</span> &#123; <span class="comment">// 拦截属性删除</span></span><br><span class="line">    <span class="keyword">if</span> (prop.startsWith(<span class="string">&#x27;_&#x27;</span>)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Access denied&quot;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">delete</span> target[prop]</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">has</span>(<span class="params">target, prop</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (prop.startsWith(<span class="string">&#x27;_&#x27;</span>)) &#123; <span class="comment">// 拦截 in 操作</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Access denied&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> prop <span class="keyword">in</span> target</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">ownKeys</span>(<span class="params">target</span>)</span> &#123; <span class="comment">// 拦截读取属性列表</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.keys(target).filter(<span class="function"><span class="params">key</span> =&gt;</span> !key.startsWith(<span class="string">&#x27;_&#x27;</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;get&quot; 不允许读取 _age</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  user._age <span class="comment">// Error: Access denied</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123; <span class="built_in">console</span>.log(e.message) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;set&quot; 不允许写入 _age</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  user._age = <span class="string">&quot;20&quot;</span> <span class="comment">// Error: Access denied</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123; <span class="built_in">console</span>.log(e.message) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;deleteProperty&quot; 不允许删除 _age</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">delete</span> user._age <span class="comment">// Error: Access denied</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123; <span class="built_in">console</span>.log(e.message) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;has&quot; 将 _age 过滤出去</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="string">&#x27;_age&#x27;</span> <span class="keyword">in</span> user</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123; <span class="built_in">console</span>.log( e.message ) &#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// &quot;ownKeys&quot; 将 _age 过滤出去</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> user) <span class="built_in">console</span>.log(key) <span class="comment">// name</span></span><br></pre></td></tr></table></figure>
+
+<h4 class="bamboo-h red" id="Proxy访问属性的限制">Proxy访问属性的限制</h4><br/>
+<p>当我们期望使用Proxy对对象的属性进行代理，并修改属性的返回值时，我们需要这个属性<strong>不能同时为不可配置和不可写</strong>。如果这个属性同时为不可配置和不可写，那么在通过代理读取属性时，会抛出异常。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = <span class="built_in">Object</span>.defineProperties(&#123;&#125;, &#123;</span><br><span class="line">  <span class="comment">// 可配置的name</span></span><br><span class="line">  <span class="attr">name</span>: &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;xx&#x27;</span>,</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">writable</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 不可配置的age</span></span><br><span class="line">  <span class="attr">age</span>: &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">writable</span>: <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">target = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">target, prop</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;abc&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(target.name) <span class="comment">// abc</span></span><br><span class="line"><span class="built_in">console</span>.log(target.age) <span class="comment">// Uncaught TypeError: &#x27;get&#x27; on proxy: property &#x27;age&#x27; is a read-only and non-configurable data property on the proxy target but the proxy did not return its actual value (expected &#x27;18&#x27; but got &#x27;abc&#x27;)</span></span><br></pre></td></tr></table></figure>
+
+<h4 class="bamboo-h red" id="拦截属性赋值操作">拦截属性赋值操作</h4><br/>
+<p>定义一个person对象，包含一个age属性，取值在0~100之间，只要设置的值不在区间内，就会抛出异常。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;xx&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">user = <span class="keyword">new</span> <span class="built_in">Proxy</span>(user, &#123;</span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">target, prop, number</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (prop === <span class="string">&#x27;age&#x27;</span> &amp;&amp; number &gt; <span class="number">100</span> || number &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;The age is invalid&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    target[prop] = number</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">user.name = <span class="string">&#x27;yy&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(user.name) <span class="comment">// yy</span></span><br><span class="line">user.age = <span class="number">20</span></span><br><span class="line"><span class="built_in">console</span>.log(user.age) <span class="comment">// 20</span></span><br><span class="line">user.age = <span class="number">200</span></span><br><span class="line"><span class="built_in">console</span>.log(user.age) <span class="comment">// Uncaught Error: The age is invalid</span></span><br></pre></td></tr></table></figure>
+
+<h4 class="bamboo-h red" id="函数的拦截">函数的拦截</h4><br/>
+<p>Proxy中提供了apply()函数，用于拦截函数调用的操作，<strong>函数调用包括直接调用、call()函数调用、apply()函数调用<code>3</code>种方式</strong>。</p>
+<p>通过对函数调用的拦截，可以加入自定义操作，从而得到新的函数处理结果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sum = <span class="keyword">new</span> <span class="built_in">Proxy</span>(sum, &#123;</span><br><span class="line">  <span class="function"><span class="title">apply</span>(<span class="params">target, obj, args</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> target.apply(obj, args) * <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( sum(<span class="number">1</span>, <span class="number">2</span>) ) <span class="comment">// 6</span></span><br><span class="line"><span class="built_in">console</span>.log( sum.call(<span class="literal">null</span>, <span class="number">1</span>, <span class="number">2</span>) ) <span class="comment">// 6</span></span><br><span class="line"><span class="built_in">console</span>.log( sum.apply(<span class="literal">null</span>, [<span class="number">1</span>, <span class="number">2</span>]) ) <span class="comment">// 6</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
       </div>
       
     </article>
@@ -774,39 +830,21 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/177772/34/10719/148461/60d1acd3E8642092d/319597142cee7cef.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/06/23/es6-de-proxy/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> 上一篇:
-        <div>ES6 的 Proxy</div>
-      </div>
-      
-      <!-- <div class="content">
-        
-ES6中新增了Proxy对象，从字面量上看可以理解为代理器，主要用于改变对象的默认访问行为，实际表现是在访问对象之间增
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/190388/32/9664/211153/60d1ac09E307d0589/d4ac576a8db2384c.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/176433/38/16331/317801/60d1ac0eEca01bc76/25118f184af79e31.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/19/js-shi-xian-ji-cheng-de-ji-chong-fang-shi/" class="post-nav-link">
+    <a href="/2021/06/20/xing-neng-you-hua-fang-dou-he-jie-liu/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>JS 实现继承的几种方式</div>
+        <div>性能优化：防抖和节流</div>
       </div>
       <!-- <div class="content">
-        
-继承作为面向对象语言的三大特性之一，可以在不影响父类对象实现的情况下，使得子类对象具有父类对象的特性；同时还能再不影响
+        debounce防抖
+debounce(f, ms)装饰器的结果是一个包装器，该包装器将暂停对 f 的调用，直到经过 m
       </div> -->
     </a>
   </div>
