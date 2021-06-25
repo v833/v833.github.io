@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>ES6 的 Reflect | WQ&#39;s personal blog</title>
+  <title>前端安全：如何防范 XSS 和 CSRF | WQ&#39;s personal blog</title>
 
   
     
@@ -672,17 +672,17 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img10.360buyimg.com/ddimg/jfs/t1/193315/30/9539/141488/60d1acd3E838b3191/c4716b59b081f702.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/179361/18/10760/139108/60d1ac0eE54a99621/ce0141c937ab3f04.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      ES6 的 Reflect
+      前端安全：如何防范 XSS 和 CSRF
     </span>
     <!-- id 将作为查询条件 -->
-    <span id="/2021/06/24/es6-de-reflect/" class="leancloud-visitors view" data-flag-title="ES6 的 Reflect">
+    <span id="/2021/06/25/qian-duan-an-quan-ru-he-fang-fan-xss-he-csrf/" class="leancloud-visitors view" data-flag-title="前端安全：如何防范 XSS 和 CSRF">
       <i class="post-meta-item-text">阅读数: </i>
       <i class="leancloud-visitors-count">loading</i>
     </span>
@@ -700,7 +700,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-06-24</span>
+        <span class="post-time">2021-06-25</span>
       </div>
       
       <div class="post-tags-categories">
@@ -708,8 +708,8 @@
         <div class="tags">
           <i class="iconfont icontag"></i>
           
-            <a href="/tags/javascript/" class="">
-              javascript
+            <a href="/tags/%E5%AE%89%E5%85%A8/" class="">
+              安全
             </a>
           
         </div>
@@ -726,119 +726,80 @@
         
       </div>
       <div class="post-content">
-        <h2 class="bamboo-h " id="Reflect概述">Reflect概述</h2><br/>
+        <h2 class="bamboo-h " id="什么是 XSS 攻击？如何防范 XSS 攻击？">什么是 XSS 攻击？如何防范 XSS 攻击？</h2><br/>
 
-<blockquote>
-<p>什么是<code>Reflect</code>对象？</p>
-<p>我们可以这样理解，有一个名为<code>Reflect的全局对象</code>，上面挂载了对象的某些特殊函数(如：<code>[[Get]]</code>、<code>[[Set]]</code>)，这些函数可以通过类似于<code>Reflect.apply()</code>这种形式调用，所有在Reflect对象上的函数要么可以在<code>Object原型链</code>中找到，要么可以通过<code>命令式操作符</code>实现，例如<code>delete</code>和<code>in</code>操作符。</p>
-</blockquote>
-<p><em><strong>既然在ES6以前，Object对象中已经有与Reflect的函数相同功能的函数或者命令式操作符，那么为什么还要在ES6中专门增加一个Reflect对象呢？</strong></em></p>
-<p>主要原因有以下几点。</p>
-<ul>
-<li><p><code>更合理地规划于Object对象相关的API</code><br>在ES6中，Object对象的一些明显属于<strong>语言内部的函数</strong>都会添加到Reflect对象中，这样Object对象与Reflect对象中会存在相同处理函数。<strong>而在未来的设计中，语言内部的函数只会添加到Reflect对象中</strong>。</p>
-</li>
-<li><p><code>全局对象(内置的对象)</code><br>用一个单一的全局对象去存储这些函数，能够保持其他的Javascript代码的整齐、干净。不然的话，这些函数可能是全局的，或者通过原型来调用，<strong>不方便统一管理</strong>。</p>
-</li>
-<li><p><code>代替命令式操作符</code><br>将一些命令式操作符如delete、in等使用函数来代替，这样的目的是为了<strong>代码更好维护，更好向下兼容</strong>，同时避免出现更多的保留字。</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统写法</span></span><br><span class="line"><span class="string">&#x27;toString&#x27;</span> <span class="keyword">in</span> <span class="built_in">Object</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 新写法</span></span><br><span class="line"><span class="built_in">Reflect</span>.has(<span class="built_in">Object</span>, <span class="string">&#x27;toString&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><code>修改Object对象的某些函数的返回结果</code><br>修改Object对象的某些函数的返回结果，可以让其变得更合理，使得代码更好维护。</li>
-</ul>
-<p>如果一个对象obj是<strong>不能扩展的</strong>，那么在调用ObjectdefineProperty(obj, prop, desc)时，会<strong>抛出一个异常</strong>。因此在传统的写法中，我们需要通过try…catch处理。</p>
-<p>而使用Reflect.defineProperty(obj, prop, desc)时，返回的是<strong>false</strong>，新写法就可以通过if…else实现。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传统写法</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(obj, prop, desc) </span><br><span class="line">    <span class="comment">// success</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="comment">// failure</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新写法</span></span><br><span class="line"><span class="keyword">if</span> ( <span class="built_in">Reflect</span>.defineProperty(obj, prop, desc) ) &#123;</span><br><span class="line">  <span class="comment">// success</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// failure</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>Reflect对象的函数与Proxy对象的函数一一对应</code></li>
-</ul>
-<p><strong>只要是Proxy对象的函数，就能在Reflect对象上找到对应的函数</strong>。这就让Proxy对象可以方便的调用对应的Reflect对象上的函数，完成默认行为，并以此为修改行为的基础。</p>
-<p>也就是说，不管Proxy对象怎么修改默认行为，总可以在Refect对象上获取默认行为。事实上<strong>Proxy对象也经常随着Reflect对象一起进行调用</strong>。</p>
-<h2 class="bamboo-h " id="Reflect静态函数">Reflect静态函数</h2><br/>
+<p>XSS 攻击指的是跨站脚本攻击，是一种<code>代码注入攻击</code>。攻击者通过在网站注入恶意脚本，使之在用户的浏览器上运行，从而盗取用户的信息如 <code>cookie</code> 等。</p>
+<p>XSS 的本质是因为<code>网站没有对恶意代码进行过滤</code>，与正常的代码混合在一起了，浏览器没有办法分辨哪些脚本是可信的，从而导致了恶意代码的执行。</p>
+<p>而由于直接在用户的终端执行，恶意代码能够直接获取用户的信息，或者利用这些信息冒充用户向网站发起攻击者定义的请求。</p>
+<p class='p primary'>XSS 一般分为存储型、反射型和 DOM 型。</p>
 
-<p>**Reflect对象本身并不是一个构造函数(无法通过 new 调用)**，而是直接提供静态函数以供调用，Reflect对象的静态函数一共13个，如下所示。</p>
-<ul>
-<li><p><code>Reflect.get(target, prop, receiver)</code><br>Reflect.get()函数的作用是<strong>获取对象的属性值</strong>，等同于执行target[prop]<br>receiver表示函数中this绑定的对象。</p>
-</li>
-<li><p><code>Reflect.set(target, prop, value, receiver)</code><br>Reflect.set()的作用是<strong>设置某个属性值</strong>。等同于执行target[prop] = value。</p>
-</li>
-<li><p><code>Reflect.apply(target, thisArg, args)</code><br>Reflect.apply()函数的作用是<strong>通过指定的参数列表执行target函数</strong>，等同于执行Function.prototype.apply.call(target, thisArg, args)。其中target表示的是目标对象，thsArg表示的是执行target函数时的this对象，args表示的时参数列表。</p>
-</li>
-<li><p><code>Reflect.has(target, prop)</code><br>Reflect.has()函数的作用是<strong>判断属性是否在对象中</strong>，等同于执行prop in target</p>
-</li>
-</ul>
-<ul>
-<li><p><code>Reflect.deleteProperty(target, prop)</code><br>Reflect.deleteProperty()函数的作用是<strong>删除对象的属性</strong>，等同于执行delete obj[prop]</p>
-</li>
-<li><p><code>Reflect.ownKeys(target)</code><br>Reflect.ownKeys()函数的作用是<strong>获取对象的所有属性</strong>，包括Symbol，等同于Object.getOwnPrototypeNames()与Objct.getOwnPrototypeSymbols()之和。</p>
-</li>
-<li><p><code>Reflect.construct(target, args)</code><br>Reflect.construct()函数的作用是<strong>执行构造函数</strong>，等同于执行new Target(…args)</p>
-</li>
-<li><p><code>Reflect.defineProperty(target, prop, desc)</code><br>Reflect.defineProperty()函数的作用是<strong>为对象定义属性</strong>，等同于执行Object.defineProperty()</p>
-</li>
-</ul>
-<ul>
-<li><p><code>Reflect.getOwnPropertyDescriptor(target, prop)</code><br>Reflect.getOwnPropertyDescriptor()函数的作用是<strong>得到制定属性的描述对象</strong>，等同于执行Object.getOwnPropertyDescriptor()</p>
-</li>
-<li><p><code>Reflect.setPrototypeOf(target, newProto)</code><br>Reflect.setPrototypeOf()函数的作用是<strong>设置对象的原型</strong>，等同于执行Object.setPrototypeOf(target, newProto)</p>
-</li>
-<li><p><code>Reflect.getPrototypeOf(target)</code><br>Reflect.getPrototypeOf()函数的作用是<strong>读取对象的__proto__属性</strong>，等同于执行Object.getPrototypeOf(obj)</p>
-</li>
-</ul>
-<ul>
-<li><p><code>Reflect.isExtensible(target)</code><br>Reflect.isExtensible()函数的作用是<strong>判断对象是否可拓展</strong>，等同于执行Object.isExtensible()</p>
-</li>
-<li><p><code>Reflect.preventExtensions(target)</code><br>Reflect.preventExtensions()函数的作用是<strong>让一个函数变得不可拓展</strong>，等同于执行Object.preventExtensions()</p>
-</li>
-</ul>
-<blockquote>
-<p>Reflect 上存在的一些静态函数对应于ES2015之前的Object上可用的方法。尽管某些方法在行为上看似相似，但它们之间常常存在细微的差异。</p>
-<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/Comparing_Reflect_and_Object_methods">查看具体差异(MDN)</a></p>
-</blockquote>
-<h2 class="bamboo-h " id="Reflect 与 Proxy">Reflect 与 Proxy</h2><br/>
-<p><strong>ES6在设计的时候就将Reflect和Proxy对象绑定在一起了</strong>，Reflect对象的函数与Proxy对象的函数一一对应，因此在Proxy对象中调用Reflect对象对应的函数是一个明智的选择。</p>
-<p>例如我们使用Proxy对象拦截属性的读取、设置和删除操作，并配合Reflect对象实现时，可以编写如下代码。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;xx&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">target = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">target, prop</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">`读取属性<span class="subst">$&#123;prop&#125;</span>的值为<span class="subst">$&#123;target[prop]&#125;</span>`</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, prop)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">target, prop, value</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">`设置属性<span class="subst">$&#123;prop&#125;</span>的值为<span class="subst">$&#123;value&#125;</span>`</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, prop, value)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">deleteProperty</span>(<span class="params">target, prop</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">`删除属性<span class="subst">$&#123;prop&#125;</span>`</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.deleteProperty(target, prop)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">target.name <span class="comment">// 读取属性name的值为xx</span></span><br><span class="line">target.name = <span class="string">&#x27;yy&#x27;</span> <span class="comment">// 设置属性name的值为yy</span></span><br><span class="line"><span class="keyword">delete</span> target.name <span class="comment">// 删除属性name</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>上面的实例只是讲解了如何配合使用Proxy对象和Reflect对象，那么两者的配合能实现什么样的功能呢？</p>
-</blockquote>
-<p><strong>有一个最经典的案例就是可以实现观察者模式</strong>。</p>
-<h3 class="bamboo-h warning" id="Proxy 和 Reflect 实现观察者模式">Proxy 和 Reflect 实现观察者模式</h3><br/>
-<blockquote>
-<p>观察者模式的表现</p>
-<p>一个目标对象管理所有依赖它的观察者对象</p>
-<p>当自身的状态有改变时，会主动向所有观察者发出通知</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeObservable</span> (<span class="params">target</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 初始化 handler 存储</span></span><br><span class="line">  target.observers = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line"></span><br><span class="line">  <span class="comment">//将 handler 函数存储到 Set 中，以便于之后调用</span></span><br><span class="line">  target.observe = <span class="function"><span class="params">handler</span> =&gt;</span> target.observers.add(handler)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建一个 proxy 以处理更改</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span> (target, &#123;</span><br><span class="line">    <span class="function"><span class="title">set</span>(<span class="params">target, prop, value</span>)</span> &#123;</span><br><span class="line">      <span class="comment">// 将操作转发给对象</span></span><br><span class="line">      <span class="keyword">let</span> success = <span class="built_in">Reflect</span>.set(...arguments)</span><br><span class="line">      <span class="keyword">if</span> (success) &#123;</span><br><span class="line">        <span class="comment">// 调用所有 handler</span></span><br><span class="line">        target.observers.forEach(<span class="function"><span class="params">handler</span> =&gt;</span> handler(prop, value))</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> success</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> user = &#123;&#125;;</span><br><span class="line">user = makeObservable(user)</span><br><span class="line"><span class="comment">// 定义一个观察者</span></span><br><span class="line">user.observe(<span class="function">(<span class="params">key, value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`SET <span class="subst">$&#123;key&#125;</span>=<span class="subst">$&#123;value&#125;</span>`</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">user.name = <span class="string">&quot;xx&quot;</span> <span class="comment">// SET name=xx</span></span><br><span class="line">user.age = <span class="number">24</span> <span class="comment">// SET age=24</span></span><br></pre></td></tr></table></figure>
 
-<h3 class="bamboo-h warning" id="代理一个 getter">代理一个 getter</h3><br/>
-<p>让我们看一个示例，来说明为什么 <strong>Reflect.get 更好</strong>。此外，<strong>我们还将看到为什么 get/set 有第三个参数 receiver，而且我们之前从来没有使用过它。</strong></p>
-<p>我们有一个带有 _name 属性和 getter 的对象 user。</p>
-<p>这是对 user 对象对一个代理（proxy）：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123;</span><br><span class="line">  <span class="attr">_name</span>: <span class="string">&quot;xx&quot;</span>,</span><br><span class="line">  <span class="keyword">get</span> <span class="title">name</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>._name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> userProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(user, &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">target, prop, receiver</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> target[prop];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(userProxy.name) <span class="comment">// xx</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>另一个对象 admin 从 user 继承后，我们可以观察到错误的行为</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123;</span><br><span class="line">  <span class="attr">_name</span>: <span class="string">&quot;xx&quot;</span>,</span><br><span class="line">  <span class="keyword">get</span> <span class="title">name</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>._name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> userProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(user, &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">target, prop, receiver</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> target[prop]  <span class="comment">// (*) target = user</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> admin = &#123;</span><br><span class="line">  <span class="attr">__proto__</span>: userProxy,</span><br><span class="line">  <span class="attr">_name</span>: <span class="string">&quot;yy&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 期望输出：yy</span></span><br><span class="line"><span class="built_in">console</span>.log(admin.name); <span class="comment">// 输出：xx (!??)</span></span><br></pre></td></tr></table></figure>
-<p><strong>读取 admin.name 应该返回 “yy”，而不是 “xx”！</strong></p>
-<p>发生了什么？或许我们在继承方面做错了什么？</p>
-<p>但是，如果我们移除代理，那么一切都会按预期进行。</p>
-<p>问题实际上出在代理中，<strong>在 (*) 行。</strong></p>
-<p>当我们读取 admin.name 时，由于 admin 对象自身没有对应的的属性，搜索将转到其原型。</p>
-<p>原型是 userProxy。</p>
-<p>从代理读取 name 属性时，get 捕捉器会被触发，并从原始对象返回 target[prop] 属性，在 (*) 行。</p>
-<p>当调用 target[prop] 时，若 prop 是一个 getter，它将在 <strong>this=target 上下文中运行其代码</strong>。因此，结果是来自原始对象 target 的 this._name，即来自 <strong>user</strong>。</p>
-<p>为了解决这种情况，我们需要 get 捕捉器的第三个参数 receiver。它保证将正确的 this 传递给 getter。在我们的例子中是 admin。</p>
-<blockquote>
-<p>如何把上下文传递给 getter？</p>
-<p>对于一个常规函数，我们可以使用 call/apply，但这是一个 <strong>getter</strong>，它不能“被调用”，只能被访问。</p>
-</blockquote>
-<p>Reflect.get 可以做到。如果我们使用它，一切都会正常运行。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123;</span><br><span class="line">  <span class="attr">_name</span>: <span class="string">&quot;xx&quot;</span>,</span><br><span class="line">  <span class="keyword">get</span> <span class="title">name</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>._name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> userProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(user, &#123;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">target, prop, receiver</span>)</span> &#123; <span class="comment">// receiver = admin</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(target, prop, receiver) <span class="comment">// (*)</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> admin = &#123;</span><br><span class="line">  <span class="attr">__proto__</span>: userProxy,</span><br><span class="line">  <span class="attr">_name</span>: <span class="string">&quot;yy&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(admin.name) <span class="comment">// yy</span></span><br></pre></td></tr></table></figure>
-<p>现在 receiver 保留了对正确 this 的引用（即 admin），该引用是在 (*) 行中被通过 Reflect.get 传递给 getter 的。</p>
-<p><strong><em>我们可以把捕捉器重写得更短</em>：</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">get</span>(<span class="params">target, prop, receiver</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(...arguments);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>存储型指的是恶意代码提交到了网站的数据库中，当用户请求数据的时候，<code>服务器将其拼接为 HTML 后返回给了用户</code>，从而导致了恶意代码的执行。</p>
+<p>反射型指的是攻击者构建了特殊的 URL，当服务器接收到请求后，从 <code>URL 中获取数据，拼接到 HTML 后返回</code>，从而导致了恶意代码的执行。</p>
+<p>DOM 型指的是攻击者构建了特殊的 URL，用户打开网站后，<code>js 脚本从 URL 中获取数据，从而导致了恶意代码的执行</code>。</p>
+<p class='p primary'>XSS 攻击的预防可以从两个方面入手，一个是恶意代码提交的时候，一个是浏览器执行恶意代码的时候。</p>
+
+
+<p>对于第一个方面，如果我们对存入数据库的数据都进行的转义处理，但是一个数据可能在多个地方使用，有的地方可能不需要转义，由于我们没有办法判断数据最后的使用场景，<code>所以直接在输入端进行恶意代码的处理，其实是不太可靠的</code>。</p>
+<p>因此我们可以从<code>浏览器的执行来进行预防</code>，一种是使用纯前端的方式，不用服务器端拼接后返回。另一种是对需要插入到 HTML 中的代码做好充分的转义。对于 DOM 型的攻击，主要是前端脚本的不可靠而造成的，我们对于<code>数据获取渲染和字符串拼接的时候应该对可能出现的恶意代码</code>情况进行判断。</p>
+<p>在使用 <code>.innerHTML</code>、<code>.outerHTML</code>、<code>document.write()</code> 时要特别小心，不要把不可信的数据作为 HTML 插到页面上，而应尽量使用 <code>.textContent</code>、<code>.setAttribute()</code> 等。</p>
+<p>如果用 Vuet 技术栈，并且不使用 <code>v-html</code>功能，就在前端 render 阶段避免 <code>innerHTML</code>、<code>outerHTML</code> 的 XSS 隐患。</p>
+<p>DOM 中的内联事件监听器，如 <code>location</code>、<code>onclick</code>、<code>onerror</code>、<code>onload</code>、<code>onmouseover</code> 等，<code>&lt;a&gt;</code> 标签的 <code>href</code> 属性，JavaScript 的 <code>eval()</code>、<code>setTimeout()</code>、<code>setInterval()</code> 等，都能把字符串作为代码运行。如果不可信的数据拼接到字符串中传递给这些 API，很容易产生安全隐患，请务必避免。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 内联事件监听器中包含恶意代码 --&gt;</span><br><span class="line">&lt;img onclick=&quot;UNTRUSTED&quot; onerror=&quot;UNTRUSTED&quot; src=&quot;data:image/png,&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 链接内包含恶意代码 --&gt;</span><br><span class="line">&lt;a href=&quot;UNTRUSTED&quot;&gt;1&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">// setTimeout()/setInterval() 中调用恶意代码</span><br><span class="line">setTimeout(&quot;UNTRUSTED&quot;)</span><br><span class="line">setInterval(&quot;UNTRUSTED&quot;)</span><br><span class="line"></span><br><span class="line">// location 调用恶意代码</span><br><span class="line">location.href = &#x27;UNTRUSTED&#x27;</span><br><span class="line"></span><br><span class="line">// eval() 中调用恶意代码</span><br><span class="line">eval(&quot;UNTRUSTED&quot;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>输入内容长度控制</strong></p>
+<p>对于不受信任的输入，都应该限定一个合理的长度。虽然无法完全防止 XSS 发生，但可以增加 XSS 攻击的难度。</p>
+<p><strong>HTTP-only Cookie</strong></p>
+<p>禁止 JavaScript 读取某些敏感 Cookie，攻击者完成 XSS 注入后也无法窃取此 Cookie。</p>
+<p><strong>验证码</strong></p>
+<p>防止脚本冒充用户提交危险操作。</p>
+<p><strong>检测</strong></p>
+<p> 只要在网站的各输入框中提交这个字符串，或者把它拼接到 URL 参数上，就可以进行检测了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxx/search?keyword=jaVasCript%3A%2F*-%2F*%60%2F*%60%2F*%27%2F*%22%2F**%2F(%2F*%20*%2FoNcliCk%3Dalert()%20)%2F%2F%250D%250A%250d%250a%2F%2F%3C%2FstYle%2F%3C%2FtitLe%2F%3C%2FteXtarEa%2F%3C%2FscRipt%2F--!%3E%3CsVg%2F%3CsVg%2FoNloAd%3Dalert()%2F%2F%3E%3E</span><br></pre></td></tr></table></figure>
+
+<h2 class="bamboo-h " id="什么是 CSRF 攻击？如何防范 CSRF 攻击？">什么是 CSRF 攻击？如何防范 CSRF 攻击？</h2><br/>
+<p>CSRF 攻击指的是跨站请求伪造攻击，攻击者诱导用户进入一个第三方网站，然后该网站向被攻击网站发送跨站请求。如果用户在被<br>攻击网站中保存了登录状态，那么攻击者就可以利用这个登录状态，绕过后台的用户验证，冒充用户向服务器执行一些操作。<br>CSRF 攻击的本质是利用了 cookie 会在同源请求中携带发送给服务器的特点，以此来实现用户的冒充。</p>
+<p><strong>一个典型的CSRF攻击有着如下的流程：</strong></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="http://受害者登录a.com/">受害者登录a.com</a>，并保留了登录凭证（Cookie）。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://攻击者引诱受害者访问了b.com/">攻击者引诱受害者访问了b.com</a>。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://b.com/">b.com</a> 向 <a target="_blank" rel="noopener" href="http://a.com/">a.com</a> 发送了一个请求：<a target="_blank" rel="noopener" href="http://a.com/act=xx%E3%80%82%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BC%9A%E9%BB%98%E8%AE%A4%E6%90%BA%E5%B8%A6a.com%E7%9A%84Cookie%E3%80%82">a.com/act=xx。浏览器会…</a></p>
+</li>
+<li><p>a.com接收到请求后，对请求进行验证，并确认是受害者的凭证，误以为是受害者自己发送的请求。</p>
+</li>
+<li><p>a.com以受害者的名义执行了act=xx。</p>
+</li>
+<li><p>攻击完成，攻击者在受害者不知情的情况下，冒充受害者，让a.com执行了自己定义的操作。</p>
+<p><strong>CSRF的特点</strong></p>
+<ul>
+<li>攻击一般发起在第三方网站，而不是被攻击的网站。被攻击的网站无法防止攻击发生。</li>
+<li>攻击利用受害者在被攻击网站的登录凭证，冒充受害者提交操作；而不是直接窃取数据。</li>
+<li>整个过程攻击者并不能获取到受害者的登录凭证，仅仅是“冒用”。</li>
+<li>跨站请求可以用各种方式：图片URL、超链接、CORS、Form提交等等。部分请求方式可以直接嵌入在第三方论坛、文章中，难以进行追踪。</li>
+</ul>
+<p>CSRF通常是跨域的，因为外域通常更容易被攻击者掌控。但是如果本域下有容易被利用的功能，比如可以发图和链接的论坛和评论区，攻击可以直接在本域下进行，而且这种攻击更加危险。</p>
+</li>
+</ul>
+<p>一般的 CSRF 攻击类型有三种：</p>
+<p class='p primary'>第一种是 GET 类型的 CSRF 攻击</p>
+<p>比如在网站中的一个 img 标签里构建一个请求，当用户打开这个网站的时候就会自动发起提交。</p>
+<p class='p primary'>第二种是 POST 类型的 CSRF 攻击</p>
+<p>比如说构建一个表单，然后隐藏它，当用户进入页面时，自动提交这个表单。</p>
+<p class='p primary'>第三种是链接类型的 CSRF 攻击</p>
+<p>比如说在 a 标签的 href 属性里构建一个请求，然后诱导用户去点击。</p>
+<p>CSRF 可以用下面几种方法来防护：</p>
+<p class='p success'>第一种是同源检测的方法</p>
+<p>服务器根据 http 请求头中 origin 或者 referer 信息来判断请求是否为允许访问的站点，从而对请求进行过滤。当 origin 或者 referer 信息都不存在的时候，直接阻止。这种方式的缺点是有些情况下 referer 可以被伪造。还有就是我们这种方法同时把搜索引擎的链接也给屏蔽了，所以一般网站会允许搜索引擎的页面请求，但是相应的页面请求这种请求方式也可能被攻击者给利用。</p>
+<p class='p success'>第二种方法是使用 CSRF Token 来进行验证</p>
+<p>服务器向用户返回一个随机数 Token ，当网站再次发起请求时，在请求参数中加入服务器端返回的 token ，然后服务器对这个 token 进行验证。这种方法解决了使用 cookie 单一验证方式时，可能会被冒用的问题，但是这种方法存在一个缺点就是，我们需要给网站中的所有请求都添加上这个 token，操作比较繁琐。还有一个问题是一般不会只有一台网站服务器，如果我们的请求经过负载平衡转移到了其他的服务器，但是这个服务器的 session 中没有保留这个 token 的话，就没有办法验证了。这种情况我们可以通过改变 token 的构建方式来解决。</p>
+<p class='p success'>第三种方式使用双重 Cookie 验证的办法</p>
+<p>服务器在用户访问网站页面时，向请求域名注入一个Cookie，内容为随机字符串，然后当用户再次向服务器发送请求的时候，从 cookie 中取出这个字符串，添加到 URL 参数中，然后服务器通过对 cookie 中的数据和参数中的数据进行比较，来进行验证。使用这种方式是利用了攻击者只能利用 cookie，但是不能访问获取 cookie 的特点。并且这种方法比 CSRF Token 的方法更加方便，并且不涉及到分布式访问的问题。这种方法的缺点是如果网站存在 XSS 漏洞的，那么这种方式会失效。同时这种方式不能做到子域名的隔离。</p>
+<p class='p success'>第四种方式是使用在设置 cookie 属性的时候设置 Samesite</p>
+<p> 限制 cookie 不能作为被第三方使用，从而可以避免被攻击者利用。Samesite 一共有两种模式，一种是严格模式，在严格模式下 cookie 在任何情况下都不可能作为第三方 Cookie 使用，在宽松模式下，cookie 可以被请求是 GET 请求，且会发生页面跳转的请求所使用。</p>
+
       </div>
       
     </article>
@@ -849,41 +810,24 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/179361/18/10760/139108/60d1ac0eE54a99621/ce0141c937ab3f04.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/06/25/qian-duan-an-quan-ru-he-fang-fan-xss-he-csrf/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> 上一篇:
-        <div>前端安全：如何防范 XSS 和 CSRF</div>
-      </div>
-      
-      <!-- <div class="content">
-        什么是 XSS 攻击？如何防范 XSS 攻击？
-
-
-XSS 攻击指的是跨站脚本攻击，是一种代码注入攻击。攻击者通过在网站
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/177772/34/10719/148461/60d1acd3E8642092d/319597142cee7cef.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="https://img10.360buyimg.com/ddimg/jfs/t1/193315/30/9539/141488/60d1acd3E838b3191/c4716b59b081f702.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/23/es6-de-proxy/" class="post-nav-link">
+    <a href="/2021/06/24/es6-de-reflect/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>ES6 的 Proxy</div>
+        <div>ES6 的 Reflect</div>
       </div>
       <!-- <div class="content">
-        
-ES6中新增了Proxy对象，从字面量上看可以理解为代理器，主要用于改变对象的默认访问行为，实际表现是在访问对象之间增
+        Reflect概述
+
+
+什么是Reflect对象？
+我们可以这样理解，有一个名为Reflect的全局对象，上面挂载了对象
       </div> -->
     </a>
   </div>
