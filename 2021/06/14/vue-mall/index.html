@@ -726,7 +726,7 @@
         
       </div>
       <div class="post-content">
-        <p><a target="_blank" rel="noopener" href="https://github.com/v833/vue-mall">vue-mall项目地址</a> %}</p>
+        <p><a target="_blank" rel="noopener" href="https://github.com/v833/vue-mall">vue-mall项目地址</a> </p>
 <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>项目以Vue全家桶作为主要的技术体系，开发网页和交互功能。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create &#x27;xxx&#x27; // 初始化项目</span><br></pre></td></tr></table></figure>
 
@@ -814,7 +814,6 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opacity 会把内容全部加透明度</span><br><span class="line">rgba 内容不会有透明度</span><br></pre></td></tr></table></figure>
 
-<p><img "" class="lazyload placeholder" data-original="C:\Users\25073\AppData\Roaming\Typora\typora-user-images\image-20210605212151537.png" src="https://img10.360buyimg.com/ddimg/jfs/t1/157667/29/9156/134350/603c6445Ebbc9cabe/41219c5d36d45072.gif" alt="image-20210605212151537"></p>
 <p>可以用二维数组实现</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;children&quot;&gt;</span><br><span class="line">            &lt;ul v-for=&quot;(item, index1) in menuList&quot; :key=&quot;index1&quot;&gt;</span><br><span class="line">              &lt;li v-for=&quot;(sub, index) in item&quot; :key=&quot;index&quot;&gt;</span><br><span class="line">                &lt;a :href=&quot;sub ? &#x27;/#/product/&#x27; + sub.id : &#x27;&#x27; &quot;&gt;</span><br><span class="line">                  &lt;img :src=&quot;sub ? sub.img : &#x27;/imgs/item-box-1.png&#x27;&quot; alt=&quot;&quot;&gt;</span><br><span class="line">                  &#123;&#123;sub ? sub.name : &#x27;小米9&#x27;&#125;&#125;</span><br><span class="line">                &lt;/a&gt;</span><br><span class="line">              &lt;/li&gt;</span><br><span class="line">            &lt;/ul&gt;</span><br><span class="line">          &lt;/div&gt;</span><br></pre></td></tr></table></figure>
 
