@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>学习 Vue 原理：响应式 | WQ&#39;s personal blog</title>
+  <title>现代JS学习笔记 | WQ&#39;s personal blog</title>
 
   
     
@@ -672,17 +672,17 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img12.360buyimg.com/ddimg/jfs/t1/193727/27/9731/171915/60d1ac23E576f5b87/7348394f8d73af2e.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img12.360buyimg.com/ddimg/jfs/t1/188405/13/9675/121151/60d1ac0eE00cc5abb/0d0e01ede34acba9.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      学习 Vue 原理：响应式
+      现代JS学习笔记
     </span>
     <!-- id 将作为查询条件 -->
-    <span id="/2021/05/30/xue-xi-vue-yuan-li-xiang-ying-shi/" class="leancloud-visitors view" data-flag-title="学习 Vue 原理：响应式">
+    <span id="/2021/06/01/xian-dai-js-xue-xi-bi-ji/" class="leancloud-visitors view" data-flag-title="现代JS学习笔记">
       <i class="post-meta-item-text">阅读数: </i>
       <i class="leancloud-visitors-count">loading</i>
     </span>
@@ -700,7 +700,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-05-30</span>
+        <span class="post-time">2021-06-01</span>
       </div>
       
       <div class="post-tags-categories">
@@ -708,8 +708,8 @@
         <div class="tags">
           <i class="iconfont icontag"></i>
           
-            <a href="/tags/vue/" class="">
-              vue
+            <a href="/tags/javascript/" class="">
+              javascript
             </a>
           
         </div>
@@ -718,71 +718,328 @@
         <div class="categories">
           <i class="iconfont iconbookmark1"></i>
           
-            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="">
-              前端
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="">
+              学习笔记
             </a>
           
         </div>
         
       </div>
       <div class="post-content">
-        <div class="note info"><p>近来在学习Vue，对于它的核心概念之一——响应式一直有所困惑，偶然间发现一门课程vue advanced workshop with Evan You。Vue的作者尤雨溪亲自讲解Vue。下面是对该课程学习的总结。欢迎大家参考和提出意见。</p></div>
+        <h2 id="一、JS简介"><a href="#一、JS简介" class="headerlink" title="一、JS简介"></a>一、JS简介</h2><p>JS既可以运行在浏览器中，也可以运行在服务器端，甚至可以在任意搭载了Javascript引擎的设备中执行。</p>
+<p>现代的 JavaScript 是一种“安全的”编程语言。它不提供对内存或 CPU 的底层访问，因为它最初是为浏览器创建的，不需要这些功能。</p>
+<h3 id="1-引擎是如何工作的？"><a href="#1-引擎是如何工作的？" class="headerlink" title="1.引擎是如何工作的？"></a>1.引擎是如何工作的？</h3><p>引擎很复杂，但是基本原理很简单。</p>
+<ol>
+<li>引擎（如果是浏览器，则引擎被嵌入在其中）读取（“解析”）脚本。</li>
+<li>然后，引擎将脚本转化（“编译”）为机器语言。</li>
+<li>然后，机器代码快速地执行。</li>
+</ol>
+<p>引擎会对流程中的每个阶段都进行优化。它甚至可以在编译的脚本运行时监视它，分析流经该脚本的数据，并根据获得的信息进一步优化机器代码。</p>
+<h3 id="2-同源策略"><a href="#2-同源策略" class="headerlink" title="2.同源策略"></a>2.同源策略</h3><p>不同的标签页/窗口之间通常互不了解。有时候，也会有一些联系，例如一个标签页通过 JavaScript 打开的另外一个标签页。但即使在这种情况下，如果两个标签页打开的不是同一个网站（<strong>域名、协议或者端口任一不相同的网站</strong>），它们都不能相互通信。</p>
+<p>这就是所谓的“同源策略”。为了解决“同源策略”问题，两个标签页必须 <strong>都</strong> 包含一些处理这个问题的特定的 JavaScript 代码，并均允许数据交换。本教程会讲到这部分相关的知识。</p>
+<p>这个限制也是为了用户的信息安全。例如，用户打开的 <code>http://anysite.com</code> 网页必须不能访问 <code>http://gmail.com</code>（另外一个标签页打开的网页）也不能从那里窃取信息。</p>
+<h2 id="二、JS基础知识"><a href="#二、JS基础知识" class="headerlink" title="二、JS基础知识"></a>二、JS基础知识</h2><h3 id="1-现代模式-“use-strict”"><a href="#1-现代模式-“use-strict”" class="headerlink" title="1.现代模式 “use strict”"></a>1.现代模式 “use strict”</h3><p>长久以来，JavaScript 不断向前发展且并未带来任何兼容性问题。新的特性被加入，旧的功能也没有改变。</p>
+<p>这么做有利于兼容旧代码，但缺点是 JavaScript 创造者的任何错误或不完善的决定也将永远被保留在 JavaScript 语言中。</p>
+<p>这种情况一直持续到 2009 年 ECMAScript 5 (ES5) 的出现。<strong>ES5</strong> 规范增加了新的语言特性并且修改了一些已经存在的特性。为了保证旧的功能能够使用，大部分的修改是默认不生效的。你需要一个特殊的指令 —— <code>&quot;use strict&quot;</code> 来明确地激活这些特性。</p>
+<p><strong>没有类似于 <code>&quot;no use strict&quot;</code> 这样的指令可以使程序返回默认模式。 没有办法取消 <code>use strict</code></strong></p>
+<p>现代 JavaScript 支持 “classes” 和 “modules” —— 高级语言结构（本教程后续章节会讲到），它们会自动启用 <code>use strict</code>。因此，如果我们使用它们，则无需添加 <code>&quot;use strict&quot;</code> 指令。</p>
+<p><strong>因此，目前我们欢迎将 <code>&quot;use strict&quot;;</code> 写在脚本的顶部。稍后，当你的代码全都写在了 class 和 module 中时，你则可以将 <code>&quot;use strict&quot;;</code> 这行代码省略掉。</strong></p>
+<h3 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h3><h4 id="变量命名"><a href="#变量命名" class="headerlink" title="变量命名"></a>变量命名</h4><ol>
+<li>变量名称必须仅包含字母，数字，符号 <code>$</code> 和 <code>_</code>。</li>
+<li>首字符必须非数字。</li>
+</ol>
+<p>如果命名包括多个单词，通常采用驼峰式命名法（<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CamelCase">camelCase</a>）。也就是，单词一个接一个，除了第一个单词，其他的每个单词都以大写字母开头：<code>myVeryLongName</code>。</p>
+<p>有趣的是，美元符号 <code>&#39;$&#39;</code> 和下划线 <code>&#39;_&#39;</code> 也可以用于变量命名。它们是正常的符号，就跟字母一样，没有任何特殊的含义。</p>
+<h3 id="3-数据类型"><a href="#3-数据类型" class="headerlink" title="3.数据类型"></a>3.数据类型</h3><p>在 JavaScript 中有 8 种基本的数据类型（译注：7 种原始类型和 1 种引用类型）。</p>
+<h4 id="数学运算是安全的"><a href="#数学运算是安全的" class="headerlink" title="数学运算是安全的"></a><strong>数学运算是安全的</strong></h4><p>在 JavaScript 中做数学运算是安全的。我们可以做任何事：除以 0，将非数字字符串视为数字，等等。</p>
+<p>脚本永远不会因为一个致命的错误（“死亡”）而停止。最坏的情况下，我们会得到 <code>NaN</code> 的结果。</p>
+<p><strong>在 JavaScript 中，“number” 类型无法表示大于 <code>(253-1)</code>（即 <code>9007199254740991</code>），或小于 <code>-(253-1)</code> 的整数。这是其内部表示形式导致的技术限制。</strong></p>
+<h4 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h4><p>在 JavaScript 中，有三种包含字符串的方式。</p>
+<ol>
+<li>双引号：<code>&quot;Hello&quot;</code>.</li>
+<li>单引号：<code>&#39;Hello&#39;</code>.</li>
+<li>反引号：<code>Hello</code>.</li>
+</ol>
+<h4 id="null类型"><a href="#null类型" class="headerlink" title="null类型"></a>null类型</h4><p>相比较于其他编程语言，JavaScript 中的 <code>null</code> 不是一个“对不存在的 <code>object</code> 的引用”或者 “null 指针”。</p>
+<p>JavaScript 中的 <code>null</code> 仅仅是一个代表“无”、“空”或“值未知”的特殊值。</p>
+<p>上面的代码表示 <code>age</code> 是未知的。</p>
+<p>JavaScript的最初版本是这样区分的：<strong>null是一个表示”无”的对象，转为数值时为0；undefined是一个表        示”无”的原始值，转为数值时为NaN。</strong></p>
+<p>现在的用法：</p>
+<p><strong>null表示”没有对象”，即该处不应该有值。</strong></p>
+<p>（1） 作为函数的参数，表示该函数的参数不是对象。</p>
+<p>（2） 作为对象原型链的终点</p>
+<p><strong>undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。</strong></p>
+<h4 id="typeof运算符"><a href="#typeof运算符" class="headerlink" title="typeof运算符"></a>typeof运算符</h4><p><code>typeof</code> 运算符返回参数的类型。当我们想要分别处理不同类型值的时候，或者想快速进行数据类型检验时，非常有用。</p>
+<p>它支持两种语法形式：</p>
+<ol>
+<li>作为运算符：<code>typeof x</code>。</li>
+<li>函数形式：<code>typeof(x)</code>。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">typeof undefined // &quot;undefined&quot;</span><br><span class="line"></span><br><span class="line">typeof 0 // &quot;number&quot;</span><br><span class="line"></span><br><span class="line">typeof 10n // &quot;bigint&quot;</span><br><span class="line"></span><br><span class="line">typeof true // &quot;boolean&quot;</span><br><span class="line"></span><br><span class="line">typeof &quot;foo&quot; // &quot;string&quot;</span><br><span class="line"></span><br><span class="line">typeof Symbol(&quot;id&quot;) // &quot;symbol&quot;</span><br><span class="line"></span><br><span class="line">typeof Math // &quot;object&quot;  (1)</span><br><span class="line"></span><br><span class="line">typeof null // &quot;object&quot;  (2)</span><br><span class="line"></span><br><span class="line">typeof alert // &quot;function&quot;  (3)</span><br></pre></td></tr></table></figure>
 
+<p><strong><code>null</code> 绝对不是一个 <code>object</code>。<code>null</code> 有自己的类型，它是一个特殊值。</strong></p>
+<p><strong>并非JavaScript中的所有内容都是对象，应该说所有内容都可以充当对象。</strong></p>
+<p>原始类型不是  但是有包装函数，可以有对象的属性和方法</p>
+<h3 id="4-类型转换"><a href="#4-类型转换" class="headerlink" title="4.类型转换"></a>4.类型转换</h3><h4 id="字符串转换"><a href="#字符串转换" class="headerlink" title="字符串转换"></a>字符串转换</h4><p>当我们需要一个字符串形式的值时，就会进行字符串转换。比如，<code>alert(value)</code> 将 <code>value</code> 转换为字符串类型，然后显示这个值。我们也可以显式地调用 <code>String(value)</code> 来将 <code>value</code> 转换为字符串类型：</p>
+<h4 id="数字类型转换"><a href="#数字类型转换" class="headerlink" title="数字类型转换"></a>数字类型转换</h4><p>在算术函数和表达式中，会自动进行 number 类型转换。比如，当把除法 <code>/</code> 用于非 number 类型：</p>
+<p>我们也可以使用 <code>Number(value)</code> 显式地将这个 <code>value</code> 转换为 number 类型。</p>
+<p>当我们从 string 类型源（如文本表单）中读取一个值，但期望输入一个数字时，通常需要进行显式转换。如果该字符串不是一个有效的数字，转换的结果会是 <code>NaN</code>。</p>
+<p>number 类型转换规则：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th align="center">变成……</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>undefined</td>
+<td align="center">NaN</td>
+</tr>
+<tr>
+<td>null</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td>true/false</td>
+<td align="center">1/0</td>
+</tr>
+<tr>
+<td>string</td>
+<td align="center">去掉首尾空格后的纯数字字符串中含有的数字。如果剩余字符串为空，则转换结果为 <code>0</code>。否则，将会从剩余字符串中“读取”数字。当类型转换出现 error 时返回 <code>NaN</code>。</td>
+</tr>
+</tbody></table>
+<h4 id="布尔型转换"><a href="#布尔型转换" class="headerlink" title="布尔型转换"></a>布尔型转换</h4><p>转换规则如下：</p>
+<ul>
+<li>直观上为“空”的值（如 <code>0</code>、空字符串、<code>null</code>、<code>undefined</code> 和 <code>NaN</code>）将变为 <code>false</code>。</li>
+<li>其他值变成 <code>true</code>。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot; + 1 + 0 // &#x27;10&#x27;</span><br><span class="line">&quot;&quot; - 1 + 0 // -1</span><br><span class="line">true + false // 1</span><br><span class="line">6 / &quot;3&quot;  // 2</span><br><span class="line">&quot;2&quot; * &quot;3&quot;  // 6</span><br><span class="line">4 + 5 + &quot;px&quot; // &#x27;9px&#x27;</span><br><span class="line">&quot;$&quot; + 4 + 5  // &#x27;$45&#x27;</span><br><span class="line">&quot;4&quot; - 2  // 2</span><br><span class="line">&quot;4px&quot; - 2 // NaN</span><br><span class="line">7 / 0 // infinity</span><br><span class="line">&quot;  -9  &quot; + 5 // &#x27;-9 5&#x27;</span><br><span class="line">&quot;  -9  &quot; - 5 // -14</span><br><span class="line">null + 1 // 1</span><br><span class="line">undefined + 1  // NaN</span><br><span class="line">&quot; \t \n&quot; - 2 // -2</span><br></pre></td></tr></table></figure>
 
-<h2 class="bamboo-h " id="什么是响应式？">什么是响应式？</h2><br/>
-<p>响应式是 Vue的一个核心特性，用于监听视图中绑定的数据，当数据发生改变时视图自动更新。</p>
-<p>只要状态发生改变，系统依赖部分发生自动更新就可以称为响应性。</p>
-<p>在web的场景下，就是不断变化的状态反应到DOM上的变化。</p>
-<p>响应式实现数据驱动视图的第一步。</p>
-<h2 class="bamboo-h " id="数据驱动视图">数据驱动视图</h2><br/>
-<p>现在有这样一个例子：</p>
-<blockquote>
-<p>变量 a 和变量 b ，变量 b 的值永远等于 a 的 10 倍。</p>
-</blockquote>
-<p>如果使用命令式编程，可以很简单实现。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">let</span> b = a * <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// 30</span></span><br></pre></td></tr></table></figure>
-<p>但是当我们设置 b 的值为 4 时， b 还是等于 30</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">let</span> b = a * <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// 30</span></span><br><span class="line">a = <span class="number">4</span>; <span class="comment">// 命令式，b不会保持关系同步</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// 30</span></span><br></pre></td></tr></table></figure>
-<p>那么该如何实现当a改变时，b同时也改变呢？</p>
-<blockquote>
-<p>这里有一个神奇的函数onChanged()，它接收一个函数并且当 a 的值改变时，可以自动执行里面的代码，我们将 b 的更新放在里面，问题就解决了。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onChanged (<span class="function">() =&gt;</span> b = a * <span class="number">10</span> ) <span class="comment">// 声明式, b 随着 a 改变而改变</span></span><br></pre></td></tr></table></figure>
-<p>我们扩展一下，下面代码同样有一个神奇函数onStateChange，它会在 state 改变的时候自动运行，那我们只要在函数中编写dom操作的代码，就可以实现 dom 的自动更新了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DOM元素</span></span><br><span class="line">&lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;cell b1&quot;</span>&gt;&lt;/span&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 神奇函数，当state值改变会自动重新运行</span></span><br><span class="line">onStateChange(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.cell.b1&#x27;</span>).textContent = state.a * <span class="number">10</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>我们再进一步抽象，把 dom 的操作使用渲染引擎替换，但是我们不去研究渲染引擎的实现，只是简单的认为它会自动解析模版代码与数据关联即可，那代码就会变成下面这样。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DOM元素</span></span><br><span class="line">&lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;cell b1&quot;</span>&gt;</span><br><span class="line">	&#123;&#123; state.a * <span class="number">10</span> &#125;&#125;</span><br><span class="line">&lt;/span&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 神奇函数，当state值改变会自动重新运行</span></span><br><span class="line">onStateChange(<span class="function">() =&gt;</span> &#123; view = render(state) &#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="5-值的比较"><a href="#5-值的比较" class="headerlink" title="5.值的比较"></a>5.值的比较</h3><p>普通的相等性检查 <code>==</code> 存在一个问题，它不能区分出 <code>0</code> 和 <code>false</code>，也同样无法区分空字符串和 <code>false</code></p>
+<p><strong>严格相等运算符 <code>===</code> 在进行比较时不会做任何的类型转换。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alert( null &gt; 0 );  // (1) false</span><br><span class="line">alert( null == 0 ); // (2) false</span><br><span class="line">alert( null &gt;= 0 ); // (3) true</span><br></pre></td></tr></table></figure>
 
-<h2 class="bamboo-h " id="如何实现响应式">如何实现响应式</h2><br/>
+<p>为什么会出现这种反常结果，这是因为相等性检查 <code>==</code> 和普通比较符 <code>&gt; &lt; &gt;= &lt;=</code> 的代码逻辑是相互独立的。进行值的比较时，<code>null</code> 会被转化为数字，因此它被转化为了 <code>0</code>。这就是为什么（3）中 <code>null &gt;= 0</code> 返回值是 true，（1）中 <code>null &gt; 0</code> 返回值是 false。</p>
+<p>另一方面，<code>undefined</code> 和 <code>null</code> 在相等性检查 <code>==</code> 中不会进行任何的类型转换，它们有自己独立的比较规则，所以除了它们之间互等外，不会等于任何其他的值。这就解释了为什么（2）中 <code>null == 0</code> 会返回 false。</p>
+<p><strong>除非你非常清楚自己在做什么，否则永远不要使用 <code>&gt;= &gt; &lt; &lt;=</code> 去比较一个可能为 <code>null/undefined</code> 的变量。对于取值可能是 <code>null/undefined</code> 的变量，请按需要分别检查它的取值情况。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">5 &gt; 4  // true</span><br><span class="line">&quot;apple&quot; &gt; &quot;pineapple&quot; // false</span><br><span class="line">&quot;2&quot; &gt; &quot;12&quot; // true</span><br><span class="line">undefined == null // true</span><br><span class="line">undefined === null // false</span><br><span class="line">null == &quot;\n0\n&quot; // false</span><br><span class="line">null === +&quot;\n0\n&quot; // false</span><br></pre></td></tr></table></figure>
 
-<h3 class="bamboo-h warning" id="getter 和 setter">getter 和 setter</h3><br/>
-<p>Vue 中对象会被转换成响应式， 使用ES5的 defineProperty() 重写所有属性的 getter 和 setter 方法。</p>
-<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/web/javascript/reference/global_objects/object/defineproperty">MDN上关于Object.defineProperty的介绍</a></p>
-<p>下面将演示如何通过convert函数修改传入对象的getter和setter实现修改对象属性</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convert</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">Object</span>.keys(obj).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">let</span> internalValue = obj[key] <span class="comment">// 闭包，提供了存储机会 内部值</span></span><br><span class="line">		<span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">			get () &#123;</span><br><span class="line">				<span class="keyword">return</span> internalValue</span><br><span class="line">			&#125;,</span><br><span class="line">			set (newValue) &#123;</span><br><span class="line">				internalValue = newValue</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-空值合并运算符"><a href="#6-空值合并运算符" class="headerlink" title="6.空值合并运算符"></a>6.空值合并运算符</h3><p>如果第一个参数不是 <code>null/undefined</code>，则 <code>??</code> 返回第一个参数。否则，返回第二个参数。空值合并运算符并不是什么全新的东西。它只是一种获得两者中的第一个“已定义的”值的不错的语法。</p>
+<h4 id="与-比较"><a href="#与-比较" class="headerlink" title="与||比较"></a>与||比较</h4><p>它们之间重要的区别是：</p>
+<ul>
+<li><code>||</code> 返回第一个 <strong>真</strong> 值。</li>
+<li><code>??</code> 返回第一个 <strong>已定义的</strong> 值。</li>
+</ul>
+<p>换句话说，<code>||</code> 无法区分 <code>false</code>、<code>0</code>、空字符串 <code>&quot;&quot;</code> 和 <code>null/undefined</code>。它们都一样 —— 假值（falsy values）。如果其中任何一个是 <code>||</code> 的第一个参数，那么我们将得到第二个参数作为结果。</p>
+<h4 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h4><p><code>??</code> 运算符的优先级相当低：在 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table">MDN table</a> 中为 <code>5</code>。因此，<code>??</code> 在 <code>=</code> 和 <code>?</code> 之前计算，但在大多数其他运算符（例如，<code>+</code> 和 <code>*</code>）之后计算。</p>
+<p>因此，如果我们需要在还有其他运算符的表达式中使用 <code>??</code> 进行取值，需要考虑加括号</p>
+<h3 id="7-函数"><a href="#7-函数" class="headerlink" title="7.函数"></a>7.函数</h3><h4 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h4><p>如果未提供参数，那么其默认值则是 <code>undefined</code>。</p>
+<p>如果我们想在本示例中设定“默认”的 <code>text</code>，那么我们可以在 <code>=</code> 之后指定它：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function showMessage(from, text = &quot;no text given&quot;) &#123;</span><br><span class="line">  alert( from + &quot;: &quot; + text );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">showMessage(&quot;Ann&quot;); // Ann: no text given</span><br></pre></td></tr></table></figure>
 
-<h3 class="bamboo-h warning" id="依赖跟踪（订阅发布模式）">依赖跟踪（订阅发布模式）</h3><br/>
+<p>现在如果 <code>text</code> 参数未被传递，它将会得到值 <code>&quot;no text given&quot;</code>。</p>
+<p>在 JavaScript 中，函数是一个<strong>值</strong>，所以我们可以把它当成值对待。上面代码显示了一段字符串值，即函数的源码。</p>
+<p>的确，在某种意义上说一个函数是一个特殊值，我们可以像 <code>sayHi()</code> 这样调用它。</p>
+<p>但它依然是一个值，所以我们可以像使用其他类型的值一样使用它。</p>
+<h4 id="为什么会有分号？"><a href="#为什么会有分号？" class="headerlink" title="为什么会有分号？"></a>为什么会有分号？</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function sayHi() &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let sayHi = function() &#123;</span><br><span class="line">  // ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h4 class="bamboo-h red" id="为什么要依赖收集？">为什么要依赖收集？</h4><br/>
-<p>先来看下面的代码</p>
-<figure class="highlight plaintext"><figcaption><span>Vue(&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    template: </span><br><span class="line">        `&lt;div&gt;</span><br><span class="line">            &lt;span&gt;text1:&lt;/span&gt; &#123;&#123;text1&#125;&#125;</span><br><span class="line">        &lt;div&gt;`,</span><br><span class="line">    data: &#123;</span><br><span class="line">        text1: &#x27;text1&#x27;,</span><br><span class="line">        text2: &#x27;text2&#x27;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>按照之前响应式中的方法进行绑定则会出现一个问题——text3在实际模板中并没有被用到，然而当text3的数据被修改（this.text3 = ‘test’）的时候，同样会触发text3的setter导致重新执行渲染，这显然不正确。</p>
-<p>所以我们要进行<strong>依赖收集</strong>。</p>
-<h4 class="bamboo-h red" id="如何实现？">如何实现？</h4><br/>
-<p><strong>创建一个依赖跟踪类Dep，里面有两个方法：’depend’ ‘notify’。</strong></p>
-<p>‘depend’: 收集这种依赖项。</p>
-<p>‘notify’: 表示依赖发生改变，任何之前被定义为依赖的表达式、函数、计算都会被通知重新执行。也就是说我们需要找到一种让他们建立关联的方法。我们把这种计算关系叫依赖。这种计算也被认为是订阅者模式。<br>下面是Dep类期望达到的效果，调用dep.depend方法收集收集依赖，当调用dep.notify方法，控制台会再次输出updated语句。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dep = <span class="keyword">new</span> Dep()</span><br><span class="line"></span><br><span class="line">autorun (<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	dep.depend() <span class="comment">// 实际上是把这个函数添加到订阅者列表中dep中,之后无论你在任何地方调用</span></span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&quot;updated&quot;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// should log: &quot;updated&quot;</span></span><br><span class="line"></span><br><span class="line">dep.notify()</span><br><span class="line"><span class="comment">// 函数再次被调用 should log: &quot;updated&quot; autorun</span></span><br></pre></td></tr></table></figure>
-<p>这个 autorun 函数接收一个更新函数或者表达式，当你进入这个更新函数时，一切都变得特别，当代码放在这个响应区内，就可以通过dep.depend 方法注册依赖项。</p>
-<p>代码实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.Dep = <span class="class"><span class="keyword">class</span> <span class="title">Dep</span> </span>&#123;</span><br><span class="line">	<span class="title">constructor</span> (<span class="params"></span>) &#123;</span><br><span class="line">		<span class="built_in">this</span>.subsctibers = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">	&#125;</span><br><span class="line">	depend () &#123;</span><br><span class="line">		<span class="keyword">if</span> (activeUpdate) &#123;</span><br><span class="line">			<span class="comment">// 注册这个activeUpdate作为订阅者</span></span><br><span class="line">			<span class="built_in">this</span>.subscribers.add(activeUpdate)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	notify () &#123;</span><br><span class="line">		<span class="comment">// 通知所有订阅者</span></span><br><span class="line">		<span class="built_in">this</span>.subscribers.forEach(<span class="function"><span class="params">sub</span> =&gt;</span> sub()) <span class="comment">// 获取订阅函数并执行</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> activeUpdate <span class="comment">// 发布者</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">autorun</span> (<span class="params">update</span>) </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">wrappedUpdate</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">		activeUpdate = wrappedUpdate <span class="comment">// 赋值给 wrappedUpdate 会使得当依赖关系发生改变update 函数会重新执行 动态更新依赖 保证依赖一直是最新的</span></span><br><span class="line">		update()</span><br><span class="line">		wrappedUpdate = <span class="literal">null</span></span><br><span class="line">	&#125;</span><br><span class="line">	updateWrapper();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">autorun(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	dep.depend()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h3 class="bamboo-h warning" id="实现迷你响应性系统">实现迷你响应性系统</h3><br/>
-<p>结合前面两个函数convert() autorun() 将covert改名成observe()。<br>observer需要一个监听对象，监听他们得getter和setter，在getters和setters里面，我们可以设置依赖。<br>都整合后我们相当于创建了一个对象，我们访问一个属性，它收集依赖，调用dep.depend 当我们通过赋值改变属性值，调用notify触发改变。</p>
-<p>期望实现的调用效果：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = &#123;</span><br><span class="line">	<span class="attr">count</span>: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">observe(state)</span><br><span class="line"></span><br><span class="line">autorun(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(state.count))</span><br><span class="line"><span class="comment">// should immediately log &quot;count is: 0&quot;</span></span><br><span class="line"></span><br><span class="line">state.count ++</span><br><span class="line"><span class="comment">// should log &quot;count is: 1&quot;</span></span><br></pre></td></tr></table></figure>
-<p>最终整合代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dep</span> </span>&#123;</span><br><span class="line">  <span class="title">constructor</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>.subscribers = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  depend () &#123;</span><br><span class="line">    <span class="keyword">if</span> (activeUpdate) &#123;</span><br><span class="line">      <span class="built_in">this</span>.subscribers.add(activeUpdate)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  notify () &#123;</span><br><span class="line">    <span class="built_in">this</span>.subscribers.forEach(<span class="function"><span class="params">sub</span> =&gt;</span> sub())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">observe</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">Object</span>.keys(obj).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> internalValue = obj[key]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> dep = <span class="keyword">new</span> Dep()</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">      <span class="comment">// 在getter收集依赖项，当触发notify时重新运行</span></span><br><span class="line">      get () &#123;</span><br><span class="line">        dep.depend()</span><br><span class="line">        <span class="keyword">return</span> internalValue</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="comment">// setter用于调用notify</span></span><br><span class="line">      set (newVal) &#123;</span><br><span class="line">        <span class="keyword">if</span> (internalValue !== newVal) &#123;</span><br><span class="line">          internalValue = newVal</span><br><span class="line">          dep.notify()</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> activeUpdate = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">autorun</span> (<span class="params">update</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> wrappedUpdate = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    activeUpdate = wrappedUpdate</span><br><span class="line">    update()</span><br><span class="line">    activeUpdate = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">  wrappedUpdate()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上都是基于个人的理解，写的学习笔记，欢迎大家提出建议。</p>
+<p>答案很简单：</p>
+<ul>
+<li>在代码块的结尾不需要加分号 <code>;</code>，像 <code>if &#123; ... &#125;</code>，<code>for &#123; &#125;</code>，<code>function f &#123; &#125;</code> 等语法结构后面都不用加。</li>
+<li>函数表达式是在语句内部的：<code>let sayHi = ...;</code>，作为一个值。它不是代码块而是一个赋值语句。不管值是什么，都建议在语句末尾添加分号 <code>;</code>。所以这里的分号与函数表达式本身没有任何关系，它只是用于终止语句。</li>
+</ul>
+<h4 id="一个函数是表示一个“行为”的值"><a href="#一个函数是表示一个“行为”的值" class="headerlink" title="一个函数是表示一个“行为”的值"></a><strong>一个函数是表示一个“行为”的值</strong></h4><p>字符串或数字等常规值代表 <strong>数据</strong>。</p>
+<p>函数可以被视为一个 <strong>行为（action）</strong>。</p>
+<p>我们可以在变量之间传递它们，并在需要时运行。</p>
+<p><strong>在编程语言中，一等公民可以作为函数参数，可以作为函数返回值，也可以赋值给变量。</strong></p>
+<h2 id="三、对象"><a href="#三、对象" class="headerlink" title="三、对象"></a>三、对象</h2><h3 id="1-计算属性"><a href="#1-计算属性" class="headerlink" title="1.计算属性"></a>1.计算属性</h3><p>当创建一个对象时，我们可以在对象字面量中使用方括号。这叫做 <strong>计算属性</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let fruit = prompt(&quot;Which fruit to buy?&quot;, &quot;apple&quot;);</span><br><span class="line"></span><br><span class="line">let bag = &#123;</span><br><span class="line">  [fruit]: 5, // 属性名是从 fruit 变量中得到的</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">alert( bag.apple ); // 5 如果 fruit=&quot;apple&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这里有个小陷阱：一个名为 <code>__proto__</code> 的属性。我们不能将它设置为一个非对象的值：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;&#125;;</span><br><span class="line">obj.__proto__ = 5; // 分配一个数字</span><br><span class="line">alert(obj.__proto__); // [object Object] — 值为对象，与预期结果不同</span><br></pre></td></tr></table></figure>
+
+<p>我们从代码中可以看出来，把它赋值为 <code>5</code> 的操作被忽略了。</p>
+<h3 id="2-属性存在性测试，‘in’操作"><a href="#2-属性存在性测试，‘in’操作" class="headerlink" title="2.属性存在性测试，‘in’操作"></a>2.属性存在性测试，‘in’操作</h3><p>相对于其他语言，javascript的对象中有一个需要特别注意的特性：能够被访问任何属性。即使属性不存在也不会报错！读取不存在的属性只会得到 <code>undefined</code>。所以我们可以很容易地判断一个属性是否存在</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let user = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">alert( user.noSuchProperty === undefined ); // true 意思是没有这个属性</span><br></pre></td></tr></table></figure>
+
+<p>这里还有一个特别的，检查属性是否存在的操作符 <code>&quot;in&quot;</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;key&quot; in object</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let user = &#123; name: &quot;John&quot;, age: 30 &#125;;</span><br><span class="line"></span><br><span class="line">alert( &quot;age&quot; in user ); // true，user.age 存在</span><br><span class="line">alert( &quot;blabla&quot; in user ); // false，user.blabla 不存在。</span><br></pre></td></tr></table></figure>
+
+<p>请注意，<code>in</code> 的左边必须是 <strong>属性名</strong>。通常是一个带引号的字符串。</p>
+<h4 id="in-与-undefined比较"><a href="#in-与-undefined比较" class="headerlink" title="in 与 undefined比较"></a>in 与 undefined比较</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">  test: undefined</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">alert( obj.test ); // 显示 undefined，所以属性不存在？</span><br><span class="line"></span><br><span class="line">alert( &quot;test&quot; in obj ); // true，属性存在！</span><br></pre></td></tr></table></figure>
+
+<h4 id="对象属性排序"><a href="#对象属性排序" class="headerlink" title="对象属性排序"></a>对象属性排序</h4><p>对象有顺序吗？换句话说，如果我们遍历一个对象，我们获取属性的顺序是和属性添加时的顺序相同吗？这靠谱吗？</p>
+<p>简短的回答是：“有特别的顺序”：整数属性会被进行排序，其他属性则按照创建的顺序显示。</p>
+<p>我们可以使用非整数属性名来 <strong>欺骗</strong> 程序。只需要给每个键名加一个加号 <code>&quot;+&quot;</code> 前缀就行了。</p>
+<h3 id="3-对象的引用和复制"><a href="#3-对象的引用和复制" class="headerlink" title="3.对象的引用和复制"></a>3.对象的引用和复制</h3><p>与原始类型相比，对象的根本区别之一是对象是“通过引用”被存储和复制的，与原始类型值相反：字符串，数字，布尔值等 —— 始终是以“整体值”的形式被复制的。</p>
+<h3 id="4-垃圾回收"><a href="#4-垃圾回收" class="headerlink" title="4.垃圾回收"></a>4.垃圾回收</h3><p>JavaScript 中主要的内存管理概念是 <strong>可达性</strong>。</p>
+<p>简而言之，“可达”值是那些以某种方式可访问或可用的值。它们一定是存储在内存中的。</p>
+<ol>
+<li><p>这里列出固有的可达值的基本集合，这些值明显不能被释放。</p>
+<p>比方说：</p>
+<ul>
+<li>当前函数的局部变量和参数。</li>
+<li>嵌套调用时，当前调用链上所有函数的变量与参数。</li>
+<li>全局变量。</li>
+<li>（还有一些内部的）</li>
+</ul>
+<p>这些值被称作 <strong>根（roots）</strong>。</p>
+</li>
+<li><p>如果一个值可以通过引用或引用链从根访问任何其他值，则认为该值是可达的。</p>
+</li>
+</ol>
+<p><strong>主要需要掌握的内容：</strong></p>
+<ul>
+<li>垃圾回收是自动完成的，我们不能强制执行或是阻止执行。</li>
+<li>当对象是可达状态时，它一定是存在于内存中的。</li>
+<li>被引用与可访问（从一个根）不同：一组相互连接的对象可能整体都不可达。</li>
+</ul>
+<h3 id="5-this"><a href="#5-this" class="headerlink" title="5.this"></a>5.this</h3><p>在 JavaScript 中，<code>this</code> 是“自由”的，它的值是在调用时计算出来的，它的值并不取决于方法声明的位置，而是取决于在“点符号前”的是什么对象。</p>
+<p>以“方法”的语法调用函数时：<code>object.method()</code>，调用过程中的 <code>this</code> 值是 <code>object</code>。</p>
+<h3 id="6-构造器和操作符‘new’"><a href="#6-构造器和操作符‘new’" class="headerlink" title="6.构造器和操作符‘new’"></a>6.构造器和操作符‘new’</h3><h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>当一个函数被使用 <code>new</code> 操作符执行时，它按照以下步骤：</p>
+<ol>
+<li>一个新的空对象被创建并分配给 <code>this</code>。这个新对象会被执行[[prototype]]连接</li>
+<li>函数体执行。通常它会修改 <code>this</code>，为其添加新的属性。</li>
+<li>返回 <code>this</code> 的值。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function User(name) &#123;</span><br><span class="line">  // this = &#123;&#125;;（隐式创建）</span><br><span class="line"></span><br><span class="line">  // 添加属性到 this</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.isAdmin = false;</span><br><span class="line"></span><br><span class="line">  // return this;（隐式返回）</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>这是构造器的主要目的 —— 实现可重用的对象创建代码。</strong></p>
+<h4 id="构造器的return"><a href="#构造器的return" class="headerlink" title="构造器的return"></a>构造器的return</h4><p>通常，构造器没有 <code>return</code> 语句。它们的任务是将所有必要的东西写入 <code>this</code>，并自动转换为结果。</p>
+<p>但是，如果这有一个 <code>return</code> 语句，那么规则就简单了：</p>
+<ul>
+<li><strong>如果 <code>return</code> 返回的是一个对象，则返回这个对象，而不是 <code>this</code>。</strong></li>
+<li>如果 <code>return</code> 返回的是一个原始类型，则忽略。</li>
+</ul>
+<p>换句话说，带有对象的 <code>return</code> 返回该对象，在所有其他情况下返回 <code>this</code>。</p>
+<p>例如，这里 <code>return</code> 通过返回一个对象覆盖 <code>this</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function BigUser() &#123;</span><br><span class="line"></span><br><span class="line">  this.name = &quot;John&quot;;</span><br><span class="line"></span><br><span class="line">  return &#123; name: &quot;Godzilla&quot; &#125;;  // &lt;-- 返回这个对象</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert( new BigUser().name );  // Godzilla，得到了那个对象</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-可选链"><a href="#7-可选链" class="headerlink" title="7.可选链?."></a>7.可选链?.</h3><h4 id="‘不存在属性’的问题"><a href="#‘不存在属性’的问题" class="headerlink" title="‘不存在属性’的问题"></a>‘不存在属性’的问题</h4><p>我们大多数用户的地址都存储在 <code>user.address</code> 中，街道地址存储在 <code>user.address.street</code> 中，但有些用户没有提供这些信息。</p>
+<p>在这种情况下，当我们尝试获取 <code>user.address.street</code>，而该用户恰好没提供地址信息，我们则会收到一个错误：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let user = &#123;&#125;; // 一个没有 &quot;address&quot; 属性的 user 对象</span><br><span class="line"></span><br><span class="line">alert(user.address.street); // Error!</span><br></pre></td></tr></table></figure>
+
+<h4 id="可选链"><a href="#可选链" class="headerlink" title="可选链"></a>可选链</h4><p><strong>为了简明起见，在本文接下来的内容中，我们会说如果一个属性既不是 <code>null</code> 也不是 <code>undefined</code>，那么它就“存在”。</strong></p>
+<p>换句话说，例如 <code>value?.prop</code>：</p>
+<ul>
+<li>如果 <code>value</code> 存在，则结果与 <code>value.prop</code> 相同，</li>
+<li>否则（当 <code>value</code> 为 <code>undefined/null</code> 时）则返回 <code>undefined</code>。</li>
+</ul>
+<p>下面这是一种使用 <code>?.</code> 安全地访问 <code>user.address.street</code> 的方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let user = &#123;&#125;; // user 没有 address 属性</span><br><span class="line"></span><br><span class="line">alert( user?.address?.street ); // undefined（不报错）</span><br></pre></td></tr></table></figure>
+
+<p><strong>我们可以使用</strong> <code>?.</code> <strong>来安全地读取或删除，但不能写入</strong></p>
+<h3 id="8-Sysmbol类型"><a href="#8-Sysmbol类型" class="headerlink" title="8.Sysmbol类型"></a>8.Sysmbol类型</h3><p>根据规范，对象的属性键只能是字符串类型或者 Symbol 类型。不是 Number，也不是 Boolean，只有字符串或 Symbol 这两种类型。</p>
+<h4 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h4><p>‘symbol’值表示唯一的标识符</p>
+<p>可以使用symbol() 创建这种类型的值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// id 是 symbol 的一个实例化对象</span><br><span class="line">let id = Symbol();</span><br></pre></td></tr></table></figure>
+
+<p>创建时，我们可以给 Symbol 一个描述（也称为 Symbol 名），这在代码调试时非常有用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// id 是描述为 &quot;id&quot; 的 Symbol</span><br><span class="line">let id = Symbol(&quot;id&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>Symbol 保证是唯一的。即使我们创建了许多具有相同描述的 Symbol，它们的值也是不同。描述只是一个标签，不影响任何东西。</p>
+<p>例如，这里有两个描述相同的 Symbol —— 它们不相等：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let id1 = Symbol(&quot;id&quot;);</span><br><span class="line">let id2 = Symbol(&quot;id&quot;);</span><br><span class="line"></span><br><span class="line">alert(id1 == id2); // false</span><br></pre></td></tr></table></figure>
+
+<h4 id="Symbol不会被自动转换为字符串"><a href="#Symbol不会被自动转换为字符串" class="headerlink" title="Symbol不会被自动转换为字符串"></a>Symbol不会被自动转换为字符串</h4><p>JavaScript 中的大多数值都支持字符串的隐式转换。例如，我们可以 <code>alert</code> 任何值，都可以生效。Symbol 比较特殊，它不会被自动转换。</p>
+<p>例如，这个 <code>alert</code> 将会提示出错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let id = Symbol(&quot;id&quot;);</span><br><span class="line">alert(id); // 类型错误：无法将 Symbol 值转换为字符串。</span><br></pre></td></tr></table></figure>
+
+<p>如果我们真的想显示一个 Symbol，我们需要在它上面调用 <code>.toString()</code>，如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let id = Symbol(&quot;id&quot;);</span><br><span class="line">alert(id.toString()); // Symbol(id)，现在它有效了</span><br></pre></td></tr></table></figure>
+
+<p>或者获取 <code>symbol.description</code> 属性，只显示描述（description）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let id = Symbol(&quot;id&quot;);</span><br><span class="line">alert(id.description); // id</span><br></pre></td></tr></table></figure>
+
+<h4 id="隐藏属性"><a href="#隐藏属性" class="headerlink" title="隐藏属性"></a>隐藏属性</h4><p>Symbol 允许我们创建对象的“隐藏”属性，代码的任何其他部分都不能意外访问或重写这些属性。</p>
+<p>例如，如果我们使用的是属于第三方代码的 <code>user</code> 对象，我们想要给它们添加一些标识符。</p>
+<p>我们可以给它们使用 Symbol 键：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123; <span class="comment">// 属于另一个代码</span></span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;John&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> id = <span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>);</span><br><span class="line"></span><br><span class="line">user[id] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">alert( user[id] ); <span class="comment">// 我们可以使用 Symbol 作为键来访问数据</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign</a> 会同时复制字符串和 symbol 属性</p>
+<p><code>Object.keys(user)</code> 也会忽略它们。这是一般“隐藏符号属性”原则的一部分。如果另一个脚本或库遍历我们的对象，它不会意外地访问到符号属性。</p>
+<h4 id="全局Symbol"><a href="#全局Symbol" class="headerlink" title="全局Symbol"></a>全局Symbol</h4><p>正如我们所看到的，通常所有的 Symbol 都是不同的，即使它们有相同的名字。但有时我们想要名字相同的 Symbol 具有相同的实体。例如，应用程序的不同部分想要访问的 Symbol <code>&quot;id&quot;</code> 指的是完全相同的属性。</p>
+<p>为了实现这一点，这里有一个 <strong>全局 Symbol 注册表</strong>。我们可以在其中创建 Symbol 并在稍后访问它们，它可以确保每次访问相同名字的 Symbol 时，返回的都是相同的 Symbol。</p>
+<p>要从注册表中读取（不存在则创建）Symbol，请使用 <code>Symbol.for(key)</code>。</p>
+<p>该调用会检查全局注册表，如果有一个描述为 <code>key</code> 的 Symbol，则返回该 Symbol，否则将创建一个新 Symbol（<code>Symbol(key)</code>），并通过给定的 <code>key</code> 将其存储在注册表中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 从全局注册表中读取</span><br><span class="line">let id = Symbol.for(&quot;id&quot;); // 如果该 Symbol 不存在，则创建它</span><br><span class="line"></span><br><span class="line">// 再次读取（可能是在代码中的另一个位置）</span><br><span class="line">let idAgain = Symbol.for(&quot;id&quot;);</span><br><span class="line"></span><br><span class="line">// 相同的 Symbol</span><br><span class="line">alert( id === idAgain ); // true</span><br></pre></td></tr></table></figure>
+
+<h4 id="Symbol-keyFor"><a href="#Symbol-keyFor" class="headerlink" title="Symbol.keyFor"></a>Symbol.keyFor</h4><p>对于全局 Symbol，不仅有 <code>Symbol.for(key)</code> 按名字返回一个 Symbol，还有一个反向调用：<code>Symbol.keyFor(sym)</code>，它的作用完全反过来：通过全局 Symbol 返回一个名字。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 通过 name 获取 Symbol</span><br><span class="line">let sym = Symbol.for(&quot;name&quot;);</span><br><span class="line">let sym2 = Symbol.for(&quot;id&quot;);</span><br><span class="line"></span><br><span class="line">// 通过 Symbol 获取 name</span><br><span class="line">alert( Symbol.keyFor(sym) ); // name</span><br><span class="line">alert( Symbol.keyFor(sym2) ); // id</span><br></pre></td></tr></table></figure>
+
+<p><code>Symbol.keyFor</code> 内部使用全局 Symbol 注册表来查找 Symbol 的键。所以它不适用于非全局 Symbol。如果 Symbol 不是全局的，它将无法找到它并返回 <code>undefined</code>。</p>
+<p><strong>也就是说，任何 Symbol 都具有 <code>description</code> 属性。</strong></p>
+<h2 id="四、数据类型"><a href="#四、数据类型" class="headerlink" title="四、数据类型"></a>四、数据类型</h2><p>函数 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed">toFixed(n)</a> 将数字舍入到小数点后 <code>n</code> 位，并以<strong>字符串</strong>形式返回结果。</p>
+<p>有一个特殊的内建方法 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Object/is"><code>Object.is</code></a>，它类似于 <code>===</code> 一样对值进行比较，但它对于两种边缘情况更可靠：</p>
+<ol>
+<li>它适用于 <code>NaN</code>：<code>Object.is（NaN，NaN）=== true</code>，这是件好事。</li>
+<li>值 <code>0</code> 和 <code>-0</code> 是不同的：<code>Object.is（0，-0）=== false</code>，从技术上讲这是对的，因为在内部，数字的符号位可能会不同，即使其他所有位均为零。</li>
+</ol>
+<p>在所有其他情况下，<code>Object.is(a，b)</code> 与 <code>a === b</code> 相同。</p>
+<p>这种比较方式经常被用在 JavaScript 规范中。当内部算法需要比较两个值是否完全相同时，它使用 <code>Object.is</code>（内部称为 <a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-samevalue">SameValue</a>）。</p>
+<p><strong>结论：在处理小数时避免相等性检查。</strong></p>
+<p>在 <code>if</code> 测试中 <code>indexOf</code> 有一点不方便。我们不能像这样把它放在 <code>if</code> 中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let str = &quot;Widget with id&quot;;</span><br><span class="line"></span><br><span class="line">if (str.indexOf(&quot;Widget&quot;)) &#123;</span><br><span class="line">    alert(&quot;We found it&quot;); // 不工作！</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述示例中的 <code>alert</code> 不会显示，因为 <code>str.indexOf(&quot;Widget&quot;)</code> 返回 <code>0</code>（意思是它在起始位置就查找到了匹配项）。是的，但是 <code>if</code> 认为 <code>0</code> 表示 <code>false</code>。</p>
+<p>因此我们应该检查 <code>-1</code>，像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let str = &quot;Widget with id&quot;;</span><br><span class="line"></span><br><span class="line">if (str.indexOf(&quot;Widget&quot;) != -1) &#123;</span><br><span class="line">    alert(&quot;We found it&quot;); // 现在工作了！</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">选择方式……</th>
+<th align="left">负值参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>slice(start, end)</code></td>
+<td align="left">从 <code>start</code> 到 <code>end</code>（不含 <code>end</code>）</td>
+<td align="left">允许</td>
+</tr>
+<tr>
+<td align="left"><code>substring(start, end)</code></td>
+<td align="left"><code>start</code> 与 <code>end</code> 之间（包括 <code>start</code>，但不包括 <code>end</code>）</td>
+<td align="left">负值代表 <code>0</code></td>
+</tr>
+<tr>
+<td align="left"><code>substr(start, length)</code></td>
+<td align="left">从 <code>start</code> 开始获取长为 <code>length</code> 的字符串</td>
+<td align="left">允许 <code>start</code> 为负数</td>
+</tr>
+</tbody></table>
+<p>写一个函数 <code>ucFirst(str)</code>，并返回首字母大写的字符串 <code>str</code>，例如：</p>
+<p><strong>这里存在一个小问题。如果 <code>str</code> 是空的，那么 <code>str[0]</code> 就是 <code>undefined</code>，但由于 <code>undefined</code> 并没有 <code>toUpperCase()</code> 方法，因此我们会得到一个错误。</strong></p>
+<ol>
+<li>使用 <code>str.charAt(0)</code>，因为它总是会返回一个字符串（可能为空）。</li>
+<li>为空字符添加测试。</li>
+</ol>
+<h3 id="1-数组"><a href="#1-数组" class="headerlink" title="1.数组"></a>1.数组</h3><h4 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h4><p>数组是对象，所以我们可以尝试使用 <code>delete</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let arr = [&quot;I&quot;, &quot;go&quot;, &quot;home&quot;];</span><br><span class="line"></span><br><span class="line">delete arr[1]; // remove &quot;go&quot;</span><br><span class="line"></span><br><span class="line">alert( arr[1] ); // undefined</span><br><span class="line"></span><br><span class="line">// now arr = [&quot;I&quot;,  , &quot;home&quot;];</span><br><span class="line">alert( arr.length ); // 3</span><br></pre></td></tr></table></figure>
+
+<p>元素被删除了，但数组仍然有 3 个元素，我们可以看到 <code>arr.length == 3</code>。</p>
+<p>这很正常，因为 <code>delete obj.key</code> 是通过 <code>key</code> 来移除对应的值。对于对象来说是可以的。但是对于数组来说，我们通常希望剩下的元素能够移动并占据被释放的位置。我们希望得到一个更短的数组。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">arr.splice</a> 方法可以说是处理数组的瑞士军刀。它可以做所有事情：添加，删除和插入元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.splice(start[, deleteCount, elem1, ..., elemN])</span><br></pre></td></tr></table></figure>
+
+<h4 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.slice([start], [end])</span><br></pre></td></tr></table></figure>
+
+<p>它会返回一个新数组，将所有从索引 <code>start</code> 到 <code>end</code>（不包括 <code>end</code>）的数组项复制到一个新的数组。<code>start</code> 和 <code>end</code> 都可以是负数，在这种情况下，从末尾计算索引。</p>
+<h4 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h4><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/concat">arr.concat</a> 创建一个新数组，其中包含来自于其他数组和其他项的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.concat(arg1, arg2...)</span><br></pre></td></tr></table></figure>
+
+<h4 id="arr-forEach"><a href="#arr-forEach" class="headerlink" title="arr.forEach"></a>arr.forEach</h4><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">arr.forEach</a> 方法允许为数组的每个元素都运行一个函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr.forEach(function(item, index, array) &#123;</span><br><span class="line">  // ... do something with item</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>如果我们想检查是否包含某个元素，并且不想知道确切的索引，那么 <code>arr.includes</code> 是首选。</p>
+<p>此外，<code>includes</code> 的一个非常小的差别是它能正确处理<code>NaN</code>，而不像 <code>indexOf/lastIndexOf</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const arr = [NaN];</span><br><span class="line">alert( arr.indexOf(NaN) ); // -1（应该为 0，但是严格相等 === equality 对 NaN 无效）</span><br><span class="line">alert( arr.includes(NaN) );// true（这个结果是对的）</span><br></pre></td></tr></table></figure>
+
+<p><strong>我们已经知道，箭头函数没有自身的 <code>this</code>。现在我们知道了它们也没有特殊的 <code>arguments</code> 对象。</strong></p>
 
       </div>
       
@@ -796,18 +1053,19 @@
 
   
   <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img12.360buyimg.com/ddimg/jfs/t1/188405/13/9675/121151/60d1ac0eE00cc5abb/0d0e01ede34acba9.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="https://img10.360buyimg.com/ddimg/jfs/t1/6112/28/14085/224876/60d1acd4E1054b82d/3a632e368e7795e6.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/01/xian-dai-js-xue-xi-bi-ji/" class="post-nav-link">
+    <a href="/2021/06/01/v-model-shuang-xiang-shu-ju-bang-ding-shi-xian-yuan-li/" class="post-nav-link">
       <div class="title">
         <i class="fa fa-angle-left"></i> 上一篇:
-        <div>现代JS学习笔记</div>
+        <div>v-model 双向数据绑定实现原理</div>
       </div>
       
       <!-- <div class="content">
-        一、JS简介JS既可以运行在浏览器中，也可以运行在服务器端，甚至可以在任意搭载了Javascript引擎的设备中执行。
-
+        准备工作
+我们来手动实现一个 v-model 的功能。
+首先定义了一个component组件，里面有一个template
       </div> -->
     </a>
   </div>
@@ -816,19 +1074,16 @@
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img14.360buyimg.com/ddimg/jfs/t1/179160/21/10602/181900/60d1acd4E0adda7b8/d3971722cdf74ce4.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="https://img12.360buyimg.com/ddimg/jfs/t1/193727/27/9731/171915/60d1ac23E576f5b87/7348394f8d73af2e.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/05/29/san-chong-lei-xing-jian-cha-fang-fa-typeof-instanceof-he-object.prototype.tostring/" class="post-nav-link">
+    <a href="/2021/05/30/xue-xi-vue-yuan-li-xiang-ying-shi/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>三种类型检查方法：typeof、instanceof 和 Object.prototype.toString</div>
+        <div>学习 Vue 原理：响应式</div>
       </div>
       <!-- <div class="content">
-        typeof 运算符,
-
-
-typeof 运算符返回参数的类型。当我们想要分别处理不同类型值的时候，或者想快速进行数据类
+        近来在学习Vue，对于它的核心概念之一——响应式一直有所困惑，偶然间发现一门课程vue advanced worksho
       </div> -->
     </a>
   </div>
