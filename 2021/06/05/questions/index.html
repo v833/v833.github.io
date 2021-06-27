@@ -917,7 +917,8 @@
 <li>C: <code>1</code> <code>undefined</code> and <code>2</code> <code>undefined</code> and <code>3</code> <code>undefined</code> and <code>4</code> <code>undefined</code></li>
 <li>D: <code>1</code> <code>2</code> and <code>undefined</code> <code>3</code> and <code>undefined</code> <code>4</code></li>
 </ul>
-<h4 id="答案-D"><a href="#答案-D" class="headerlink" title="答案: D"></a>答案: D</h4><p><code>reducer</code> 函数接收4个参数:</p>
+<p>答案: <strong>D</strong></p>
+<p><code>reducer</code> 函数接收4个参数:</p>
 <ol>
 <li>Accumulator (acc) (累计器)</li>
 <li>Current Value (cur) (当前值)</li>
@@ -941,7 +942,8 @@
 </li>
 <li><p>D: <code>running index.js</code>, <code>undefined</code>, <code>running sum.js</code></p>
 </li>
-<li><h4 id="答案-B"><a href="#答案-B" class="headerlink" title="答案: B"></a>答案: B</h4><p><code>import</code>命令是编译阶段执行的，在代码运行之前。因此这意味着被导入的模块会先运行，而导入模块的文件会后执行。</p>
+<li><p><strong>答案: B</strong></p>
+<p><code>import</code>命令是编译阶段执行的，在代码运行之前。因此这意味着被导入的模块会先运行，而导入模块的文件会后执行。</p>
 <p>这是CommonJS中<code>require（）</code>和<code>import</code>之间的区别。使用<code>require()</code>，您可以在运行代码时根据需要加载依赖项。 如果我们使用<code>require</code>而不是<code>import</code>，<code>running index.js</code>，<code>running sum.js</code>，<code>3</code>会被依次打印。</p>
 </li>
 </ul>
@@ -956,7 +958,8 @@
 </li>
 <li><p>D: <code>undefined</code></p>
 </li>
-<li><h4 id="答案-B-1"><a href="#答案-B-1" class="headerlink" title="答案: B"></a>答案: B</h4><p><code>push()</code>方法返回新数组的长度。一开始，数组包含一个元素（字符串<code>&quot;banana&quot;</code>），长度为1。 在数组中添加字符串<code>&quot;apple&quot;</code>后，长度变为2，并将从<code>addToList</code>函数返回。</p>
+<li><p><strong>答案: B</strong></p>
+<p><code>push()</code>方法返回新数组的长度。一开始，数组包含一个元素（字符串<code>&quot;banana&quot;</code>），长度为1。 在数组中添加字符串<code>&quot;apple&quot;</code>后，长度变为2，并将从<code>addToList</code>函数返回。</p>
 <p><code>push</code>方法修改原始数组，如果你想从函数返回数组而不是数组长度，那么应该在push <code>item</code>之后返回<code>list</code>。</p>
 </li>
 </ul>
@@ -971,7 +974,8 @@
 </li>
 <li><p>D: <code>&#123; constructor: ...&#125;</code> <code>undefined</code></p>
 </li>
-<li><h4 id="答案-D-1"><a href="#答案-D-1" class="headerlink" title="答案: D"></a>答案: D</h4><p>常规函数，例如<code>giveLydiaPizza</code>函数，有一个<code>prototype</code>属性，它是一个带有<code>constructor</code>属性的对象（原型对象）。 然而，箭头函数，例如<code>giveLydiaChocolate</code>函数，没有这个<code>prototype</code>属性。 尝试使用<code>giveLydiaChocolate.prototype</code>访问<code>prototype</code>属性时会返回<code>undefined</code>。</p>
+<li><p><strong>答案: D</strong></p>
+<p>常规函数，例如<code>giveLydiaPizza</code>函数，有一个<code>prototype</code>属性，它是一个带有<code>constructor</code>属性的对象（原型对象）。 然而，箭头函数，例如<code>giveLydiaChocolate</code>函数，没有这个<code>prototype</code>属性。 尝试使用<code>giveLydiaChocolate.prototype</code>访问<code>prototype</code>属性时会返回<code>undefined</code>。</p>
 </li>
 </ul>
 <h5 id="58、-args是剩余参数，剩余参数的值是一个包含所有剩余参数的数组，并且只能作为最后一个参数。上述示例中，剩余参数是第二个参数，这是不可能的，并会抛出语法错误。"><a href="#58、-args是剩余参数，剩余参数的值是一个包含所有剩余参数的数组，并且只能作为最后一个参数。上述示例中，剩余参数是第二个参数，这是不可能的，并会抛出语法错误。" class="headerlink" title="58、... args是剩余参数，剩余参数的值是一个包含所有剩余参数的数组，并且只能作为最后一个参数。上述示例中，剩余参数是第二个参数，这是不可能的，并会抛出语法错误。"></a>58、<code>... args</code>是剩余参数，剩余参数的值是一个包含所有剩余参数的数组，<strong>并且只能作为最后一个参数</strong>。上述示例中，剩余参数是第二个参数，这是不可能的，并会抛出语法错误。</h5><h5 id="59、输出什么"><a href="#59、输出什么" class="headerlink" title="59、输出什么?"></a>59、输出什么?</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const getList = ([x, ...y]) =&gt; [x, y]</span><br><span class="line">const getUser = user =&gt; &#123; name: user.name, age: user.age &#125;</span><br><span class="line"></span><br><span class="line">const list = [1, 2, 3, 4]</span><br><span class="line">const user = &#123; name: &quot;Lydia&quot;, age: 21 &#125;</span><br><span class="line"></span><br><span class="line">console.log(getList(list))</span><br><span class="line">console.log(getUser(user))</span><br></pre></td></tr></table></figure>
@@ -985,7 +989,8 @@
 </li>
 <li><p>D: <code>Error</code> and <code>&#123; name: &quot;Lydia&quot;, age: 21 &#125;</code></p>
 </li>
-<li><h4 id="答案-A"><a href="#答案-A" class="headerlink" title="答案: A"></a>答案: A</h4><p><code>getList</code>函数接收一个数组作为其参数。 在<code>getList</code>函数的括号之间，我们立即解构这个数组。 您可以将其视为：</p>
+<li><p><strong>答案: A</strong></p>
+<p><code>getList</code>函数接收一个数组作为其参数。 在<code>getList</code>函数的括号之间，我们立即解构这个数组。 您可以将其视为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x, ...y] = [1, 2, 3, 4]</span><br></pre></td></tr></table></figure>
 
 <p>使用剩余的参数<code>... y</code>，我们将所有剩余参数放在一个数组中。 在这种情况下，其余的参数是<code>2</code>，<code>3</code>和<code>4</code>。 <code>y</code>的值是一个数组，包含所有其余参数。 在这种情况下，<code>x</code>的值等于<code>1</code>，所以当我们打印<code>[x，y]</code>时，会打印<code>[1，[2,3,4]]</code>。</p>
@@ -1006,7 +1011,8 @@
 </li>
 <li><p>D: <code>Impossible! You shouldn&#39;t see a therapist after so much JavaScript lol</code></p>
 </li>
-<li><h4 id="答案-B-2"><a href="#答案-B-2" class="headerlink" title="答案: B"></a>答案: B</h4><p><code>[]</code>是一个真值。 使用<code>&amp;&amp;</code>运算符，如果左侧值是真值，则返回右侧值。 在这种情况下，左侧值<code>[]</code>是一个真值，所以返回<code>Im</code>。</p>
+<li><p><strong>答案: B</strong></p>
+<p><code>[]</code>是一个真值。 使用<code>&amp;&amp;</code>运算符，如果左侧值是真值，则返回右侧值。 在这种情况下，左侧值<code>[]</code>是一个真值，所以返回<code>Im</code>。</p>
 <p><code>&quot;&quot;</code>是一个假值。 如果左侧值是假的，则不返回任何内容。 <code>n&#39;t</code>不会被退回。</p>
 </li>
 </ul>
@@ -1029,7 +1035,8 @@
 <li>C: <code>setInterval</code> 的回调仍然会被每秒钟调用</li>
 <li>D: 我们从没调用过 <code>config.alert()</code>, config 为 <code>null</code></li>
 </ul>
-<h4 id="答案-C"><a href="#答案-C" class="headerlink" title="答案: C"></a>答案: C</h4><p>一般情况下当我们将对象赋值为 <code>null</code>, 那些对象会被进行 <em>垃圾回收（garbage collected）</em> 因为已经没有对这些对象的引用了。然而，<code>setInterval</code>的参数是一个箭头函数（所以上下文绑定到对象 <code>config</code> 了），回调函数仍然保留着对 <code>config</code>的引用。只要存在引用，对象就不会被垃圾回收。因为没有被垃圾回收，<code>setInterval</code> 的回调每1000ms (1s)会被调用一次。</p>
+<p><strong>答案: C</strong></p>
+<p>一般情况下当我们将对象赋值为 <code>null</code>, 那些对象会被进行 <em>垃圾回收（garbage collected）</em> 因为已经没有对这些对象的引用了。然而，<code>setInterval</code>的参数是一个箭头函数（所以上下文绑定到对象 <code>config</code> 了），回调函数仍然保留着对 <code>config</code>的引用。只要存在引用，对象就不会被垃圾回收。因为没有被垃圾回收，<code>setInterval</code> 的回调每1000ms (1s)会被调用一次。</p>
 
       </div>
       
