@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>前端安全：如何防范 XSS 和 CSRF | WQ&#39;s personal blog</title>
+  <title>canvas 实现彩虹画笔绘画板 | WQ&#39;s personal blog</title>
 
   
     
@@ -672,17 +672,17 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img10.360buyimg.com/ddimg/jfs/t1/182850/8/11488/97319/60d7f259E7ea7362e/08cc0f4d28e9a89d.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img11.360buyimg.com/ddimg/jfs/t1/174522/1/16196/229405/60d1ac08Eec480169/1427ad7dca301294.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      前端安全：如何防范 XSS 和 CSRF
+      canvas 实现彩虹画笔绘画板
     </span>
     <!-- id 将作为查询条件 -->
-    <span id="/2021/06/25/qian-duan-an-quan-ru-he-fang-fan-xss-he-csrf/" class="leancloud-visitors view" data-flag-title="前端安全：如何防范 XSS 和 CSRF">
+    <span id="/2021/06/25/canvas-shi-xian-cai-hong-hua-bi-hui-hua-ban/" class="leancloud-visitors view" data-flag-title="canvas 实现彩虹画笔绘画板">
       <i class="post-meta-item-text">阅读数: </i>
       <i class="leancloud-visitors-count">loading</i>
     </span>
@@ -708,8 +708,8 @@
         <div class="tags">
           <i class="iconfont icontag"></i>
           
-            <a href="/tags/%E5%AE%89%E5%85%A8/" class="">
-              安全
+            <a href="/tags/CSS/" class="">
+              CSS
             </a>
           
         </div>
@@ -718,88 +718,108 @@
         <div class="categories">
           <i class="iconfont iconbookmark1"></i>
           
-            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="">
-              前端
+            <a href="/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" class="">
+              项目总结
             </a>
           
         </div>
         
       </div>
       <div class="post-content">
-        <h2 class="bamboo-h " id="什么是 XSS 攻击？如何防范 XSS 攻击？">什么是 XSS 攻击？如何防范 XSS 攻击？</h2><br/>
-
-
-<p>XSS 攻击指的是跨站脚本攻击，是一种<code>代码注入攻击</code>。攻击者通过在网站注入恶意脚本，使之在用户的浏览器上运行，从而盗取用户的信息如 <code>cookie</code> 等。</p>
-<p>XSS 的本质是因为<code>网站没有对恶意代码进行过滤</code>，与正常的代码混合在一起了，浏览器没有办法分辨哪些脚本是可信的，从而导致了恶意代码的执行。</p>
-<p>而由于直接在用户的终端执行，恶意代码能够直接获取用户的信息，或者利用这些信息冒充用户向网站发起攻击者定义的请求。</p>
-<p class='p primary'>XSS 一般分为存储型、反射型和 DOM 型。</p>
-
-
-<p>存储型指的是恶意代码提交到了网站的数据库中，当用户请求数据的时候，<code>服务器将其拼接为 HTML 后返回给了用户</code>，从而导致了恶意代码的执行。</p>
-<p>反射型指的是攻击者构建了特殊的 URL，当服务器接收到请求后，从 <code>URL 中获取数据，拼接到 HTML 后返回</code>，从而导致了恶意代码的执行。</p>
-<p>DOM 型指的是攻击者构建了特殊的 URL，用户打开网站后，<code>js 脚本从 URL 中获取数据，从而导致了恶意代码的执行</code>。</p>
-<p class='p primary'>XSS 攻击的预防可以从两个方面入手，一个是恶意代码提交的时候，一个是浏览器执行恶意代码的时候。</p>
-
-
-<p>对于第一个方面，如果我们对存入数据库的数据都进行的转义处理，但是一个数据可能在多个地方使用，有的地方可能不需要转义，由于我们没有办法判断数据最后的使用场景，<code>所以直接在输入端进行恶意代码的处理，其实是不太可靠的</code>。</p>
-<p>因此我们可以从<code>浏览器的执行来进行预防</code>，一种是使用纯前端的方式，不用服务器端拼接后返回。另一种是对需要插入到 HTML 中的代码做好充分的转义。对于 DOM 型的攻击，主要是前端脚本的不可靠而造成的，我们对于<code>数据获取渲染和字符串拼接的时候应该对可能出现的恶意代码</code>情况进行判断。</p>
-<p>在使用 <code>.innerHTML</code>、<code>.outerHTML</code>、<code>document.write()</code> 时要特别小心，不要把不可信的数据作为 HTML 插到页面上，而应尽量使用 <code>.textContent</code>、<code>.setAttribute()</code> 等。</p>
-<p>如果用 Vuet 技术栈，并且不使用 <code>v-html</code>功能，就在前端 render 阶段避免 <code>innerHTML</code>、<code>outerHTML</code> 的 XSS 隐患。</p>
-<p>DOM 中的内联事件监听器，如 <code>location</code>、<code>onclick</code>、<code>onerror</code>、<code>onload</code>、<code>onmouseover</code> 等，<code>&lt;a&gt;</code> 标签的 <code>href</code> 属性，JavaScript 的 <code>eval()</code>、<code>setTimeout()</code>、<code>setInterval()</code> 等，都能把字符串作为代码运行。如果不可信的数据拼接到字符串中传递给这些 API，很容易产生安全隐患，请务必避免。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 内联事件监听器中包含恶意代码 --&gt;</span><br><span class="line">&lt;img onclick=&quot;UNTRUSTED&quot; onerror=&quot;UNTRUSTED&quot; src=&quot;data:image/png,&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 链接内包含恶意代码 --&gt;</span><br><span class="line">&lt;a href=&quot;UNTRUSTED&quot;&gt;1&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">// setTimeout()/setInterval() 中调用恶意代码</span><br><span class="line">setTimeout(&quot;UNTRUSTED&quot;)</span><br><span class="line">setInterval(&quot;UNTRUSTED&quot;)</span><br><span class="line"></span><br><span class="line">// location 调用恶意代码</span><br><span class="line">location.href = &#x27;UNTRUSTED&#x27;</span><br><span class="line"></span><br><span class="line">// eval() 中调用恶意代码</span><br><span class="line">eval(&quot;UNTRUSTED&quot;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>输入内容长度控制</strong></p>
-<p>对于不受信任的输入，都应该限定一个合理的长度。虽然无法完全防止 XSS 发生，但可以增加 XSS 攻击的难度。</p>
-<p><strong>HTTP-only Cookie</strong></p>
-<p>禁止 JavaScript 读取某些敏感 Cookie，攻击者完成 XSS 注入后也无法窃取此 Cookie。</p>
-<p><strong>验证码</strong></p>
-<p>防止脚本冒充用户提交危险操作。</p>
-<p><strong>检测</strong></p>
-<p> 只要在网站的各输入框中提交这个字符串，或者把它拼接到 URL 参数上，就可以进行检测了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxx/search?keyword=jaVasCript%3A%2F*-%2F*%60%2F*%60%2F*%27%2F*%22%2F**%2F(%2F*%20*%2FoNcliCk%3Dalert()%20)%2F%2F%250D%250A%250d%250a%2F%2F%3C%2FstYle%2F%3C%2FtitLe%2F%3C%2FteXtarEa%2F%3C%2FscRipt%2F--!%3E%3CsVg%2F%3CsVg%2FoNloAd%3Dalert()%2F%2F%3E%3E</span><br></pre></td></tr></table></figure>
-
-<h2 class="bamboo-h " id="什么是 CSRF 攻击？如何防范 CSRF 攻击？">什么是 CSRF 攻击？如何防范 CSRF 攻击？</h2><br/>
-<p>CSRF 攻击指的是跨站请求伪造攻击，攻击者诱导用户进入一个第三方网站，然后该网站向被攻击网站发送跨站请求。如果用户在被<br>攻击网站中保存了登录状态，那么攻击者就可以利用这个登录状态，绕过后台的用户验证，冒充用户向服务器执行一些操作。<br>CSRF 攻击的本质是利用了 cookie 会在同源请求中携带发送给服务器的特点，以此来实现用户的冒充。</p>
-<p><strong>一个典型的CSRF攻击有着如下的流程：</strong></p>
+        <h2 id="项目效果"><a href="#项目效果" class="headerlink" title="项目效果"></a>项目效果</h2><h2 id="涉及特性"><a href="#涉及特性" class="headerlink" title="涉及特性"></a>涉及特性</h2><p>Canvas：</p>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="http://受害者登录a.com/">受害者登录a.com</a>，并保留了登录凭证（Cookie）。</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://攻击者引诱受害者访问了b.com/">攻击者引诱受害者访问了b.com</a>。</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://b.com/">b.com</a> 向 <a target="_blank" rel="noopener" href="http://a.com/">a.com</a> 发送了一个请求：<a target="_blank" rel="noopener" href="http://a.com/act=xx%E3%80%82%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BC%9A%E9%BB%98%E8%AE%A4%E6%90%BA%E5%B8%A6a.com%E7%9A%84Cookie%E3%80%82">a.com/act=xx。浏览器会…</a></p>
-</li>
-<li><p>a.com接收到请求后，对请求进行验证，并确认是受害者的凭证，误以为是受害者自己发送的请求。</p>
-</li>
-<li><p>a.com以受害者的名义执行了act=xx。</p>
-</li>
-<li><p>攻击完成，攻击者在受害者不知情的情况下，冒充受害者，让a.com执行了自己定义的操作。</p>
-<p><strong>CSRF的特点</strong></p>
-<ul>
-<li>攻击一般发起在第三方网站，而不是被攻击的网站。被攻击的网站无法防止攻击发生。</li>
-<li>攻击利用受害者在被攻击网站的登录凭证，冒充受害者提交操作；而不是直接窃取数据。</li>
-<li>整个过程攻击者并不能获取到受害者的登录凭证，仅仅是“冒用”。</li>
-<li>跨站请求可以用各种方式：图片URL、超链接、CORS、Form提交等等。部分请求方式可以直接嵌入在第三方论坛、文章中，难以进行追踪。</li>
+<li>模板骨架</li>
+<li>基本属性<ul>
+<li><code>getContext()</code></li>
+<li><code>strokeStyle</code></li>
+<li><code>fillStyle</code></li>
+<li><code>fillRect</code></li>
+<li><code>lineCap</code></li>
+<li><code>lineJoin</code></li>
 </ul>
-<p>CSRF通常是跨域的，因为外域通常更容易被攻击者掌控。但是如果本域下有容易被利用的功能，比如可以发图和链接的论坛和评论区，攻击可以直接在本域下进行，而且这种攻击更加危险。</p>
+</li>
+<li>路径绘制<ul>
+<li><code>beginPath()</code></li>
+<li><code>lineTo()</code></li>
+<li><code>moveTo()</code></li>
+</ul>
 </li>
 </ul>
-<p>一般的 CSRF 攻击类型有三种：</p>
-<p class='p primary'>第一种是 GET 类型的 CSRF 攻击</p>
-<p>比如在网站中的一个 img 标签里构建一个请求，当用户打开这个网站的时候就会自动发起提交。</p>
-<p class='p primary'>第二种是 POST 类型的 CSRF 攻击</p>
-<p>比如说构建一个表单，然后隐藏它，当用户进入页面时，自动提交这个表单。</p>
-<p class='p primary'>第三种是链接类型的 CSRF 攻击</p>
-<p>比如说在 a 标签的 href 属性里构建一个请求，然后诱导用户去点击。</p>
-<p>CSRF 可以用下面几种方法来防护：</p>
-<p class='p success'>第一种是同源检测的方法</p>
-<p>服务器根据 http 请求头中 origin 或者 referer 信息来判断请求是否为允许访问的站点，从而对请求进行过滤。当 origin 或者 referer 信息都不存在的时候，直接阻止。这种方式的缺点是有些情况下 referer 可以被伪造。还有就是我们这种方法同时把搜索引擎的链接也给屏蔽了，所以一般网站会允许搜索引擎的页面请求，但是相应的页面请求这种请求方式也可能被攻击者给利用。</p>
-<p class='p success'>第二种方法是使用 CSRF Token 来进行验证</p>
-<p>服务器向用户返回一个随机数 Token ，当网站再次发起请求时，在请求参数中加入服务器端返回的 token ，然后服务器对这个 token 进行验证。这种方法解决了使用 cookie 单一验证方式时，可能会被冒用的问题，但是这种方法存在一个缺点就是，我们需要给网站中的所有请求都添加上这个 token，操作比较繁琐。还有一个问题是一般不会只有一台网站服务器，如果我们的请求经过负载平衡转移到了其他的服务器，但是这个服务器的 session 中没有保留这个 token 的话，就没有办法验证了。这种情况我们可以通过改变 token 的构建方式来解决。</p>
-<p class='p success'>第三种方式使用双重 Cookie 验证的办法</p>
-<p>服务器在用户访问网站页面时，向请求域名注入一个Cookie，内容为随机字符串，然后当用户再次向服务器发送请求的时候，从 cookie 中取出这个字符串，添加到 URL 参数中，然后服务器通过对 cookie 中的数据和参数中的数据进行比较，来进行验证。使用这种方式是利用了攻击者只能利用 cookie，但是不能访问获取 cookie 的特点。并且这种方法比 CSRF Token 的方法更加方便，并且不涉及到分布式访问的问题。这种方法的缺点是如果网站存在 XSS 漏洞的，那么这种方式会失效。同时这种方式不能做到子域名的隔离。</p>
-<p class='p success'>第四种方式是使用在设置 cookie 属性的时候设置 Samesite</p>
-<p> 限制 cookie 不能作为被第三方使用，从而可以避免被攻击者利用。Samesite 一共有两种模式，一种是严格模式，在严格模式下 cookie 在任何情况下都不可能作为第三方 Cookie 使用，在宽松模式下，cookie 可以被请求是 GET 请求，且会发生页面跳转的请求所使用。</p>
+<p>鼠标事件处理：</p>
+<ul>
+<li><code>mousemove</code></li>
+<li><code>mousedown</code></li>
+<li><code>mouseup</code></li>
+<li><code>mouseout</code></li>
+</ul>
+<h2 id="过程指南"><a href="#过程指南" class="headerlink" title="过程指南"></a>过程指南</h2><ol>
+<li>获取 HTML 中的 <code>&lt;canvas&gt;</code> 元素，并设定宽度和高度</li>
+<li><code>.getContext(&#39;2d&#39;)</code> 获取上下文，下面以 ctx 表示</li>
+<li>设定 ctx 基本属性<ul>
+<li>描边和线条颜色</li>
+<li>线条宽度</li>
+<li>线条末端形状</li>
+</ul>
+</li>
+<li>绘画效果<ol>
+<li>设定一个用于标记绘画状态的变量</li>
+<li>鼠标事件监听，不同类型的事件将标记变量设为不同值</li>
+<li>编写发生绘制时触发的函数，设定绘制路径起点、终点</li>
+</ol>
+</li>
+<li>线条彩虹渐变效果（运用 hsl 的 <code>h</code> 值的变化，累加）</li>
+<li>线条粗细渐变效果（设定一个范围，当超出这个范围时，线条粗细进行逆向改变</li>
+</ol>
+<h2 id="Canvas相关知识"><a href="#Canvas相关知识" class="headerlink" title="Canvas相关知识"></a>Canvas相关知识</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API">Canvas_API</a></p>
+<h3 id="HelloWorld简单介绍"><a href="#HelloWorld简单介绍" class="headerlink" title="HelloWorld简单介绍"></a>HelloWorld简单介绍</h3><h4 id="一、-模板骨架"><a href="#一、-模板骨架" class="headerlink" title="一、 模板骨架"></a>一、 模板骨架</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML5 Canvas 实现彩虹画笔绘画板<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="css"></span></span></span><br><span class="line"><span class="css"><span class="xml">    <span class="selector-tag">canvas</span> &#123;</span></span></span><br><span class="line"><span class="css"><span class="xml">      <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span></span></span><br><span class="line"><span class="css"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="css"><span class="xml">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;tutorial&quot;</span> <span class="attr">width</span>=<span class="string">&quot;150&quot;</span> <span class="attr">height</span>=<span class="string">&quot;150&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"><span class="xml">  &lt; script&gt;&lt;/ script&gt;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>&lt; canvas&gt; 元素</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas id=<span class="string">&quot;tutorial&quot;</span> width=<span class="string">&quot;150&quot;</span> height=<span class="string">&quot;150&quot;</span>&gt;&lt;/canvas&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>canvas</code> 看起来和 <code>img</code> 元素很相像，唯一的不同就是它并没有 <code>src</code> 和<code>alt</code> 属性。实际上，<code>canvas</code> 标签只有两个属性——<code>width</code>和<code>height</code>。这些都是可选的，并且同样利用 <code>DOM properties</code> 来设置。当没有设置宽度和高度的时候，<code>canvas</code>会初始化宽度为<code>300</code>像素和高度为<code>150</code>像素。该元素可以使用CSS来定义大小，但在绘制时图像会伸缩以适应它的框架尺寸：如果CSS的尺寸与初始画布的比例不一致，它会出现扭曲。</p>
+<ul>
+<li>渲染上下文（The rendering context）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;tutorial&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&#x27;2d&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>canvas</code>元素创造了一个固定大小的画布，它公开了一个或多个渲染上下文，其可以用来绘制和处理要展示的内容。</p>
+<p><code>canvas</code>起初是空白的。为了展示，首先脚本需要找到渲染上下文，然后在它的上面绘制。<code>canvas</code>元素有一个叫做 <code>getContext()</code> 的方法，这个方法是用来获得渲染上下文和它的绘画功能。<code>getContext()</code>只有一个参数，上下文的格式。对于2D图像而言，基本教程，你可以使用<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D">CanvasRenderingContext2D</a></p>
+<h2 id="项目源码分析"><a href="#项目源码分析" class="headerlink" title="项目源码分析"></a>项目源码分析</h2><h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>实现彩虹画笔绘画板😊<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span></span><br><span class="line"><span class="css"><span class="xml">    * &#123;</span></span></span><br><span class="line"><span class="css"><span class="xml">      <span class="attribute">margin</span>: <span class="number">0</span>;</span></span></span><br><span class="line"><span class="css"><span class="xml">      <span class="attribute">padding</span>: <span class="number">0</span>;</span></span></span><br><span class="line"><span class="css"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="css"><span class="xml"></span></span></span><br><span class="line"><span class="css"><span class="xml">    <span class="selector-tag">canvas</span> &#123;</span></span></span><br><span class="line"><span class="css"><span class="xml">      <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span></span></span><br><span class="line"><span class="css"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="css"><span class="xml">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;draw&quot;</span> <span class="attr">width</span>=<span class="string">&quot;1200&quot;</span> <span class="attr">height</span>=<span class="string">&quot;800&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  &lt; script type=&quot;text/javascript&quot;&gt;</span></span><br><span class="line"><span class="xml">    // 获取canvas节点</span></span><br><span class="line"><span class="xml">    let canvas = document.querySelector(&#x27;#draw&#x27;);</span></span><br><span class="line"><span class="xml">    let ctx = canvas.getContext(&quot;2d&quot;);</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    let colorDeg = 0;</span></span><br><span class="line"><span class="xml">    let lineWidth = 50;</span></span><br><span class="line"><span class="xml">    let direction = true;</span></span><br><span class="line"><span class="xml">    // hsl 色相(0 - 360) 饱和度 明度</span></span><br><span class="line"><span class="xml">    ctx.strokeStyle = `hsl($&#123;colorDeg&#125;, 90%, 50%)`;</span></span><br><span class="line"><span class="xml">    ctx.lineWidth = `$&#123;lineWidth&#125;`;</span></span><br><span class="line"><span class="xml">    ctx.lineCap = &#x27;round&#x27;;</span></span><br><span class="line"><span class="xml">    ctx.lineJoin = &#x27;round&#x27;;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    let drawing = false;</span></span><br><span class="line"><span class="xml">    let [x, y] = [0, 0]</span></span><br><span class="line"><span class="xml">    function draw(e) &#123;</span></span><br><span class="line"><span class="xml">      if (!drawing) return;</span></span><br><span class="line"><span class="xml">      ctx.beginPath();</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">      // 控制笔触大小</span></span><br><span class="line"><span class="xml">      colorDeg = colorDeg &lt; 360 ? colorDeg + 1 : 0;</span></span><br><span class="line"><span class="xml">      if (lineWidth &gt; 50 || lineWidth &lt; 10) &#123;</span></span><br><span class="line"><span class="xml">        direction = !direction</span></span><br><span class="line"><span class="xml">      &#125;</span></span><br><span class="line"><span class="xml">      direction ? lineWidth++ : lineWidth--;</span></span><br><span class="line"><span class="xml">      ctx.lineWidth = `$&#123;lineWidth&#125;`;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">      // 彩虹效</span></span><br><span class="line"><span class="xml">      ctx.strokeStyle = `hsl($&#123;colorDeg&#125;, 90%, 50%)`;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">      // 控制绘制路径</span></span><br><span class="line"><span class="xml">      ctx.moveTo(x, y);</span></span><br><span class="line"><span class="xml">      console.log(x, y);</span></span><br><span class="line"><span class="xml">      ctx.lineTo(e.offsetX, e.offsetY);</span></span><br><span class="line"><span class="xml">      [x, y] = [e.offsetX, e.offsetY];</span></span><br><span class="line"><span class="xml">      ctx.stroke();</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"><span class="xml">    canvas.addEventListener(&quot;mousedown&quot;, (e) =&gt; &#123;</span></span><br><span class="line"><span class="xml">      drawing = true;</span></span><br><span class="line"><span class="xml">      // 括号，方括号，正则开头的斜杠，加号，减号，反引号 作为行首的时候必须要加分号</span></span><br><span class="line"><span class="xml">      [x, y] = [e.offsetX, e.offsetY]</span></span><br><span class="line"><span class="xml">    &#125;);</span></span><br><span class="line"><span class="xml">    canvas.addEventListener(&#x27;mousemove&#x27;, draw)</span></span><br><span class="line"><span class="xml">    canvas.addEventListener(&#x27;mouseup&#x27;, () =&gt; &#123;</span></span><br><span class="line"><span class="xml">      drawing = false</span></span><br><span class="line"><span class="xml">    &#125;);</span></span><br><span class="line"><span class="xml">    canvas.addEventListener(&#x27;mouseleave&#x27;, () =&gt; &#123;</span></span><br><span class="line"><span class="xml">      drawing = false</span></span><br><span class="line"><span class="xml">    &#125;)</span></span><br><span class="line"><span class="xml">  &lt;/ script&gt;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API">Canvas</a></p>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><ul>
+<li><code>lineCap</code>：笔触的形状，有 round | butt | square 圆、平、方三种。</li>
+<li><code>lineJoin</code>：线条相交的样式，有 round | bevel | miter 圆交、斜交、斜接三种。</li>
+<li><code>lineWidth</code>：线条的宽度</li>
+<li><code>strokeStyle</code>：线条描边的颜色</li>
+<li><code>fillStyle</code>：填充的颜色</li>
+</ul>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><code>beginPath()</code>：新建一条路径</li>
+<li><code>stroke()</code>：绘制轮廓</li>
+<li><code>moveTo()</code>：（此次）绘制操作的起点</li>
+<li><code>lineTo()</code>：路径的终点</li>
+</ul>
+<h3 id="彩虹渐变颜色——HSL"><a href="#彩虹渐变颜色——HSL" class="headerlink" title="彩虹渐变颜色——HSL"></a>彩虹渐变颜色——HSL</h3><p>在这个挑战中，涉及到改变线条的颜色，如何实现彩虹的渐变效果？我们需要利用 HSL 色彩模式，首先可以去这个网站 <a target="_blank" rel="noopener" href="http://mothereffinghsl.com/">http://mothereffinghsl.com</a> 感受一下 HSL 不同色彩值对应的效果。</p>
+<ul>
+<li>H(hue) 代表色调，取值为 0~360，专业术语叫色相</li>
+<li>S 是饱和度，可以理解为掺杂进去的灰度值，取值为 0~1</li>
+<li>L 则是亮度，取值也是 0~1，或者百分比。</li>
+</ul>
+<p>这之中 H 值从 0 到 360 的变化代表了色相的角度的值域变化，利用这一点就可以实现绘制时线条颜色的渐变了，只需要在它的值超过 360 时恢复到 0 重新累加即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colorDeg = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">ctx.strokeStyle = <span class="string">`hsl(<span class="subst">$&#123; colorDeg &#125;</span>, 90%, 50%)`</span>;	</span><br><span class="line">colorDeg = colorDeg &lt; <span class="number">360</span> ? colorDeg + <span class="number">1</span> : <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，如果想实现黑白水墨的颜色，可以将颜色设置为黑色，通过透明度的改变来实现深浅不一的颜色。</p>
+<h3 id="控制笔触大小"><a href="#控制笔触大小" class="headerlink" title="控制笔触大小"></a>控制笔触大小</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//		控制笔触大小</span></span><br><span class="line">     <span class="keyword">if</span> (lineWidth &gt; <span class="number">50</span> || lineWidth &lt; <span class="number">10</span>) &#123;</span><br><span class="line">       direction = !direction</span><br><span class="line">     &#125;</span><br><span class="line">     direction ? lineWidth++ : lineWidth--;</span><br><span class="line">     ctx.lineWidth = <span class="string">`<span class="subst">$&#123;lineWidth&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，根据线条的宽度的变化来控制<code>direction</code>的值，根据<code>direction</code>的值来控制线宽是增加还是减少。</p>
+<h3 id="控制线条路径"><a href="#控制线条路径" class="headerlink" title="控制线条路径"></a>控制线条路径</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// 控制绘制路径</span></span><br><span class="line">ctx.beginPath();</span><br><span class="line">   ctx.moveTo(x, y);</span><br><span class="line">   <span class="built_in">console</span>.log(x, y);</span><br><span class="line">   ctx.lineTo(e.offsetX, e.offsetY);</span><br><span class="line">   [x, y] = [e.offsetX, e.offsetY];</span><br><span class="line">   ctx.stroke();</span><br></pre></td></tr></table></figure>
+
+<h3 id="事件监听代码逻辑分析"><a href="#事件监听代码逻辑分析" class="headerlink" title="事件监听代码逻辑分析"></a>事件监听代码逻辑分析</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">canvas.addEventListener(<span class="string">&#x27;mousedown&#x27;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line"><span class="comment">// 开始绘图</span></span><br><span class="line"> drawing = <span class="literal">true</span>;</span><br><span class="line"><span class="comment">// 绘图起始坐标初始化</span></span><br><span class="line"> [x, y] = [e.offsetX, e.offsetY]</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 鼠标移动时，调用draw方法</span></span><br><span class="line">canvas.addEventListener(<span class="string">&#x27;mousemove&#x27;</span>, draw);</span><br><span class="line"><span class="comment">// 鼠标抬起时，将drawing置为false</span></span><br><span class="line">canvas.addEventListener(<span class="string">&#x27;mouseup&#x27;</span>, <span class="function">() =&gt;</span> drawing = <span class="literal">false</span>);</span><br><span class="line"><span class="comment">// 当鼠标不在可绘图区域范围内时，将drawing置为false</span></span><br><span class="line">canvas.addEventListener(<span class="string">&#x27;mouseout&#x27;</span>, <span class="function">() =&gt;</span> drawing = <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
       </div>
       
     </article>
@@ -812,21 +832,20 @@
 
   
   <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/190388/32/9664/211153/60d1ac09E307d0589/d4ac576a8db2384c.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="https://img10.360buyimg.com/ddimg/jfs/t1/182850/8/11488/97319/60d7f259E7ea7362e/08cc0f4d28e9a89d.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/27/zai-vue-zhong-shi-yong-svg/" class="post-nav-link">
+    <a href="/2021/06/25/qian-duan-an-quan-ru-he-fang-fan-xss-he-csrf/" class="post-nav-link">
       <div class="title">
         <i class="fa fa-angle-left"></i> 上一篇:
-        <div>在 vue 中使用 svg 的方法</div>
+        <div>前端安全：如何防范 XSS 和 CSRF</div>
       </div>
       
       <!-- <div class="content">
-        使用方式
-全局引入
+        什么是 XSS 攻击？如何防范 XSS 攻击？
 
-1npm install svg-sprite-loader -S
-配置vue.config.js
+
+XSS 攻击指的是跨站脚本攻击，是一种代码注入攻击。攻击者通过在网站
       </div> -->
     </a>
   </div>
@@ -838,19 +857,17 @@
     <div class="post-nav-img lazyload" data-original="https://img11.360buyimg.com/ddimg/jfs/t1/174522/1/16196/229405/60d1ac08Eec480169/1427ad7dca301294.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/25/canvas-shi-xian-cai-hong-hua-bi-hui-hua-ban/" class="post-nav-link">
+    <a href="/2021/06/24/es6-de-reflect/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>canvas 实现彩虹画笔绘画板</div>
+        <div>ES6 的 Reflect</div>
       </div>
       <!-- <div class="content">
-        项目效果涉及特性Canvas：
+        Reflect概述
 
-模板骨架
-基本属性
-getContext()
-strokeStyle
-fillStyl
+
+什么是Reflect对象？
+我们可以这样理解，有一个名为Reflect的全局对象，上面挂载了对象
       </div> -->
     </a>
   </div>
