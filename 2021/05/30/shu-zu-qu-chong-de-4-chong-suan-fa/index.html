@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>git常见命令总结 | WQ&#39;s personal blog</title>
+  <title>数组去重的4种算法 | WQ&#39;s personal blog</title>
 
   
     
@@ -700,17 +700,17 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img10.360buyimg.com/ddimg/jfs/t1/179394/4/11407/109134/60d7f259E53f2700b/06f7c6db9d8a1bcb.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img10.360buyimg.com/ddimg/jfs/t1/184279/30/9845/645077/60d1ac10Ec7b00649/0cb390e3d905360c.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      git常见命令总结
+      数组去重的4种算法
     </span>
     <!-- id 将作为查询条件 -->
-    <span id="/2021/06/08/git-chang-jian-ming-ling-zong-jie/" class="leancloud-visitors view" data-flag-title="git常见命令总结">
+    <span id="/2021/05/30/shu-zu-qu-chong-de-4-chong-suan-fa/" class="leancloud-visitors view" data-flag-title="数组去重的4种算法">
       <i class="post-meta-item-text">阅读数: </i>
       <i class="leancloud-visitors-count">loading</i>
     </span>
@@ -728,7 +728,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-06-08</span>
+        <span class="post-time">2021-05-30</span>
       </div>
       
       <div class="post-tags-categories">
@@ -736,8 +736,8 @@
         <div class="tags">
           <i class="iconfont icontag"></i>
           
-            <a href="/tags/git/" class="">
-              git
+            <a href="/tags/javascript/" class="">
+              javascript
             </a>
           
         </div>
@@ -746,20 +746,20 @@
         <div class="categories">
           <i class="iconfont iconbookmark1"></i>
           
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="">
-              学习笔记
+            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="">
+              前端
             </a>
           
         </div>
         
       </div>
       <div class="post-content">
-        <h2 id="常见命令"><a href="#常见命令" class="headerlink" title="常见命令"></a>常见命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">git clone &lt;url&gt;</span><br><span class="line">git init </span><br><span class="line">git status 查看状态</span><br><span class="line">git diff 查看变更内容</span><br><span class="line">git pull </span><br><span class="line">git push 3 // master 分支</span><br><span class="line">git push origin &lt;branch&gt; // 其他分支</span><br><span class="line">git add . 1</span><br><span class="line">git add &lt;file&gt;</span><br><span class="line">git commit -m &#x27;xxx&#x27; 2</span><br><span class="line">git commit -m &#x27;xxx -a // 新增所有</span><br><span class="line">git branch &lt;new branch&gt;</span><br><span class="line">git branch &lt;branch&gt; -d // 删除分支</span><br><span class="line">git checkout 切换分支</span><br><span class="line">git merge &lt;branch&gt;</span><br><span class="line">git mv &lt;file&gt; &lt;newfilename&gt; 修改文件名字</span><br><span class="line">git rm &lt;file&gt; // 删除文件</span><br><span class="line">git log // 查看历史</span><br><span class="line">git tag &lt;tagname&gt;</span><br><span class="line">git checkout a.js // 撤销</span><br><span class="line">git revert &lt;commit&gt; // 回滚 撤销指定的提交 有历史记录</span><br><span class="line">git reset --hard &lt;commit&gt; // 撤销指定的提交 无历史记录</span><br><span class="line">=&gt; git push &#x27;xx&#x27; --force</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(1). 基本使用</span><br><span class="line">git pull 拉取并merge代码</span><br><span class="line">git add .; //添加 暂存区</span><br><span class="line">git commit -m &#x27;zhu shi&#x27;// 提交到本地仓库并加上注释</span><br><span class="line">git push origin master //往远程仓库推送代码</span><br><span class="line">(2). 多人协作方式</span><br><span class="line">git branch -a 查看所有的分支</span><br><span class="line">git checkout -b aaa 创建新的分支aaa</span><br><span class="line">git checkout aaa 切换到aaa分支</span><br><span class="line">git push origin aaa 推送aaa 分支到远程仓库aaa分支</span><br><span class="line">git push origin master:aaa 推送master 到远程的aaa 分支</span><br><span class="line">git branch -d 删除一个分支</span><br></pre></td></tr></table></figure>
-
-<p><strong>vscode 安装 git history diff</strong></p>
-
+        <p>存在一个数组<code>[1, 3, 5, 7, 9, 1, 5, 9]</code></p>
+<p>通过一定的算法，得到数组<code>[1, 3, 5, 7, 9]</code></p>
+<h2 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrUnique</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> k <span class="keyword">of</span> arr) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!result.includes(k)) &#123;</span><br><span class="line">      result.push(k)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log( arrUnique(arr) )</span><br></pre></td></tr></table></figure>
+<h2 id="利用对象键值对"><a href="#利用对象键值对" class="headerlink" title="利用对象键值对"></a>利用对象键值对</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrUnique</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = []</span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> val = arr[i]</span><br><span class="line">    <span class="keyword">if</span> (!obj[val]) &#123;</span><br><span class="line">      obj[val] = <span class="literal">true</span></span><br><span class="line">      result.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arrUnique(arr))</span><br></pre></td></tr></table></figure>
+<h2 id="先排序，再去重"><a href="#先排序，再去重" class="headerlink" title="先排序，再去重"></a>先排序，再去重</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrUnique</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = [arr[<span class="number">0</span>]]</span><br><span class="line">  arr.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] !== result[result.length - <span class="number">1</span>]) &#123;</span><br><span class="line">      result.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arrUnique(arr))</span><br></pre></td></tr></table></figure>
+<h2 id="借助ES6的Set数据结构"><a href="#借助ES6的Set数据结构" class="headerlink" title="借助ES6的Set数据结构"></a>借助ES6的Set数据结构</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrUnique</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [...new <span class="built_in">Set</span>(arr)]</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arrUnique(arr))</span><br></pre></td></tr></table></figure>
       </div>
       
     </article>
@@ -772,18 +772,17 @@
 
   
   <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img10.360buyimg.com/ddimg/jfs/t1/182850/8/11488/97319/60d7f259E7ea7362e/08cc0f4d28e9a89d.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/176433/38/16331/317801/60d1ac0eEca01bc76/25118f184af79e31.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/11/yong-js-dai-ma-shi-xian-guan-cha-zhe-mo-shi/" class="post-nav-link">
+    <a href="/2021/05/30/xue-xi-vue-yuan-li-xiang-ying-shi/" class="post-nav-link">
       <div class="title">
         <i class="fa fa-angle-left"></i> 上一篇:
-        <div>用js代码实现观察者模式</div>
+        <div>学习 Vue 原理：响应式</div>
       </div>
       
       <!-- <div class="content">
-        用js代码实现观察者模式
-观察者模式定义了对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都
+        近来在学习Vue，对于它的核心概念之一——响应式一直有所困惑，偶然间发现一门课程vue advanced worksho
       </div> -->
     </a>
   </div>
@@ -792,20 +791,19 @@
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img14.360buyimg.com/ddimg/jfs/t1/191494/10/10835/80361/60d9f8baEf79d0f7c/7f6437e6c805fe2e.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="https://img14.360buyimg.com/ddimg/jfs/t1/172014/1/17283/144094/60d9f8baE77026362/ce8fac538ef0c420.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/07/vue-de-sheng-ming-zhou-qi/" class="post-nav-link">
+    <a href="/2021/05/29/san-chong-lei-xing-jian-cha-fang-fa-typeof-instanceof-he-object.prototype.tostring/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>Vue 的生命周期</div>
+        <div>三种类型检查方法：typeof、instanceof 和 Object.prototype.toString</div>
       </div>
       <!-- <div class="content">
-        beforeCreate(创建前)
-在数据观测和初始化事件还未开始
+        typeof 运算符,
 
-created(创建后)
-完成数据观测，属性和方法
+
+typeof 运算符返回参数的类型。当我们想要分别处理不同类型值的时候，或者想快速进行数据类
       </div> -->
     </a>
   </div>

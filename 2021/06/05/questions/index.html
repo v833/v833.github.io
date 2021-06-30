@@ -219,6 +219,20 @@
                   </a>
                 </li>
                 
+                <li>
+                  <a target="_blank" rel="noopener" href="https://www.zhihu.com/">
+                    
+                    <span>知乎</span>
+                  </a>
+                </li>
+                
+                <li>
+                  <a target="_blank" rel="noopener" href="https://juejin.cn/">
+                    
+                    <span>掘金</span>
+                  </a>
+                </li>
+                
               </ul>
             
           </li>
@@ -377,6 +391,20 @@
                   <a target="_blank" rel="noopener" href="https://stackoverflow.com/">
                     
                     <span>stackoverflow</span>
+                  </a>
+                </li>
+                
+                <li>
+                  <a target="_blank" rel="noopener" href="https://www.zhihu.com/">
+                    
+                    <span>知乎</span>
+                  </a>
+                </li>
+                
+                <li>
+                  <a target="_blank" rel="noopener" href="https://juejin.cn/">
+                    
+                    <span>掘金</span>
                   </a>
                 </li>
                 
@@ -1037,6 +1065,13 @@
 </ul>
 <p><strong>答案: C</strong></p>
 <p>一般情况下当我们将对象赋值为 <code>null</code>, 那些对象会被进行 <em>垃圾回收（garbage collected）</em> 因为已经没有对这些对象的引用了。然而，<code>setInterval</code>的参数是一个箭头函数（所以上下文绑定到对象 <code>config</code> 了），回调函数仍然保留着对 <code>config</code>的引用。只要存在引用，对象就不会被垃圾回收。因为没有被垃圾回收，<code>setInterval</code> 的回调每1000ms (1s)会被调用一次。</p>
+<h5 id="64、Event-Bus不方便之处"><a href="#64、Event-Bus不方便之处" class="headerlink" title="64、Event Bus不方便之处"></a>64、Event Bus不方便之处</h5><p>vue2里面可以用new Vue() 创建对象，调用对象的$enit和$on，在vue3里$on被废弃，只能自己实现或者用第三方的事件管理器(cookie, localStorage, sessionStorage, vuex)</p>
+<p>在想拿到数据之前需要绑定事件监听，在发送数据时需要触发，很麻烦</p>
+<p>对组件的生命周期也会对事件传递产生影响。比如一个组件在触发事件时，另外一个本需要该数据的组件可能尚未初始化未设置监听</p>
+<h5 id="65、vuex和localStorage区别"><a href="#65、vuex和localStorage区别" class="headerlink" title="65、vuex和localStorage区别"></a>65、vuex和localStorage区别</h5><p>localStrage 会让数据永久保存在本地，Vuex只是让当前页面不同组件间能共享数据</p>
+<p>页面刷新时，vuex数据初始化(菜单导航不能把控制变量放在vuex)</p>
+<p>localStorage没有响应式，一个组件对localStorage数据的修改不能让另外一个使用该数据的组件视图重新渲染</p>
+<p>vuex能规范不同组件对全局状态的修改</p>
 
       </div>
       
