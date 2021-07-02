@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Promise全面总结 | WQ&#39;s personal blog</title>
+  <title>JS实现时钟效果 | WQ&#39;s personal blog</title>
 
   
     
@@ -700,17 +700,17 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/176433/38/16331/317801/60d1ac0eEca01bc76/25118f184af79e31.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/174403/30/17441/62273/60d9f90fEfe3d7b73/f223d92b6bfaabb9.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      Promise全面总结
+      JS实现时钟效果
     </span>
     <!-- id 将作为查询条件 -->
-    <span id="/2021/06/30/promise-quan-mian-zong-jie/" class="leancloud-visitors view" data-flag-title="Promise全面总结">
+    <span id="/2021/07/02/js-shi-xian-shi-zhong-xiao-guo/" class="leancloud-visitors view" data-flag-title="JS实现时钟效果">
       <i class="post-meta-item-text">阅读数: </i>
       <i class="leancloud-visitors-count">loading</i>
     </span>
@@ -728,7 +728,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-06-30</span>
+        <span class="post-time">2021-07-02</span>
       </div>
       
       <div class="post-tags-categories">
@@ -746,121 +746,73 @@
         <div class="categories">
           <i class="iconfont iconbookmark1"></i>
           
-            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="">
-              前端
+            <a href="/categories/%E5%8E%9F%E7%94%9Fjs%E9%A1%B9%E7%9B%AE/" class="">
+              原生js项目
             </a>
           
         </div>
         
       </div>
       <div class="post-content">
-        <blockquote>
-<p>Promise是在ES6中新增的一种用于解决异步编程的方案，接下来会从下面几个方面详细介绍Promise</p>
-<p>Prmoise诞生的原因</p>
-<p>Promise的生命周期</p>
-<p>Promse的基本用法</p>
-</blockquote>
-<h2 class="bamboo-h " id="Prmoise诞生的原因">Prmoise诞生的原因</h2><br/>
-<p>Promise诞生以前，在处理一个异步请求时，我们通常是在回调函数中做处理，例如处理一个Ajax请求的代码如下所示。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&#x27;testUrl&#x27;</span>,</span><br><span class="line">  <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 回调函数</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)    </span><br></pre></td></tr></table></figure>
+        <p><a target="_blank" rel="noopener" href="https://v833.github.io/javscript-projects/04-JS%20and%20CSS%20Clock/">点击查看</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>实现模拟时钟的效果，大致思路和解决方案如下：</p>
+<ul>
+<li>分别获取到当前时间的时、分、秒。</li>
+<li>通过时分秒对一圈360度，进行映射，确定每一个指针所需旋转的角度。</li>
+<li>通过CSS的<code>transform：rotate(deg)</code>，来实时的调整指针在键盘中的位置。</li>
+</ul>
+<h2 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock-face&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand hour-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand min-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand second-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>假如在一个行为中，需要执行多个异步请求，每一个请求又需要依赖上一个请求的结果，按照回调函数的处理方法，代码如下所示。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&#x27;testUrl&#x27;</span>,</span><br><span class="line">  <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 第二个请求</span></span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">&#x27;url2&#x27;</span>,</span><br><span class="line">      <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 第三个请求</span></span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">          <span class="attr">url</span>: <span class="string">&#x27;url2&#x27;</span>,</span><br><span class="line">          <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 第四个请求</span></span><br><span class="line">            $.ajax(&#123;</span><br><span class="line">              <span class="attr">url</span>: <span class="string">&#x27;url2&#x27;</span>,</span><br><span class="line">              <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="comment">// 回调</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="CSS样式"><a href="#CSS样式" class="headerlink" title="CSS样式"></a>CSS样式</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#018DED</span> <span class="built_in">url</span>(<span class="string">http://unsplash.it/1500/1000?image=881&amp;blur=50</span>);</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">&#x27;helvetica neue&#x27;</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">10px</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">2rem</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.clock</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">30rem</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30rem</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">20px</span> solid white;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">50px</span> auto;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">2rem</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">4px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.1</span>),</span><br><span class="line">    inset <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">3px</span> <span class="number">#EFEFEF</span>,</span><br><span class="line">    inset <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> black,</span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.2</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.clock-face</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">3px</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.hand</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">background</span>: black;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">90deg</span>);</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">0.05s</span>;</span><br><span class="line">    <span class="attribute">transition-timing-function</span>: <span class="built_in">cubic-bezier</span>(<span class="number">0.1</span>, <span class="number">2.7</span>, <span class="number">0.58</span>, <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
 
+<p><strong>涉及到的特性：</strong></p>
+<ul>
+<li><code>transform-oragin</code></li>
+</ul>
+<p>调整指针的初始位置以及旋转的轴点:<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin">transform-oragin</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform</span>-oragin: <span class="number">100%</span>; //初始化使三个指针全部指向<span class="number">12</span>时</span><br></pre></td></tr></table></figure>
 
-<p>事实上，一个行为所产生的异步请求可能比这个还要多，这就会导致代码的嵌套太深，引发“回调地狱”。</p>
-<p>“回调地狱”存在以下几个问题。</p>
-<p>· 代码臃肿，可读性差。</p>
-<p>· 代码耦合度高，可维护性差，难以复用。</p>
-<p>· 回调函数都是匿名函数，不方便调试。</p>
-<p>那么有什么方法能够避免在处理异步请求时，产生“回调地狱”的问题呢？</p>
-<p>Promise就应运而生了，它为异步编程提供了一种更合理、更强大的解决方案。</p>
-<h2 class="bamboo-h " id="Promise的生命周期">Promise的生命周期</h2><br/>
-<p>每一个Promise对象都有3种状态，即pending（进行中）、fulfilled（已成功）和rejected（已失败）。</p>
-<p>Promise在创建时处于pending状态，状态的改变只有两种可能。</p>
-<p>一种是在Promise执行成功时，由pending状态改变为fulfilled状态；</p>
-<p>另一种是在Promise执行失败时，由pending状态改变为rejected状态。</p>
-<blockquote>
-<p><strong>状态一旦改变，就不能再改变</strong>，状态改变一次后得到的就是Promise的终态。</p>
-</blockquote>
-<h2 class="bamboo-h " id="Promise 的基本用法">Promise 的基本用法</h2><br/>
-<p>Promise对象本身是一个构造函数，可以通过new操作符生成Promise的实例。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 异步请求处理</span></span><br><span class="line">  <span class="keyword">if</span> (...) &#123;</span><br><span class="line">    resolve()</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>transform: rotate()</code></li>
+</ul>
+<p>设置旋转角度</p>
+<ul>
+<li><code>transition</code></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transition</span>: all //<span class="number">0.05s</span>;设置动画时间为<span class="number">0.05</span>秒</span><br></pre></td></tr></table></figure>
 
-<p>Promise执行的过程是：在接收的函数中处理异步请求，然后判断异步请求的结果</p>
-<p>如果结果为“true”，则表示异步请求执行成功，调用resolve()函数，resolve()函数一旦执行，Promise的状态就从pending变为fulfilled；</p>
-<p>如果结果为“false”，则表示异步请求执行失败，调用reject()函数，reject()函数一旦执行，Promise的状态就从pending变为rejected。</p>
-<p>resolve()函数和reject()函数可以传递参数，作为后续.then()函数或者.catch()函数执行时的数据源。<br>需要注意的是Promise在创建后会立即调用，然后等待执行resolve()函数或者reject()函数来确定Promise的最终状态。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Promise&#x27;</span>);</span><br><span class="line">  resolve()</span><br><span class="line">&#125;)</span><br><span class="line">promise.then(<span class="function">() =&gt;</span> <span class="built_in">console</span>.log(<span class="string">&#x27;resolved&#x27;</span>))</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;Hello&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>transition-timing-function: cubic-bezier(x, x, x, x)</code></li>
+</ul>
+<p>设置 <code>transition-time-function</code> 的值，以实现秒针“滴答滴答”的效果。此外注意 <code>transform</code> 中的 <code>rotate</code> （旋转）属性由角度来控制，可以试着在页面上修改这个参数来查看效果。</p>
+<h2 id="JS代码"><a href="#JS代码" class="headerlink" title="JS代码"></a>JS代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> secondHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.second-hand&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> minsHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.min-hand&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> hourHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.hour-hand&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setDate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> seconds = now.getSeconds();</span><br><span class="line">    <span class="keyword">const</span> secondsDegrees = ((seconds / <span class="number">60</span>) * <span class="number">360</span>) + <span class="number">90</span>;</span><br><span class="line">    secondHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;secondsDegrees&#125;</span>deg)`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> mins = now.getMinutes();</span><br><span class="line">    <span class="keyword">const</span> minsDegrees = ((mins / <span class="number">60</span>) * <span class="number">360</span>) + ((seconds / <span class="number">60</span>) * <span class="number">6</span>) + <span class="number">90</span>;</span><br><span class="line">    minsHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;minsDegrees&#125;</span>deg)`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> hour = now.getHours();</span><br><span class="line">    <span class="keyword">const</span> hourDegrees = ((hour / <span class="number">12</span>) * <span class="number">360</span>) + ((mins / <span class="number">60</span>) * <span class="number">30</span>) + <span class="number">90</span>;</span><br><span class="line">    hourHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;hourDegrees&#125;</span>deg)`</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">setInterval</span>(setDate, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  setDate();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p>在上面的代码中，会先后输出“Promise” “Hello” “resolved”。</p>
-<p>· 首先是Promise的创建，会立即执行，输出“Promise”。</p>
-<p>· 然后是执行resolve()函数，这样的话就会触发then()函数指定回调函数的执行，但是它需要等当前线程中的所有同步代码执行完毕，因此会先执行最后一行同步代码，输出“Hello”。</p>
-<p>· 最后是当所有同步代码执行完毕后，执行then()函数，输出“resolved”。<br>在拥有Promise异步解决方案后，实现原生get类型的Ajax请求的代码如下所示。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 封装原生get类型Ajax请求</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxGetPromise</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> handler = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.readyState !== <span class="number">4</span>) <span class="keyword">return</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">        resolve(<span class="built_in">this</span>.response)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="built_in">this</span>.statusText))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> client = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">    client.open(<span class="string">&#x27;GET&#x27;</span>, url)</span><br><span class="line">    client.onreadystatechange = handler</span><br><span class="line">    client.responseText = <span class="string">&#x27;json&#x27;</span></span><br><span class="line">    client.send()</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> promise</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取秒针、分钟、小时节点</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> secondHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.second-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> minsHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.min-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> hourHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.hour-hand&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
-<p>当一个Promise的实例创建好后，我们该如何进行成功或者失败的异步处理呢？</p>
-<p><strong>这就需要调用then()函数和catch()函数了。</strong></p>
-<h3 class="bamboo-h warning" id="then()函数">then()函数</h3><br/>
-<p>Promise在原型属性上添加了一个then()函数，表示在Promise实例状态改变时执行的回调函数。</p>
-<p>它接收两个函数作为参数</p>
-<p>第一个参数表示的是Promise在执行成功后（即调用了resolve()函数），所需要执行的回调函数，函数参数就是通过resolve()函数传递的参数。</p>
-<p>第二个参数是可选的，表示的是Promise在执行失败后（即调用了reject()函数或抛出了异常），执行的回调函数。</p>
-<p>以上面封装Ajax请求的函数为例，我们看看then()函数的用法。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ajaxGetPromise(<span class="string">&#x27;/testUrl&#x27;</span>).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(response);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>ajaxGetPromise()函数在执行后会返回一个Promise实例，在执行then()函数时，回调函数中接收一个response参数，值为resolve()函数中传递的this.response，表示Ajax请求的响应。</p>
-<p>then()函数返回的是一个新Promise实例，因此可以使用链式调用then()函数，在上一轮then()函数内部return的值会作为下一轮then()函数接收的参数值。</p>
-<p>基于then()函数的链式调用写法，可以解决本小节开头提到的“回调地狱”问题。从代码风格上看，使用Promise的写法非常优雅。</p>
-<p>需要注意的是，在then()函数中不能返回Promise实例本身，否则会出现Promise循环引用的问题，抛出异常。</p>
-<h3 class="bamboo-h warning" id="catch()函数">catch()函数</h3><br/>
-<p>catch()函数与then()函数是成对存在的，then()函数是Promise执行成功之后的回调，而catch()函数是Promise执行失败之后的回调，它所接收的参数就是执行reject()函数时传递的参数。</p>
-<p>我们可以通过在Promise中手动抛出一个异常，来测试catch()函数的用法。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    reject(err)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err)) <span class="comment">// Error: test</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取当前时间秒、分、小时</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">const</span> seconds = now.getSeconds();</span><br><span class="line"><span class="keyword">const</span> mins = now.getMinutes();</span><br><span class="line"><span class="keyword">const</span> hour = now.getHours();</span><br></pre></td></tr></table></figure>
 
-<p>因为promise实例在创建后会立即执行，所以进入try语句后会抛出一个异常，从而被catch()函数捕获到，在catch()函数中调用reject()函数，并传递Error信息。一旦reject()函数被执行，就会触发promise实例的catch()函数，从而能在catch()函数的回调函数中输出err的信息。</p>
-<p>事实上只要在Promise执行过程中出现了异常，就会被自动抛出，并触发reject(err)，而不用我们去使用try…catch，在catch()函数中手动调用reject()函数。<br>因此前面的代码可以改写成如下所示的代码。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err)) <span class="comment">// Error: test</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>计算秒、分、小时角度</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> secondsDegrees = ((seconds / <span class="number">60</span>) * <span class="number">360</span>) + <span class="number">90</span>;</span><br><span class="line"><span class="keyword">const</span> minsDegrees = ((mins / <span class="number">60</span>) * <span class="number">360</span>) + ((seconds / <span class="number">60</span>) * <span class="number">6</span>) + <span class="number">90</span>;</span><br><span class="line"><span class="keyword">const</span> hourDegrees = ((hour / <span class="number">12</span>) * <span class="number">360</span>) + ((mins / <span class="number">60</span>) * <span class="number">30</span>) + <span class="number">90</span>;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>需要注意的是，如果一个Promise的状态已经变成fulfilled成功状态，再去抛出异常，是无法触发catch()函数的。这是因为Promise的状态一旦改变，就会永久保持该状态，不会再次改变。</p>
-</blockquote>
-<p><strong>在ES6中不仅为Promise的原型对象添加了then()函数和catch()函数等异步处理函数，还为Promise对象自身添加了一系列的静态函数，用来处理多Promise实例同时运行的情况。接下来我们选择几个重点的静态函数来讲解。</strong></p>
-<h3 class="bamboo-h warning" id="Promise.all()函数">Promise.all()函数</h3><br/>
-<p>then()函数和catch()函数是Promise原型链中的函数，因此每个Promise的实例可以进行共享，而all()函数是Promise本身的静态函数，用于将多个Promise实例包装成一个新的Promise实例。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">Promise</span>.all([p1, p2, p3]);</span><br></pre></td></tr></table></figure>
-<p>返回的新Promise实例p的状态由3个Promise实例p1、p2、p3共同决定，总共会出现以下两种情况。</p>
-<p>· 只有p1、p2、p3全部的状态都变为fulfilled成功状态，p的状态才会变为fulfilled状态，此时p1、p2、p3的返回值组成一个数组，作为p的then()函数的回调函数的参数。</p>
-<p>· 只要p1、p2、p3中有任意一个状态变为rejected失败状态，p的状态就变为rejected状态，此时第一个被reject的实例的返回值会作为p的catch()函数的回调函数的参数。</p>
-<blockquote>
-<p>需要注意的是，作为参数的Promise实例p1、p2、p3，如果已经定义了catch()函数，那么当其中一个Promise状态变为rejected时，并不会触发Promise.all()函数的catch()函数。</p>
-<p>如果想要Promise.all()函数能触发catch()函数，那么就不要在p1、p2实例中定义catch()函数。</p>
-</blockquote>
-<h3 class="bamboo-h warning" id="Promise.race()函数">Promise.race()函数</h3><br/>
+<ul>
+<li>根据角度设置样式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">secondHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;secondsDegrees&#125;</span>deg)`</span>;</span><br><span class="line">minsHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;minsDegrees&#125;</span>deg)`</span>;</span><br><span class="line">hourHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;hourDegrees&#125;</span>deg)`</span>;</span><br></pre></td></tr></table></figure>
 
-<p>Promise.all()函数作用于多个Promise实例上，返回一个新的Promise实例，表示的是如果多个Promise实例中有任何一个实例的状态发生改变，那么这个新实例的状态就随之改变，而最先改变的那个Promise实例的返回值将作为新实例的回调函数的参数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">Promise</span>.race([p1, p2, p3]);</span><br></pre></td></tr></table></figure>
-<p>当p1、p2、p3这3个Promise实例中有任何一个执行成功或者失败时，由Promise.race()函数生成的实例p的状态就与之保持一致，并且最先那个执行完的实例的返回值将会成为p的回调函数的参数。</p>
-<p>使用Promise.race()函数可以实现这样一个场景：假如发送一个Ajax请求，在3秒后还没有收到请求成功的响应时，会自动处理成请求失败。</p>
-<p>实现的思路如下。</p>
-<p>· 将Ajax请求处理成一个Promise，称之为p1。</p>
-<p>· 创建一个自定义的Promise实例，称之为p2，在p2中通过setTimeout()函数控制3秒后抛出一个异常。</p>
-<p>· 将p1和p2两个实例放入Promise.race()函数中，生成一个新的实例p，如果在3秒内接收到Ajax请求的返回值，表示实例p1执行成功，则p通过调用then()函数可以接收到p1的返回值；如果在3秒后还没有接收到Ajax请求的返回值，则会执行p2中的setTimeout()函数，抛出一个异常，表示p2执行失败，则p通过调用catch()函数可以接收到p2的返回值。</p>
-<p>根据以上分析，可以得到以下代码。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p1 = ajaxGetPromise(<span class="string">&#x27;./testUrl&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;timeout&#x27;</span>)), <span class="number">3000</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> p = <span class="built_in">Promise</span>.race([p1, p2])</span><br></pre></td></tr></table></figure>
-
-<h3 class="bamboo-h warning" id="Promise.resolve()函数">Promise.resolve()函数</h3><br/>
-<p>Promise提供了一个静态函数resolve()，用于将传入的变量转换为Promise对象，它等价于在Promise函数体内调用resolve()函数。</p>
-<p>Promise.resolve()函数执行后，Promise的状态会立即变为fulfilled，然后进入then()函数中做处理。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.resolve(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> resolve(<span class="string">&#x27;hello&#x27;</span>))</span><br></pre></td></tr></table></figure>
-<h3 class="bamboo-h warning" id="Promise.reject()函数">Promise.reject()函数</h3><br/>
-<p>Promise.reject()函数用于返回一个状态为rejected的Promise实例，函数在执行后Promise的状态会立即变为rejected，从而会立即进入catch()函数中做处理，等价于在Promise函数体内调用reject()函数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="built_in">Promise</span>.reject(<span class="string">&#x27;出错了&#x27;</span>);</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> reject(<span class="string">&#x27;出错了&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置定时器，每秒调用一次<code>setDate</code>函数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(setDate, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
 
 
-<p>在Promise. reject (param)函数中传递的参数param，会作为后续catch()函数的回调函数接收的参数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.reject(<span class="string">&#x27;fail&#x27;</span>).catch(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result));</span><br></pre></td></tr></table></figure>
-
-<p>执行上面的代码后，会输出字符串“fail”。</p>
 
       </div>
       
@@ -872,45 +824,22 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/174403/30/17441/62273/60d9f90fEfe3d7b73/f223d92b6bfaabb9.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/07/02/js-shi-xian-shi-zhong-xiao-guo/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> 上一篇:
-        <div>JS实现时钟效果</div>
-      </div>
-      
-      <!-- <div class="content">
-        点击查看
-简介实现模拟时钟的效果，大致思路和解决方案如下：
-
-分别获取到当前时间的时、分、秒。
-通过时分秒对一圈360度
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/193298/2/10571/138843/60d7f258Eda13bd51/057fa17adbc2ee84.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/176433/38/16331/317801/60d1ac0eEca01bc76/25118f184af79e31.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/27/zai-vue-zhong-shi-yong-svg/" class="post-nav-link">
+    <a href="/2021/06/30/promise-quan-mian-zong-jie/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>在 vue 中使用 svg 的方法</div>
+        <div>Promise全面总结</div>
       </div>
       <!-- <div class="content">
-        使用方式
-全局引入
-
-1npm install svg-sprite-loader -S
-配置vue.config.js
+        
+Promise是在ES6中新增的一种用于解决异步编程的方案，接下来会从下面几个方面详细介绍Promise
+Prmois
       </div> -->
     </a>
   </div>
