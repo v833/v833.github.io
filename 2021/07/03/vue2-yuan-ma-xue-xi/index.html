@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>JS实现时钟效果 | WQ&#39;s personal blog</title>
+  <title>Vue2 源码学习 | WQ&#39;s personal blog</title>
 
   
     
@@ -700,17 +700,17 @@
 
 
 
-<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/174403/30/17441/62273/60d9f90fEfe3d7b73/f223d92b6bfaabb9.jpg" style="background-repeat: no-repeat; background-size: cover; 
+<div class="post-detail-header lazyload" id="thumbnail_canvas" data-original="https://img11.360buyimg.com/ddimg/jfs/t1/186129/6/11702/29527/60d9f90fE2438e2b1/030696a8f9cd7575.jpg" style="background-repeat: no-repeat; background-size: cover; 
   background-position: center center;position: relative;">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="title-box">
     <span class="title">
-      JS实现时钟效果
+      Vue2 源码学习
     </span>
     <!-- id 将作为查询条件 -->
-    <span id="/2021/07/02/js-shi-xian-shi-zhong-xiao-guo/" class="leancloud-visitors view" data-flag-title="JS实现时钟效果">
+    <span id="/2021/07/03/vue2-yuan-ma-xue-xi/" class="leancloud-visitors view" data-flag-title="Vue2 源码学习">
       <i class="post-meta-item-text">阅读数: </i>
       <i class="leancloud-visitors-count">loading</i>
     </span>
@@ -728,7 +728,7 @@
       
       <div class="post-meta">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-        <span class="post-time">2021-07-02</span>
+        <span class="post-time">2021-07-03</span>
       </div>
       
       <div class="post-tags-categories">
@@ -736,8 +736,8 @@
         <div class="tags">
           <i class="iconfont icontag"></i>
           
-            <a href="/tags/javascript/" class="">
-              javascript
+            <a href="/tags/vue/" class="">
+              vue
             </a>
           
         </div>
@@ -746,74 +746,161 @@
         <div class="categories">
           <i class="iconfont iconbookmark1"></i>
           
-            <a href="/categories/%E5%8E%9F%E7%94%9Fjs%E9%A1%B9%E7%9B%AE/" class="">
-              原生js项目
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="">
+              学习笔记
             </a>
           
         </div>
         
       </div>
       <div class="post-content">
-        <p><a target="_blank" rel="noopener" href="https://v833.github.io/javscript-projects/04-JS%20and%20CSS%20Clock/">点击查看</a></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>实现模拟时钟的效果，大致思路和解决方案如下：</p>
-<ul>
-<li>分别获取到当前时间的时、分、秒。</li>
-<li>通过时分秒对一圈360度，进行映射，确定每一个指针所需旋转的角度。</li>
-<li>通过CSS的<code>transform：rotate(deg)</code>，来实时的调整指针在键盘中的位置。</li>
-</ul>
-<h2 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock-face&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand hour-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand min-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hand second-hand&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h3 id="Flow"><a href="#Flow" class="headerlink" title="Flow"></a>Flow</h3><p>flow 是facebook出品的javascript静态类型检查工具。Vue.js的源码用了Flow做了静态类型检查</p>
+<h4 id="Flow工作方式"><a href="#Flow工作方式" class="headerlink" title="Flow工作方式"></a>Flow工作方式</h4><p>通常类型检查分为2种方式</p>
+<p><strong>类型判断</strong>：通过变量的使用上下文来推断出变量类型，然后根据这些推断来检查类型</p>
+<p><strong>类型注释</strong>： 事先注释好我们期待的类型，Flow会基于这些注释来判断</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function split (str)&#123;</span><br><span class="line">  return str.split(&#x27; &#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">split(&#x27;11&#x27;)</span><br></pre></td></tr></table></figure>
 
-<h2 id="CSS样式"><a href="#CSS样式" class="headerlink" title="CSS样式"></a>CSS样式</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  <span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#018DED</span> <span class="built_in">url</span>(<span class="string">http://unsplash.it/1500/1000?image=881&amp;blur=50</span>);</span><br><span class="line">    <span class="attribute">background-size</span>: cover;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">&#x27;helvetica neue&#x27;</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">10px</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">2rem</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.clock</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">30rem</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">30rem</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">20px</span> solid white;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">50px</span> auto;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">2rem</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">4px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.1</span>),</span><br><span class="line">    inset <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">3px</span> <span class="number">#EFEFEF</span>,</span><br><span class="line">    inset <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> black,</span><br><span class="line">    <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.2</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.clock-face</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">3px</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.hand</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">background</span>: black;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">90deg</span>);</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">0.05s</span>;</span><br><span class="line">    <span class="attribute">transition-timing-function</span>: <span class="built_in">cubic-bezier</span>(<span class="number">0.1</span>, <span class="number">2.7</span>, <span class="number">0.58</span>, <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// @flow</span><br><span class="line">function add (x: number, y: number): number &#123;</span><br><span class="line">  return x + y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">add(12, 11)</span><br></pre></td></tr></table></figure>
 
-<p><strong>涉及到的特性：</strong></p>
-<ul>
-<li><code>transform-oragin</code></li>
-</ul>
-<p>调整指针的初始位置以及旋转的轴点:<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin">transform-oragin</a></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform</span>-oragin: <span class="number">100%</span>; //初始化使三个指针全部指向<span class="number">12</span>时</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Bar &#123;</span><br><span class="line">  x: string;</span><br><span class="line">  y: string | number;</span><br><span class="line">  z: boolean;</span><br><span class="line"></span><br><span class="line">  constructor(x: string, y: string | number, z: boolean) &#123;</span><br><span class="line">    this.x = x</span><br><span class="line">    this.y = y</span><br><span class="line">    this.z = z</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let bar: Bar = new Bar(&#x27;hello&#x27;, 4)</span><br><span class="line">let obj: &#123;a: string, b: number, c: Array&lt;string&gt;, d: Bar&#125; = &#123;</span><br><span class="line">  a: &#x27;hello&#x27;,</span><br><span class="line">  b: 11,</span><br><span class="line">  c: [&#x27;hello&#x27;, &#x27;world&#x27;],</span><br><span class="line">  d: new Bar(&#x27;hello&#x27;, 3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><code>transform: rotate()</code></li>
-</ul>
-<p>设置旋转角度</p>
-<ul>
-<li><code>transition</code></li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transition</span>: all //<span class="number">0.05s</span>;设置动画时间为<span class="number">0.05</span>秒</span><br></pre></td></tr></table></figure>
+<h3 id="Vue-js源码构建"><a href="#Vue-js源码构建" class="headerlink" title="Vue.js源码构建"></a>Vue.js源码构建</h3><p>Vue.js源码构建是基于rollup构ta 建，它的构建相关配置都在scripts目录下</p>
+<h3 id="从入口开始"><a href="#从入口开始" class="headerlink" title="从入口开始"></a>从入口开始</h3><p>Vue本身是一个函数，实现一个类，原型上挂载了很多方法</p>
+<p><strong>global-api</strong>：Vue上的静态属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue在instance index.js中定义</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><code>transition-timing-function: cubic-bezier(x, x, x, x)</code></li>
-</ul>
-<p>设置 <code>transition-time-function</code> 的值，以实现秒针“滴答滴答”的效果。此外注意 <code>transform</code> 中的 <code>rotate</code> （旋转）属性由角度来控制，可以试着在页面上修改这个参数来查看效果。</p>
-<h2 id="JS代码"><a href="#JS代码" class="headerlink" title="JS代码"></a>JS代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">const</span> secondHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.second-hand&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> minsHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.min-hand&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> hourHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.hour-hand&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setDate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> seconds = now.getSeconds();</span><br><span class="line">    <span class="keyword">const</span> secondsDegrees = ((seconds / <span class="number">60</span>) * <span class="number">360</span>) + <span class="number">90</span>;</span><br><span class="line">    secondHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;secondsDegrees&#125;</span>deg)`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> mins = now.getMinutes();</span><br><span class="line">    <span class="keyword">const</span> minsDegrees = ((mins / <span class="number">60</span>) * <span class="number">360</span>) + ((seconds / <span class="number">60</span>) * <span class="number">6</span>) + <span class="number">90</span>;</span><br><span class="line">    minsHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;minsDegrees&#125;</span>deg)`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> hour = now.getHours();</span><br><span class="line">    <span class="keyword">const</span> hourDegrees = ((hour / <span class="number">12</span>) * <span class="number">360</span>) + ((mins / <span class="number">60</span>) * <span class="number">30</span>) + <span class="number">90</span>;</span><br><span class="line">    hourHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;hourDegrees&#125;</span>deg)`</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">setInterval</span>(setDate, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  setDate();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="数据驱动"><a href="#数据驱动" class="headerlink" title="数据驱动"></a>数据驱动</h3><p>Vue.js一个核心思路式数据驱动。所谓数据驱动，是指视图是由数据驱动生成的，我们对视图的修改，不直接操作DOM，而是通过修改数据，<strong>DOM变成了数据的映射</strong>，我们所有的逻辑都是对数据的修改，而不用触碰DOM，这样的代码非常利于维护。</p>
+<p>声明式的将数据渲染为DOM</p>
+<h4 id="new-Vue发生了什么"><a href="#new-Vue发生了什么" class="headerlink" title="new Vue发生了什么"></a>new Vue发生了什么</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">执行了init方法</span><br><span class="line">function initData (vm) &#123;</span><br><span class="line">	let data = vm.$options.data</span><br><span class="line">	observe(data, true /* asRootData */) // 做响应式处理</span><br><span class="line">&#125;</span><br><span class="line">  const props = vm.$options.props</span><br><span class="line">  const methods = vm.$options.methods</span><br><span class="line">  将data数据代理到vm上</span><br><span class="line">  如访问data.x =&gt; this.x (this._data.x)</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>获取秒针、分钟、小时节点</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> secondHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.second-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> minsHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.min-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> hourHand = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.hour-hand&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vue 初始化主要就干了几件事情，合并配置，初始化生命周期，初始化事件中心，初始化渲染，初始化 data、props、computed、watcher 等等。</span><br><span class="line">    if (vm.$options.el) &#123;</span><br><span class="line">      vm.$mount(vm.$options.el)</span><br><span class="line">    &#125;</span><br><span class="line">在初始化的最后，检测到如果有 el 属性，则调用 vm.$mount 方法挂载 vm，挂载的目标就是把模板渲染成最终的 DOM，那么接下来我们来分析 Vue 的挂载过程。</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>获取当前时间秒、分、小时</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">const</span> seconds = now.getSeconds();</span><br><span class="line"><span class="keyword">const</span> mins = now.getMinutes();</span><br><span class="line"><span class="keyword">const</span> hour = now.getHours();</span><br></pre></td></tr></table></figure>
+<h4 id="Vue-实例挂载的实现"><a href="#Vue-实例挂载的实现" class="headerlink" title="Vue 实例挂载的实现"></a>Vue 实例挂载的实现</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">有render函数直接调用mount方法，没有将template转换成render函数 </span><br><span class="line">render 生成 VNode</span><br><span class="line">template = getOuterHTML(el)</span><br><span class="line">Vue 不能挂载在 body、html 这样的根节点上。</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>计算秒、分、小时角度</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> secondsDegrees = ((seconds / <span class="number">60</span>) * <span class="number">360</span>) + <span class="number">90</span>;</span><br><span class="line"><span class="keyword">const</span> minsDegrees = ((mins / <span class="number">60</span>) * <span class="number">360</span>) + ((seconds / <span class="number">60</span>) * <span class="number">6</span>) + <span class="number">90</span>;</span><br><span class="line"><span class="keyword">const</span> hourDegrees = ((hour / <span class="number">12</span>) * <span class="number">360</span>) + ((mins / <span class="number">60</span>) * <span class="number">30</span>) + <span class="number">90</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果没有定义 render 方法，则会把 el 或者 template 字符串转换成 render 方法。这里我们要牢记，在 Vue 2.0 版本中，所有 Vue 的组件的渲染最终都需要 render 方法，无论我们是用单文件 .vue 方式开发组件，还是写了 el 或者 template 属性，最终都会转换成 render 方法，那么这个过程是 Vue 的一个“在线编译”的过程，它是调用 compileToFunctions 方法实现的，编译过程我们之后会介绍。最后，调用原先原型上的 $mount 方法挂载。</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>根据角度设置样式</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">secondHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;secondsDegrees&#125;</span>deg)`</span>;</span><br><span class="line">minsHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;minsDegrees&#125;</span>deg)`</span>;</span><br><span class="line">hourHand.style.transform = <span class="string">`rotate(<span class="subst">$&#123;hourDegrees&#125;</span>deg)`</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">渲染watcher 当数据发生变化，调用updateComponent更新</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>设置定时器，每秒调用一次<code>setDate</code>函数</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(setDate, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="render"><a href="#render" class="headerlink" title="render"></a>render</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue 的 _render 方法是实例的一个私有方法，它用来把实例渲染成一个虚拟 Node。它的定义在 src/core/instance/render.js 文件中：</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render (createElement) &#123;</span><br><span class="line">	return createElement(&#x27;div&#x27;, &#123;</span><br><span class="line">		attrs: &#123;</span><br><span class="line">			id: &#x27;#app1&#x27;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, this.message)</span><br><span class="line">&#125; // 挂载的元素替换掉原有元素</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们在平时的开发工作中手写 render 方法的场景比较少，而写的比较多的是 template 模板，在之前的 mounted 方法的实现中，会把 template 编译成 render 方法，但这个编译过程是非常复杂的，</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">实际上，vm.$createElement 方法定义是在执行 initRender 方法的时候，可以看到除了 vm.$createElement 方法，还有一个 vm._c 方法，它是被模板编译成的 render 函数使用，而 vm.$createElement 是用户手写 render 方法使用的， 这俩个方法支持的参数相同，并且内部都调用了 createElement 方法。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm._render 最终是通过执行 createElement 方法并返回的是 vnode，它是一个虚拟 Node。Vue 2.0 相比 Vue 1.0 最大的升级就是利用了 Virtual DOM。因此在分析 createElement 的实现前，我们先了解一下 Virtual DOM 的概念。</span><br></pre></td></tr></table></figure>
+
+<h4 id="Virtual-DOM"><a href="#Virtual-DOM" class="headerlink" title="Virtual DOM"></a>Virtual DOM</h4><p>真正的 DOM 元素是非常庞大的，因为浏览器的标准就把 <strong>DOM 设计的非常复杂</strong>。当我们频繁的去做 DOM 更新，会产生一定的性能问题。</p>
+<p>而 Virtual DOM 就是用一个原生的 JS 对象去描述一个 DOM 节点，所以它比创建一个 DOM 的代价要小很多。在 Vue.js 中，Virtual DOM 是用 <code>VNode</code> 这么一个 <code>Class</code> 去描述，它是定义在 <code>src/core/vdom/vnode.js</code> 中的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">其实 VNode 是对真实 DOM 的一种抽象描述，它的核心定义无非就几个关键属性，标签名、数据、子节点、键值等，其它属性都是都是用来扩展 VNode 的灵活性以及实现一些特殊 feature 的。由于 VNode 只是用来映射到真实 DOM 的渲染，不需要包含操作 DOM 的方法，因此它是非常轻量和简单的。</span><br><span class="line">Virtual DOM 除了它的数据结构的定义，映射到真实的 DOM 实际上要经历 VNode 的 create、diff、patch 等过程。那么在 Vue.js 中，VNode 的 create 是通过之前提到的 createElement 方法创建的，我们接下来分析这部分的实现。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="createElement"><a href="#createElement" class="headerlink" title="createElement"></a>createElement</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">export function createElement (</span><br><span class="line">  context: Component,</span><br><span class="line">  tag: any,</span><br><span class="line">  data: any,</span><br><span class="line">  children: any,</span><br><span class="line">  normalizationType: any,</span><br><span class="line">  alwaysNormalize: boolean</span><br><span class="line">): VNode | Array&lt;VNode&gt; &#123;</span><br><span class="line">  if (Array.isArray(data) || isPrimitive(data)) &#123;</span><br><span class="line">    normalizationType = children</span><br><span class="line">    children = data</span><br><span class="line">    data = undefined</span><br><span class="line">  &#125; // 对参数个数不一致的处理，前移</span><br></pre></td></tr></table></figure>
+
+<p>每个 VNode 有 <code>children</code>，<code>children</code> 每个元素也是一个 VNode，这样就形成了一个 VNode Tree，它很好的描述了我们的 DOM Tree。</p>
+<p>回到 <code>mountComponent</code> 函数的过程，我们已经知道 <code>vm._render</code> 是如何创建了一个 VNode，接下来就是要把这个 VNode 渲染成一个真实的 DOM 并渲染出来，这个过程是通过 <code>vm._update</code> 完成的，接下来分析一下这个过程。</p>
+<h4 id="vm-update"><a href="#vm-update" class="headerlink" title="vm._update"></a>vm._update</h4><p>Vue 的 <code>_update</code> 是实例的一个私有方法，它被调用的时机有 2 个，<strong>一个是首次渲染，一个是数据更新的时候</strong>；由于我们这一章节只分析首次渲染部分，数据更新部分会在之后分析响应式原理的时候涉及。**<code>_update</code> 方法的作用是把 VNode 渲染成真实的 DOM**，它的定义在 <code>src/core/instance/lifecycle.js</code> 中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_update 的核心就是调用 vm.__patch__ 方法，这个方法实际上在不同的平台，比如 web 和 weex 上的定义是不一样的，因此在 web 平台中它的定义在 src/platforms/web/runtime/index.js 中：</span><br><span class="line">Vue.prototype.__patch__ = inBrowser ? patch : noop</span><br><span class="line">可以看到，甚至在 web 平台上，是否是服务端渲染也会对这个方法产生影响。因为在服务端渲染中，没有真实的浏览器 DOM 环境，所以不需要把 VNode 最终转换成 DOM，因此是一个空函数，而在浏览器端渲染中，它指向了 patch 方法，它的定义在 src/platforms/web/runtime/patch.js中：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> <code>patch</code> 方法，它接收 4个参数，<code>oldVnode</code> 表示旧的 VNode 节点，它也可以不存在或者是一个 DOM 对象；<code>vnode</code> 表示执行 <code>_render</code> 后返回的 VNode 的节点；<code>hydrating</code> 表示是否是服务端渲染；<code>removeOnly</code> 是给 <code>transition-group</code> 用的，之后会介绍。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将oldVnode (真实DOM) 转换成真实Vnode</span><br><span class="line">insert 新的DOM 删除旧的DOM 相当节点替换</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由于我们传入的 oldVnode 实际上是一个 DOM container，所以 isRealElement 为 true，接下来又通过 emptyNodeAt 方法把 oldVnode 转换成 VNode 对象，然后再调用 createElm 方法，这个方法在这里非常重要</span><br></pre></td></tr></table></figure>
+
+<p><strong>最后调用 <code>insert</code> 方法把 <code>DOM</code> 插入到父节点中，因为是递归调用，子元素会优先调用 <code>insert</code>，所以整个 <code>vnode</code> 树节点的插入顺序是先子后父。</strong></p>
+<blockquote>
+<p>其实就是调用原生 DOM 的 API 进行 DOM 操作</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch 方法:实际上整个过程就是递归创建了一个完整的 DOM 树并插入到 Body 上。</span><br></pre></td></tr></table></figure>
+
+<h4 id="Vue-初始化到最终渲染"><a href="#Vue-初始化到最终渲染" class="headerlink" title="Vue 初始化到最终渲染"></a>Vue 初始化到最终渲染</h4><p><strong>new Vue =&gt; init =&gt; $mount =&gt; compile =&gt; render =&gt; vnode =&gt; patch =&gt; DOM</strong></p>
+<h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h2><p>Vue.js 另一个核心思想是组件化。所谓组件化，就是<strong>把页面拆分成多个组件</strong> (component)，每个组件依赖的 CSS、JavaScript、模板、图片等资源放在一起开发和维护。组件是资源独立的，组件在系统内部可复用，组件和组件之间可以嵌套。</p>
+<h3 id="createComponent"><a href="#createComponent" class="headerlink" title="createComponent"></a>createComponent</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">组件Vnode的children为空</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">  // router,</span><br><span class="line">  render: createElement =&gt; createElement(App) // 传入的是组件</span><br><span class="line">&#125;).$mount(&#x27;#app&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>上一章我们在分析 <code>createElement</code> 的实现的时候，它最终会调用 <code>_createElement</code> 方法，其中有一段逻辑是对参数 <code>tag</code> 的判断，如果是一个普通的 html 标签，像上一章的例子那样是一个普通的 div，则会实例化一个普通 VNode 节点，否则通过 <code>createComponent</code> 方法创建一个组件 VNode。</p>
+<p> App 对象，它本质上是一个 <code>Component</code> 类型。直接通过 <code>createComponent</code> 方法来创建 <code>vnode</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.构造子类构造函数</span><br><span class="line">2.安装组件钩子函数</span><br><span class="line">3.实例化 vnode</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们之前提到 Vue.js 使用的 Virtual DOM 参考的是开源库 snabbdom，它的一个特点是在 VNode 的 patch 流程中对外暴露了各种时机的钩子函数，方便我们做一些额外的事情，Vue.js 也是充分利用这一点，在初始化一个 Component 类型的 VNode 的过程中实现了几个钩子函数：</span><br></pre></td></tr></table></figure>
+
+<h3 id="patch"><a href="#patch" class="headerlink" title="patch"></a>patch</h3><p>通过前一章的分析我们知道，当我们通过 <code>createComponent</code> 创建了组件 VNode，接下来会走到 <code>vm._update</code>，执行 <code>vm.__patch__</code> 去把 VNode 转换成真正的 DOM 节点。这个过程我们在前一章已经分析过了，但是针对一个普通的 VNode 节点，接下来我们来看看<strong>组件的 VNode</strong> 会有哪些不一样的地方。</p>
+<h4 id="了解组件patch的整体流程"><a href="#了解组件patch的整体流程" class="headerlink" title="了解组件patch的整体流程"></a>了解组件patch的整体流程</h4><h4 id="了解组件patch流程中的activeInstance、vm-vnode、vm-vnode"><a href="#了解组件patch流程中的activeInstance、vm-vnode、vm-vnode" class="headerlink" title="了解组件patch流程中的activeInstance、vm.$vnode、vm._vnode"></a>了解组件patch流程中的activeInstance、vm.$vnode、vm._vnode</h4><h4 id="了解嵌套组件的插入顺序"><a href="#了解嵌套组件的插入顺序" class="headerlink" title="了解嵌套组件的插入顺序"></a>了解嵌套组件的插入顺序</h4><p>在完成组件的整个 <code>patch</code> 过程后，最后执行 <code>insert(parentElm, vnode.elm, refElm)</code> 完成组件的 DOM 插入，如果组件 <code>patch</code> 过程中又创建了子组件，那么DOM 的插入顺序是<strong>先子后父</strong>。(<strong><code>递归</code></strong>)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.$el = vm.__patch__()</span><br></pre></td></tr></table></figure>
+
+<p>Patch整体流程：createComponent =》子组件初始化 =》子组件renfer =》子组件patch</p>
+<h3 id="合并配置"><a href="#合并配置" class="headerlink" title="合并配置"></a>合并配置</h3><p>了解外部调用场景的配置合并</p>
+<p>了解组件场景的配置合并</p>
+<p>通过之前章节的源码分析我们知道，<code>new Vue</code> 的过程通常有 2 种场景，一种是外部我们的代码主动调用 <code>new Vue(options)</code> 的方式实例化一个 Vue 对象；另一种是我们上一节分析的组件过程中内部通过 <code>new Vue(options)</code> 实例化子组件。</p>
+<p>无论哪种场景，都会执行实例的 <code>_init(options)</code> 方法，它首先会执行一个 <code>merge options</code> 的逻辑，相关的代码在 <code>src/core/instance/init.js</code> 中：</p>
+<h4 id="外部调用场景"><a href="#外部调用场景" class="headerlink" title="外部调用场景"></a>外部调用场景</h4><p>当执行 <code>new Vue</code> 的时候，在执行 <code>this._init(options)</code> 的时候，就会执行如下逻辑去合并 <code>options</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vm.$options = mergeOptions(</span><br><span class="line">  resolveConstructorOptions(vm.constructor),</span><br><span class="line">  options || &#123;&#125;,</span><br><span class="line">  vm</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>这里通过调用 <code>mergeOptions</code> 方法来合并，它实际上就是把 <code>resolveConstructorOptions(vm.constructor)</code> 的返回值和 <code>options</code> 做合并，<code>resolveConstructorOptions</code> 的实现先不考虑，在我们这个场景下，它还是简单返回 <code>vm.constructor.options</code>，相当于 <code>Vue.options</code>，那么这个值又是什么呢，其实在 <code>initGlobalAPI(Vue)</code> 的时候定义了这个值，代码在 <code>src/core/global-api/index.js</code> 中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initGlobalAPI</span> (<span class="params">Vue: GlobalAPI</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  Vue.options = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  ASSET_TYPES.forEach(<span class="function"><span class="params">type</span> =&gt;</span> &#123;</span><br><span class="line">    Vue.options[type + <span class="string">&#x27;s&#x27;</span>] = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// this is used to identify the &quot;base&quot; constructor to extend all plain-object</span></span><br><span class="line">  <span class="comment">// components with in Weex&#x27;s multi-instance scenarios.</span></span><br><span class="line">  Vue.options._base = Vue</span><br><span class="line"></span><br><span class="line">  extend(Vue.options.components, builtInComponents)</span><br><span class="line">  <span class="comment">// .</span></span><br></pre></td></tr></table></figure>
+
+<p>首先通过 <code>Vue.options = Object.create(null)</code> 创建一个空对象，然后遍历 <code>ASSET_TYPES</code>，<code>ASSET_TYPES</code> 的定义在 <code>src/shared/constants.js</code> 中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> ASSET_TYPES = [</span><br><span class="line">  <span class="string">&#x27;component&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;directive&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;filter&#x27;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>所以上面遍历 <code>ASSET_TYPES</code> 后的代码相当于：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.options.components = &#123;&#125;</span><br><span class="line">Vue.options.directives = &#123;&#125;</span><br><span class="line">Vue.options.filters = &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着执行了 <code>Vue.options._base = Vue</code>，它的作用在我们上节实例化子组件的时候介绍了。</p>
+<p>最后通过 <code>extend(Vue.options.components, builtInComponents)</code> 把一些内置组件扩展到 <code>Vue.options.components</code> 上，Vue 的内置组件目前有 <code>&lt;keep-alive&gt;</code>、<code>&lt;transition&gt;</code> 和 <code>&lt;transition-group&gt;</code> 组件，<strong>这也就是为什么我们在其它组件中使用 <code>&lt;keep-alive&gt;</code> 组件不需要注册的原因</strong>，这块儿后续我们介绍 <code>&lt;keep-alive&gt;</code> 组件的时候会详细讲。</p>
+<p><code>mergeOptions</code> 主要功能就是把 <code>parent</code> 和 <code>child</code> 这两个对象根据一些合并策略，合并成一个新对象并返回。比较核心的几步，先递归把 <code>extends</code> 和 <code>mixins</code> 合并到 <code>parent</code> 上，然后遍历 <code>parent</code>，调用 <code>mergeField</code>，然后再遍历 <code>child</code>，如果 <code>key</code> 不在 <code>parent</code> 的自身属性上，则调用 <code>mergeField</code>。</p>
+<p>这里有意思的是 <code>mergeField</code> 函数，它对不同的 <code>key</code> 有着不同的合并策略。</p>
+<p>所以对于钩子函数，他们的合并策略都是 <code>mergeHook</code> 函数。这个函数的实现也非常有意思，用了一个多层 3 元运算符，逻辑就是如果不存在 <code>childVal</code> ，就返回 <code>parentVal</code>；否则再判断是否存在 <code>parentVal</code>，如果存在就把 <code>childVal</code> 添加到 <code>parentVal</code> 后返回新数组；否则返回 <code>childVal</code> 的数组。所以回到 <code>mergeOptions</code> 函数，一旦 <code>parent</code> 和 <code>child</code> 都定义了相同的钩子函数，<strong>那么它们会把 2 个钩子函数合并成一个数组</strong>。(先父后子)</p>
+<h4 id="组件场景"><a href="#组件场景" class="headerlink" title="组件场景"></a>组件场景</h4><p>组件的构造函数是通过 <code>Vue.extend</code> 继承自 <code>Vue</code> 的</p>
+<p>把实例化子组件传入的子组件父 VNode 实例 <code>parentVnode</code>、子组件的父 Vue 实例 <code>parent</code> 保存到 <code>vm.$options</code> 中，另外还保留了 <code>parentVnode</code> 配置中的如 <code>propsData</code> 等其它的属性。</p>
+<p>这么看来，<code>initInternalComponent</code> 只是做了简单一层对象赋值，并不<strong>涉及到递归、合并策略</strong>等复杂逻辑。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>那么至此，Vue 初始化阶段对于 <code>options</code> 的合并过程就介绍完了，我们需要知道对于 <code>options</code> 的合并有 2 种方式，子组件初始化过程通过 <code>initInternalComponent</code> 方式要比外部初始化 Vue 通过 <code>mergeOptions</code> 的过程要快，合并完的结果保留在 <code>vm.$options</code> 中。</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>每个 Vue 实例在被创建之前都要经过一系列的初始化过程。例如需要设置数据监听、编译模板、挂载实例到 DOM、在数据变化时更新 DOM 等。同时在这个过程中也会运行一些叫做生命周期钩子的函数，给予用户机会在一些特定的场景下添加他们自己的代码。</p>
+<p>源码中最终执行生命周期的函数都是调用 <code>callHook</code> 方法，它的定义在 <code>src/core/instance/lifecycle</code> 中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">export function callHook (vm: Component, hook: string) &#123;</span><br><span class="line">  // #7573 disable dep collection when invoking lifecycle hooks</span><br><span class="line">  pushTarget()</span><br><span class="line">  const handlers = vm.$options[hook]</span><br><span class="line">  const info = `$&#123;hook&#125; hook`</span><br><span class="line">  if (handlers) &#123;</span><br><span class="line">    for (let i = 0, j = handlers.length; i &lt; j; i++) &#123;</span><br><span class="line">      invokeWithErrorHandling(handlers[i], vm, null, vm, info)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  if (vm._hasHookEvent) &#123;</span><br><span class="line">    vm.$emit(&#x27;hook:&#x27; + hook)</span><br><span class="line">  &#125;</span><br><span class="line">  popTarget()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上一节中，我们详细地介绍了 Vue.js 合并 <code>options</code> 的过程，各个阶段的生命周期的函数也被合并到 <code>vm.$options</code> 里，并且是一个<strong>数组</strong>。<strong>因此 <code>callhook</code> 函数的功能就是调用某个生命周期钩子注册的所有回调函数</strong>。</p>
+<h4 id="beforeCreate-amp-created"><a href="#beforeCreate-amp-created" class="headerlink" title="beforeCreate &amp; created"></a>beforeCreate &amp; created</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">init 过程中</span><br><span class="line">initLifecycle(vm)</span><br><span class="line">   initEvents(vm)</span><br><span class="line">   initRender(vm)</span><br><span class="line">   callHook(vm, &#x27;beforeCreate&#x27;)</span><br><span class="line">   initInjections(vm) // resolve injections before data/props</span><br><span class="line">   initState(vm)</span><br><span class="line">   initProvide(vm) // resolve provide after data/props</span><br><span class="line">   callHook(vm, &#x27;created&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到 <code>beforeCreate</code> 和 <code>created</code> 的钩子调用是在 <code>initState</code> 的前后，<code>initState</code> 的作用是初始化 <code>props</code>、<code>data</code>、<code>methods</code>、<code>watch</code>、<code>computed</code> 等属性。那么显然 <code>beforeCreate</code> 的钩子函数中就不能获取到 <code>props</code>、<code>data</code> 中定义的值，也不能调用 <code>methods</code> 中定义的函数。</p>
+<p>在这俩个钩子函数执行的时候，并没有渲染 DOM，所以我们也不能够访问 DOM，一般来说，如果组件在加载的时候需要和后端有交互，放在这俩个钩子函数执行都可以，如果是需要访问 <code>props</code>、<code>data</code> 等数据的话，就需要使用 <code>created</code> 钩子函数。<strong>之后我们会介绍 vue-router 和 vuex 的时候会发现它们都混合了 <code>beforeCreate</code> 钩子函数。</strong></p>
+<h4 id="beforeMount-amp-mounted"><a href="#beforeMount-amp-mounted" class="headerlink" title="beforeMount &amp; mounted"></a>beforeMount &amp; mounted</h4><p>顾名思义，<code>beforeMount</code> 钩子函数发生在 <code>mount</code>，也就是 DOM 挂载之前，它的调用时机是在 <code>mountComponent</code> 函数中，定义在 <code>src/core/instance/lifecycle.js</code> 中</p>
+<p>在<strong>执行 <code>vm._render()</code> 函数渲染 VNode 之前</strong>（执行完了compie过程编译为render函数），执行了 <code>beforeMount</code> 钩子函数，在执行完 <code>vm._update()</code> 把 VNode patch 到真实 DOM 后，执行 <code>mounted</code> 钩子。注意，这里对 <code>mounted</code> 钩子函数执行有一个判断逻辑，<code>vm.$vnode</code> 如果为 <code>null</code>，则表明这不是一次组件的初始化过程，而是我们通过外部 <code>new Vue</code> 初始化过程。那么对于组件，它的 <code>mounted</code> 时机在哪儿呢？</p>
+<p>之前我们提到过，组件的 VNode patch 到 DOM 后，会执行 <code>invokeInsertHook</code> 函数，把 <code>insertedVnodeQueue</code> 里保存的钩子函数依次执行一遍，它的定义在 <code>src/core/vdom/patch.js</code> 中：</p>
+<p>对于同步渲染的子组件而言，<code>mounted</code> 钩子函数的执行顺序是先子后父。</p>
+<h4 id="beforeUpdate-amp-updated"><a href="#beforeUpdate-amp-updated" class="headerlink" title="beforeUpdate &amp; updated"></a>beforeUpdate &amp; updated</h4><p><code>beforeUpdate</code> 的执行时机是在渲染 Watcher 的 <code>before</code> 函数中，我们刚才提到过</p>
+<p>注意这里有个判断，也就<strong>是在组件已经 <code>mounted</code> 之后，才会去调用这个钩子函数。</strong></p>
+<p><code>update</code> 的执行时机是在<code>flushSchedulerQueue</code> 函数调用的时候，它的定义在 <code>src/core/observer/scheduler.js</code> 中</p>
+<p>我们之前提过，在<strong>组件 mount 的过程中</strong>，会实例化一个渲染的 <code>Watcher</code> 去监听 <code>vm</code> 上的数据变化重新渲染，这段逻辑发生在 <code>mountComponent</code> 函数执行的时候</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function callUpdatedHooks (queue) &#123;</span><br><span class="line">  let i = queue.length</span><br><span class="line">  while (i--) &#123;</span><br><span class="line">    const watcher = queue[i]</span><br><span class="line">    const vm = watcher.vm</span><br><span class="line">    // watcher是渲染watcher </span><br><span class="line">    if (vm._watcher === watcher &amp;&amp; vm._isMounted &amp;&amp; !vm._isDestroyed) &#123;</span><br><span class="line">      callHook(vm, &#x27;updated&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="beforeDestroy-amp-destroyed"><a href="#beforeDestroy-amp-destroyed" class="headerlink" title="beforeDestroy &amp; destroyed"></a>beforeDestroy &amp; destroyed</h4><p>顾名思义，<code>beforeDestroy</code> 和 <code>destroyed</code> 钩子函数的执行时机在组件销毁的阶段，终会调用 <code>$destroy</code> 方法，它的定义在 <code>src/core/instance/lifecycle.js</code> 中：</p>
+<p>包括从 <code>parent</code> 的 <code>$children</code> 中删掉自身，删除 <code>watcher</code>，当前渲染的 VNode 执行销毁钩子函数等，执行完毕后再调用 <code>destroy</code> 钩子函数。</p>
+<p>在 <code>$destroy</code> 的执行过程中，它又会执行 <code>vm.__patch__(vm._vnode, null)</code> 触发它子组件的销毁钩子函数，这样一层层的递归调用，所以 <code>destroy</code> 钩子函数执行顺序是先子后父，和 <code>mounted</code> 过程一样。</p>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><p>这一节主要介绍了 Vue 生命周期中各个钩子函数的执行时机以及顺序，通过分析，<strong>我们知道了如在 <code>created</code> 钩子函数中可以访问到数据，在 <code>mounted</code> 钩子函数中可以访问到 DOM，在 <code>destroy</code> 钩子函数中可以做一些定时器销毁工作，了解它们有利于我们在合适的生命周期去做不同的事情。</strong></p>
+<h3 id="组件注册"><a href="#组件注册" class="headerlink" title="组件注册"></a>组件注册</h3><p>在 Vue.js 中，除了它内置的组件如 <code>keep-alive</code>、<code>component</code>、<code>transition</code>、<code>transition-group</code> 等，其它用户自定义组件在使用前必须注册。</p>
+<p>Vue.js 提供了 2 种组件的注册方式，全局注册和局部注册。接下来我们从源码分析的角度来分析这两种注册方式。</p>
+<h4 id="全局注册"><a href="#全局注册" class="headerlink" title="全局注册"></a>全局注册</h4><p>要注册一个全局组件，可以使用 <code>Vue.component(tagName, options)</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">&#x27;my-component&#x27;</span>, &#123;</span><br><span class="line">  <span class="comment">// 选项</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>那么，<code>Vue.component</code> 函数是在什么时候定义的呢，它的定义过程发生在最开始初始化 Vue 的全局函数的时候，代码在 <code>src/core/global-api/assets.js</code> 中：</p>
+<p>函数首先遍历 <code>ASSET_TYPES</code>，得到 <code>type</code> 后挂载到 Vue 上 。<code>ASSET_TYPES</code> 的定义在 <code>src/shared/constants.js</code> 中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> ASSET_TYPES = [</span><br><span class="line">  <span class="string">&#x27;component&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;directive&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;filter&#x27;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>所以实际上 Vue 是初始化了 3 个全局函数，并且如果 <code>type</code> 是 <code>component</code> 且 <code>definition</code> 是一个对象的话，通过 <code>this.opitons._base.extend</code>， 相当于 <code>Vue.extend</code> 把这个对象转换成一个继承于 Vue 的构造函数，最后通过 <code>this.options[type + &#39;s&#39;][id] = definition</code> 把它挂载到 <code>Vue.options.components</code> 上。</p>
+<p>由于我们每个组件的创建都是通过 <code>Vue.extend</code> 继承而来，我们之前分析过在继承的过程中有这么一段逻辑：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Sub.options = mergeOptions(</span><br><span class="line">  Super.options,</span><br><span class="line">  extendOptions</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>也就是说它会把 <code>Vue.options</code> 合并到 <code>Sub.options</code>，也就是组件的 <code>options</code> 上， 然后在组件的实例化阶段，会执行 <code>merge options</code> 逻辑，把 <code>Sub.options.components</code> 合并到 <code>vm.$options.components</code> 上。</p>
+<p><strong>我们在使用 <code>Vue.component(id, definition)</code> 全局注册组件的时候，id 可以是连字符、驼峰或首字母大写的形式。</strong></p>
+<h4 id="局部注册"><a href="#局部注册" class="headerlink" title="局部注册"></a>局部注册</h4><p>Vue.js 也同样支持局部注册，我们可以在一个组件内部使用 <code>components</code> 选项做组件的局部注册，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> HelloWorld <span class="keyword">from</span> <span class="string">&#x27;./components/HelloWorld&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">components</span>: &#123;</span><br><span class="line">    HelloWorld</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在组件的 Vue 的实例化阶段有一个<strong>合并 <code>option</code> 的逻辑</strong>，之前我们也分析过，所以就把 <code>components</code> 合并到 <code>vm.$options.components</code> 上，这样我们就可以在 <code>resolveAsset</code> 的时候拿到这个组件的构造函数，并作为 <code>createComponent</code> 的钩子的参数。</p>
+<p>注意，局部注册和全局注册不同的是，只有该类型的组件才可以访问局部注册的子组件，而全局注册是扩展到 <code>Vue.options</code> 下，所以在所有组件创建的过程中，<strong>都会从全局的 <code>Vue.options.components</code> 扩展到当前组件的 <code>vm.$options.components</code> 下，这就是全局注册的组件能被任意使用的原因。</strong></p>
+<p><strong>当我们使用到组件库的时候，往往更通用基础组件都是全局注册的，而编写的特例场景的业务组件都是局部注册的。</strong></p>
+<h3 id="异步组件"><a href="#异步组件" class="headerlink" title="异步组件"></a>异步组件</h3><p>在我们平时的开发工作中，为了减少首屏代码体积，往往会把一些非首屏的组件设计成异步组件，按需加载。Vue 也原生支持了异步组件的能力，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">&#x27;async-example&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 这个特殊的 require 语法告诉 webpack</span></span><br><span class="line">   <span class="comment">// 自动将编译后的代码分割成不同的块，</span></span><br><span class="line">   <span class="comment">// 这些块将通过 Ajax 请求自动下载。</span></span><br><span class="line">   <span class="built_in">require</span>([<span class="string">&#x27;./my-async-component&#x27;</span>], resolve)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
       </div>
       
     </article>
@@ -824,39 +911,24 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img11.360buyimg.com/ddimg/jfs/t1/186129/6/11702/29527/60d9f90fE2438e2b1/030696a8f9cd7575.jpg" style="background-size: cover; 
-      background-position: center center;">
-    </div>
-    <a href="/2021/07/03/vue2-yuan-ma-xue-xi/" class="post-nav-link">
-      <div class="title">
-        <i class="fa fa-angle-left"></i> 上一篇:
-        <div>Vue2 源码学习</div>
-      </div>
-      
-      <!-- <div class="content">
-        Flowflow 是facebook出品的javascript静态类型检查工具。Vue.js的源码用了Flow做了静态类
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/176433/38/16331/317801/60d1ac0eEca01bc76/25118f184af79e31.jpg" style="background-size: cover; 
+    <div class="post-nav-img lazyload" data-original="https://img13.360buyimg.com/ddimg/jfs/t1/174403/30/17441/62273/60d9f90fEfe3d7b73/f223d92b6bfaabb9.jpg" style="background-size: cover; 
       background-position: center center;">
     </div>
-    <a href="/2021/06/30/promise-quan-mian-zong-jie/" class="post-nav-link">
+    <a href="/2021/07/02/js-shi-xian-shi-zhong-xiao-guo/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fa fa-angle-right"></i>
-        <div>Promise全面总结</div>
+        <div>JS实现时钟效果</div>
       </div>
       <!-- <div class="content">
-        
-Promise是在ES6中新增的一种用于解决异步编程的方案，接下来会从下面几个方面详细介绍Promise
-Prmois
+        点击查看
+简介实现模拟时钟的效果，大致思路和解决方案如下：
+
+分别获取到当前时间的时、分、秒。
+通过时分秒对一圈360度
       </div> -->
     </a>
   </div>
