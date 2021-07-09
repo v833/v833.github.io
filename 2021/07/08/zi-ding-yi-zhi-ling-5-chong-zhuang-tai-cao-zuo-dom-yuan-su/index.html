@@ -754,7 +754,7 @@
         
       </div>
       <div class="post-content">
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(&quot;hello&quot;,&#123;</span><br><span class="line">  bind:function(el,bingind,vnode)&#123;</span><br><span class="line">      el.style[&quot;color&quot;] = bingind.value;</span><br><span class="line">      console.log(&quot;1-bind&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  inserted:function()&#123;</span><br><span class="line">      console.log(&quot;2-insert&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  update:function()&#123;</span><br><span class="line">      console.log(&quot;3-update&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  componentUpdated:function()&#123;</span><br><span class="line">      console.log(&#x27;4 - componentUpdated&#x27;);</span><br><span class="line">  &#125;,</span><br><span class="line">  unbind:function()&#123;</span><br><span class="line">      console.log(&#x27;5 - unbind&#x27;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(&quot;hello&quot;,&#123;</span><br><span class="line">  bind:function(el,bingind,vnode)&#123;</span><br><span class="line">  	  bingind.value</span><br><span class="line">  	  bingind.def</span><br><span class="line">      el.style[&quot;color&quot;] = bingind.value;</span><br><span class="line">      console.log(&quot;1-bind&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  inserted:function()&#123;</span><br><span class="line">      console.log(&quot;2-insert&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  update:function()&#123;</span><br><span class="line">      console.log(&quot;3-update&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  componentUpdated:function()&#123;</span><br><span class="line">      console.log(&#x27;4 - componentUpdated&#x27;);</span><br><span class="line">  &#125;,</span><br><span class="line">  unbind:function()&#123;</span><br><span class="line">      console.log(&#x27;5 - unbind&#x27;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <h5 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h5><p> 只调用一次，指令第一次绑定到元素时候调用，用这个钩子可以定义一个绑定时执行一次的初始化动作。</p>
 <h5 id="Inserted"><a href="#Inserted" class="headerlink" title="Inserted"></a>Inserted</h5><p> 被绑定的元素插入父节点的时候调用(父节点存在即可调用，不必存在document中)</p>
@@ -771,6 +771,27 @@
 <div class="post-nav">
 
 
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img lazyload" data-original="https://img11.360buyimg.com/ddimg/jfs/t1/184732/10/11535/99269/60d9f8baE78cc9819/6a36b1ecfee59e93.jpg" style="background-size: cover; 
+      background-position: center center;">
+    </div>
+    <a href="/2021/07/09/vue-admin-hou-tai-xi-tong-zong-jie/" class="post-nav-link">
+      <div class="title">
+        <i class="fa fa-angle-left"></i> 上一篇:
+        <div>vue-admin 后台系统总结</div>
+      </div>
+      
+      <!-- <div class="content">
+        1vue create vue-admin
+
+项目初始化npm i es-lint
+导入vue.config.js
+创建
+      </div> -->
+    </a>
+  </div>
 
 
 
